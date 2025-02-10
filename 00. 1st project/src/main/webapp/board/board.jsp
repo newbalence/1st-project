@@ -344,7 +344,6 @@
 			<option value="old" <%= listOrder.equals("old") ? "selected" : ""  %>>오래된순</option>
 		</select>
 		</form>
-		<div>hi</div>
 		
         <ul class="post-list">
         	<li class="post-item">
