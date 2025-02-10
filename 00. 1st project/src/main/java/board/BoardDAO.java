@@ -60,20 +60,20 @@ public class BoardDAO extends DBManager {
 		
 		String sql = "update board set ";
 		if(title != null) {
-			sql += "title = ," + title + "', ";
+			sql += "title = '" + title + "', ";
 		}
 		if(content != null) {
-			sql += "content = " + content + "', ";
+			sql += "content = '" + content + "', ";
 		}
 		if(originName != null) {
-			sql += "origin_name = " + originName + "', ";
-			sql += "upload_name = " + uploadName + "', ";
-			sql += "location = " + location + "', ";
+			sql += "origin_name = '" + originName + "', ";
+			sql += "upload_name = '" + uploadName + "', ";
+			sql += "location = '" + location + "', ";
 			sql += "file_size = " + fileSize;
 		}
-		sql += " update_date = now() ";
+		sql += "update_date = now() ";
 		sql += "where bno = " + bno;
-		
+		System.out.println(sql);
 		executeUpdate(sql);
 		DBDisConnect();
 	}
@@ -84,7 +84,7 @@ public class BoardDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "update board set update_date = now(), board_type = 00 where bno = " + bno;
+		String sql = "update board set update_date = now(), board_type = 99 where bno = " + bno;
 		executeUpdate(sql);
 		DBDisConnect();
 	}
@@ -101,11 +101,10 @@ public class BoardDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select board.*, user.*, count(push.bno) as push, count(hit.bno) as hit from board ";
+		String sql = "select board.*, user.*, (select count(*) from push where bno = board.bno) as push, (select count(*) from hit where bno = board.bno) as hit from board ";
 		sql += "left join user on board.author = user.id ";
-		sql += "left join push on board.bno = push.bno ";
-		sql += "left join hit on board.bno = hit.bno ";
-		sql += "where (board.board_type != 99 or user.user_type != 2)";
+		sql += "where (board.board_type != 99 and user.user_type != 2)";
+		System.out.println(sql);
 		if(boardType != null && !boardType.equals("") && !boardType.equals("null")) {
 			 sql += " and board.board_type = " + boardType; 
 		}
@@ -124,8 +123,6 @@ public class BoardDAO extends DBManager {
 		}
 		
 		sql += " limit " + startNum + ", " + limitSize;
-		
-		System.out.println(sql);
 		executeQuery(sql);
 		
 		List<BoardVO> list = new ArrayList<>();
@@ -215,7 +212,7 @@ public class BoardDAO extends DBManager {
 		DBConnect();
 		
 		String sql = "select count(board.bno) as cnt from board left join user on board.author = user.id ";
-		sql += "where (board.board_type != 99 or user.user_type != 2)";
+		sql += "where (board.board_type != 99 and user.user_type != 2)";
 		if(boardType != null && !boardType.equals("") && !boardType.equals("null")) {
 			 sql += " and board.board_type = " + boardType; 
 		}
@@ -228,6 +225,7 @@ public class BoardDAO extends DBManager {
 		if(next()) {
 			int count = getInt("cnt");
 			DBDisConnect();
+			System.out.println(count);
 			return count;
 		}else{
 			DBDisConnect();

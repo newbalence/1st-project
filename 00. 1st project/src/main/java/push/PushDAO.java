@@ -24,7 +24,7 @@ public class PushDAO extends DBManager {
 	}
 	
 //	추천 클릭시
-	public void insertPush(String user, String bno) {
+	public void clickPush(String user, String bno) {
 		driverLoad();
 		DBConnect();
 		

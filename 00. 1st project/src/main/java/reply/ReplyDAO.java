@@ -17,8 +17,8 @@ public class ReplyDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into reply(author, rcontent, bno)";
-		sql += "value('" + rauthor + "', '" + rcontent + "', " + bno + ");";
+		String sql = "insert into reply(rauthor, rcontent, bno) ";
+		sql += "values('" + rauthor + "', '" + rcontent + "', " + bno + ");";
 		executeUpdate(sql);
 		
 		String lastNum = "select last_insert_id() as rno;";

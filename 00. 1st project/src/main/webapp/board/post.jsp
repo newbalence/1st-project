@@ -221,7 +221,7 @@
             color: #555;
         }
         .comment-actions {
-            margin-top: 10px;
+            float : right;
             text-align: right;
         }
         .comment-actions button {
@@ -284,6 +284,10 @@
         .dpnone{
         	display : none;
         }
+        .meta-reply {
+            font-size: 0.9rem;
+            color: #777;
+        }
     </style>
 </head>
 <body>
@@ -291,7 +295,16 @@
         <h2><%= title %></h2>
         <div class="meta">
         <span>작성자: <%= author %> | 작성일: <%= createDate %><%= updateDate == null ? "" : "(수정됨)" %></span>
-        <span style="float:right">조회<%= hit %> 추천<%= push %> <i class=<%= userPush == 1 ? "bi-hand-thumbs-up-fill" : "bi-hand-thumbs-up" %>></i></span>
+        <span style="float:right">
+        	<span id="pushNum">조회<%= hit %> 추천<%= push %></span> 
+        <%
+        	if(user != null){
+        		%>
+        		        <i id="push" class=<%= userPush == 1 ? "bi-hand-thumbs-up-fill" : "bi-hand-thumbs-up" %>></i>
+      			<%
+        	}
+        %>
+		</span>
         </div>
         <div class="post-content">
             <p><%= content %></p>
@@ -303,7 +316,7 @@
 		            <h3>첨부파일</h3>
 		            <div class="attachment-item">
 		                <a download="<%= originName %>" href="/JspBoard/upload/<%= uploadName %>" class="attachment-name"><%= originName %></a>
-		                <span class="attachment-size">(<%= 3 %>)</span>
+		                <span class="attachment-size">(<%= data %>)</span>
 		            </div>
 		        </div>
         		<%
@@ -318,8 +331,8 @@
         	if(user != null && (user.getId().equals(author) || user.getUserType().equals("0"))){
         		%>
 		        <span class="post-actions">
-		            <button onclick="location.href='modify.jsp?no=<%=no %>'">게시글 수정</button>
-		            <button onclick="deletePost(<%=no %>)">게시글 삭제</button>
+		            <button onclick="location.href='modify.jsp?no=<%= no %>'">게시글 수정</button>
+		            <button onclick="deletePost(<%= no %>)">게시글 삭제</button>
 		        </span>
         		<%
         	}
@@ -346,30 +359,34 @@
             		String rcreateDate = rvo.getCreateDate();
             		String ruserType = rvo.getUserType();
             		String rupdateDate = rvo.getUpdateDate();
+            		rcreateDate = rcreateDate.substring(0, 16);
             		
             		if(ruserType.equals("2")){
             			continue;
             		}
             		%>
           	<div class="comment">
-                <div class="meta">작성자: <%= rauthor %> | 작성일: <%= rcreateDate %><%= rupdateDate == null ? "" : "(수정됨)" %></div>
+                <div class="meta">작성자: <%= rauthor %></div>
                 <p><%= rcontent %></p>
+                <div class="meta-reply">
+                	<span>작성일: <%= rcreateDate %><%= rupdateDate == null ? "" : "(수정됨)" %></span>
                 
-                <%
-                	//댓글 목록을 반복하며 댓글의 작성자가 로그인한 사용자의 아이디와
-                	//동일하면 수정 삭제 버튼을 보여준다.
-                	if(user != null && (user.getId().equals(rauthor) || user.getUserType().equals("0"))){
-                		%>
-                			<div class="comment-actions">
-			                    <button onclick="replyBtn(this)">수정</button>
-			                    <input type="hidden">
-			                    <button class="dpnone" onclick="modifyReply(<%= rno %>, this)">확인</button>
-			                    <button class="dpnone" onclick="cancelBtn(this, '<%= rcontent %>')">취소</button>
-			                    <button onclick="deleteReply(<%= rno %>, this)">삭제</button>
-			                </div>
-                		<%
-                	}
-                %>
+	                <%
+	                	//댓글 목록을 반복하며 댓글의 작성자가 로그인한 사용자의 아이디와
+	                	//동일하면 수정 삭제 버튼을 보여준다.
+	                	if(user != null && (user.getId().equals(rauthor) || user.getUserType().equals("0"))){
+	                		%>
+	                			<span class="comment-actions">
+				                    <button onclick="replyBtn(this)">수정</button>
+				                    <input type="hidden">
+				                    <button class="dpnone" onclick="modifyReply(<%= rno %>, this)">확인</button>
+				                    <button class="dpnone" onclick="cancelBtn(this, '<%= rcontent %>')">취소</button>
+				                    <button onclick="deleteReply(<%= rno %>, this)">삭제</button>
+				                </span>
+	                		<%
+	                	}
+	                %>
+                </div>
             </div>
             	<%
             	}
@@ -382,5 +399,200 @@
 	</body>
 	<script>
 		
+		let rauthor = "<%= user == null ? null : user.getId() %>";
+		
+		function replyBtn(obj){
+			let el = $(".comment");
+			for(let i = 0; i < el.length; i++){
+				let value = el.eq(i).children().children().children("input").val();
+				let input = el.eq(i).children("input");
+				input.replaceWith("<p>" + value + "</p>");
+				
+				
+				el.eq(i).children().children().children().eq(0).css("display", "inline");
+				el.eq(i).children().children().children(".dpnone").css("display", "none");
+			}
+			
+			let p = $(obj).parent().parent().parent().children("p");
+			$(obj).next().val(p.text());
+			
+			p.replaceWith("<input type='text' value='" + p.text() + "'>");
+			
+			$(obj).css("display", "none");
+			$(obj).parent().children(".dpnone").css("display", "inline");
+			
+		}
+		
+		function cancelBtn(obj, text){
+			let input = $(obj).parent().parent().parent().children("input");
+			input.replaceWith("<p>" + text + "</p>")
+			
+			$(obj).prev().prev().prev().css("display", "inline");
+			$(obj).parent().children(".dpnone").css("display", "none");
+			
+		}
+		
+		
+		function deleteReply(rno, obj){
+			let result = confirm("댓글을 삭제하시겠습니까?");
+			if(result == true){
+				$.ajax({
+					url : "deleteReply.jsp",
+					type : "post",
+					data : {
+						rno : rno
+					},
+					success : function(result){
+						if(result.trim() == "success"){
+							$(obj).parent().parent().parent().remove();
+						}else{
+							alert("삭제 실패");
+						}
+					},
+					error : function(){
+						console.log("에러 발생");
+					}
+				});
+			}
+			
+		}
+		
+		function modifyReply(rno, obj){
+			let input = $(obj).parent().parent().parent().children("input");
+			let reply = input.val();
+			
+			if(reply != null && reply.trim() != ""){
+				let mresult = confirm("댓글을 수정하시겠습니까?");
+				if(mresult == true){
+					$.ajax({
+						url : "modifyReply.jsp",
+						type : "post",
+						data : {
+							rcontent : reply,
+							rno : rno
+						},
+						success : function (result){
+							if(result.trim() == "success"){
+								input.replaceWith("<p>" + reply + "</p>");
+								$(obj).parent().children(".dpnone").css("display", "none");
+								$(obj).prev().prev().css("display", "inline");
+								$(obj).next().attr("onclick", "cancelBtn(this, '" + reply + "')");
+							}
+						},
+						error : function(){
+							console.log("에러 발생");
+						}
+					});
+				}
+			}
+			
+		}
+		
+		function deletePost(no){
+			let result = confirm("삭제하시겠습니까?");
+			if(result == true){
+				location.href = "delete.jsp?no=" + no;
+			}
+		}
+		
+		$("#replyBtn").click(function(){
+			$.ajax({
+				url : "replyWriteok.jsp",
+				type : "post",
+				data : {
+					no : "<%= bno %>",
+					rauthor : rauthor,
+					rcontent : $("#rcontent").val()
+				},
+				success : function(result){
+					let time = getTime();
+					console.log(result);
+					
+					if(result.trim() != "0"){
+						//html요소를 추가
+						let rcontent = $("#rcontent");
+						
+						let html = "";
+						html += "<div class='comment'>";
+						html += 	"<div class='meta'>작성자: " + rauthor + "</div>";
+						html += 	"<p>"+rcontent.val()+"</p>";
+						html +=		"<div class='meta-reply'>"
+						html +=		"<span>작성일 : " + time + "</span>";
+						html += 	"<span class='comment-actions'>";
+						html += 		"<button onclick='replyBtn(this)'>수정</button>";
+						html += 		"<input type='hidden'>";
+						html += 		"<button class='dpnone' onclick='modifyReply(" + result.trim() + ", this)'>확인</button>";
+						html += 		"<button class='dpnone' onclick='cancelBtn(this, `" + rcontent.val() + "`)'>취소</button>";
+						html +=			"<button onclick='deleteReply(" + result.trim() + ", this)'>삭제</button>";
+						html += 	"</span>";
+						html += "</div>";
+						$(".comments-section").prepend(html);
+						
+						rcontent.val("");
+					}else{
+						alert("에러 발생");
+					}
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
+			
+		});
+		
+		function getTime(){
+			let date = new Date();
+			console.log(date);
+			
+			let year = date.getFullYear();
+			let month = (date.getMonth() + 1).toString().padStart(2,"0");
+			let day = date.getDate().toString().padStart(2,"0");
+			let hour = date.getHours().toString().padStart(2,"0");
+			let minute = date.getMinutes().toString().padStart(2,"0");
+			let second = date.getSeconds().toString().padStart(2,"0");
+			
+			let time = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second
+			return time;
+		}
+		
+		let pushNo = <%= push %>;
+		$("#push").click(function(){
+			let pushNum = $("#pushNum");
+			let bno = <%= no %>
+			let push = $("#push");
+			let cName = push.attr("class");
+			$.ajax({
+				url : "pushok.jsp",
+				type : "post",
+				data : {
+					bno : bno,
+					uId : rauthor
+				},
+				success : function (result){
+					if(result.trim() == "success"){
+						if(cName == "bi-hand-thumbs-up"){
+							push.attr("class", "bi-hand-thumbs-up-fill")
+							pushNum.text("조회<%= hit %> 추천" + (++pushNo));
+						}else if(cName == "bi-hand-thumbs-up-fill"){
+							push.attr("class", "bi-hand-thumbs-up")
+							pushNum.text("조회<%= hit %> 추천" + (--pushNo));
+						}
+					}else{
+						console.log("에러 발생");
+					}
+					
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
+			if(cName == "bi-hand-thumbs-up"){
+				push.attr("class", "bi-hand-thumbs-up-fill");
+			}else if(cName == "bi-hand-thumbs-up-fill"){
+				push.attr("class", "bi-hand-thumbs-up");
+			}else{
+				return;
+			}
+		});
 	</script>
 </html>

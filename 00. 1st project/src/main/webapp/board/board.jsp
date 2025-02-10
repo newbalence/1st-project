@@ -14,7 +14,7 @@
 	}
 	
 	int currentPage = Integer.parseInt(pageNum);
-	int limitSize = 8;
+	int limitSize = 10;
 	int startNum = (currentPage - 1) * limitSize;
 	String searchType = request.getParameter("searchType");
 	String keyword = request.getParameter("searchKeyword");
@@ -32,6 +32,7 @@
 	List<BoardVO> list = bdao.selBoardAll(svo);
 	
 	int totalCount = bdao.getcount(svo);
+	System.out.println("total : " + totalCount);
 	
 	int pageGroupSize = 10;
 	
@@ -365,8 +366,10 @@
         			String nick = bvo.getNick();
         			int hit = bvo.getHit();
         			int push = bvo.getPush();
+        			System.out.println(bno);
+        			System.out.println(push);
         			createDate = createDate.substring(0, 10);
-        			if(userType.equals("2")){
+        			if(userType.equals("2") || bvo.getBoardType().equals("99")){
         				continue;
         			}
         			%>
@@ -485,5 +488,8 @@
 	    boxElement.classList.remove("active");
 	  });
 	});
+	
+	
+	
 </script>
 </html>
