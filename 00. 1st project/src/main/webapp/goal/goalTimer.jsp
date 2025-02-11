@@ -14,11 +14,26 @@
 	    <meta charset="UTF-8" />
 	    <title>갓 생 살기</title>
 	    <style>
+	    	html{
+	    		height: 100%;
+    		    margin: 0px;
+    		    padding : 0px;
+	    	}
+	    	body{
+	    		height: 100%;
+	    		margin: 0px;
+    		    padding : 0px;
+	    	}
+	    	.container{
+    		    height: calc(100% - 65px);
+	    		display: flex;
+			    align-items: center;
+			    justify-content: space-around;
+	    	}
 	    	.timer-box {
 			  display: flex;
 			  flex-direction: column;
 			  align-items: center;
-			  margin-top: 125px;
 			}
 			
 			.timer {
@@ -64,22 +79,76 @@
 			.start + div > .timerBtn:nth-child(1) {
 			  display: none;
 			}
+			.timer-list{
+			    direction: rtl;
+			    text-align: left;
+				display:flex;
+				flex-direction: column;
+				overflow-y: scroll;
+    			max-height: 500px;
+			}
+			
+			.timer-list::-webkit-scrollbar-track{
+			  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			  border-radius: 10px;
+			  background-color: #F5F5F5;
+			}
+			
+			.timer-list::-webkit-scrollbar{
+			  width: 12px;
+			  background-color: #F5F5F5;
+			}
+			
+			.timer-list::-webkit-scrollbar-thumb{
+			  border-radius: 10px;
+			  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+			  background-color: #555;
+			}
+			
+			.timer-list > div{
+				height : 50px;
+				border : 1px solid black;
+				background-color : black;
+				color : white;
+				margin : 5px;
+				border-bottom-right-radius: 10px;
+    			border-top-right-radius: 10px;
+			}
+			.check{
+				text-align: left;
+				direction: ltr;
+			}
 	    </style>
 	</head>
 	<body>
-		<div class="timer-box">
-      		<div class="timer js-timer">00:00:00</div>
-      		<div class="timer-form__Btn">
-		        <div class="timerBtn js-timer__startBtn">
-		        	<i class="fas fa-play"></i>
-		        </div>
-        		<div class="timerBtn js-timer__stopBtn">
-          			<i class="fas fa-pause"></i>
-        		</div>
-        		<div class="timerBtn js-timer__resetBtn">
-          			<i class="fas fa-stop"></i>
-        		</div>
-      		</div>
+		<div class="container">
+			<div class="timer-list">
+				<% 
+					for(int i = 0; i < 20; i ++){
+						%>
+						<div class="check">
+							<div>2025-01-24</div>
+							<span>13 : 48 - 15 : 35</span>
+							<span>(1시간 20분)</span>
+						</div>
+						<%
+					}
+				%>
+			</div>
+			<div class="timer-box">
+	      		<div class="timer js-timer">00:00:00</div>
+	      		<div class="timer-form__Btn">
+			        <div class="timerBtn js-timer__startBtn">
+			        	<i class="fas fa-play"></i>
+			        </div>
+	        		<div class="timerBtn js-timer__stopBtn">
+	          			<i class="fas fa-pause"></i>
+	        		</div>
+	        		<div class="timerBtn js-timer__resetBtn">
+	          			<i class="fas fa-stop"></i>
+	        		</div>
+	      		</div>
+	    	</div>
     	</div>
   	</body>
 	<script>
