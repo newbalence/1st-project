@@ -68,25 +68,25 @@
 	</head>
 	<body>
 		<div class="timer-box">
-      	<div class="timer js-timer">00:00:00</div>
-      	<div class="timer-form__Btn">
-        <div class="timerBtn js-timer__startBtn">
-        	<i class="fas fa-play"></i>
-        </div>
-        <div class="timerBtn js-timer__stopBtn">
-          	<i class="fas fa-pause"></i>
-        </div>
-        <div class="timerBtn js-timer__resetBtn">
-          	<i class="fas fa-stop"></i>
-        </div>
-      </div>
-    </div>
-  </body>
-  <script>
-	  const timer = document.querySelector('.js-timer'),
-	  stopBtn = document.querySelector('.js-timer__stopBtn'),
-	  startBtn = document.querySelector('.js-timer__startBtn'),
-	  resetBtn = document.querySelector('.js-timer__resetBtn');
+      		<div class="timer js-timer">00:00:00</div>
+      		<div class="timer-form__Btn">
+		        <div class="timerBtn js-timer__startBtn">
+		        	<i class="fas fa-play"></i>
+		        </div>
+        		<div class="timerBtn js-timer__stopBtn">
+          			<i class="fas fa-pause"></i>
+        		</div>
+        		<div class="timerBtn js-timer__resetBtn">
+          			<i class="fas fa-stop"></i>
+        		</div>
+      		</div>
+    	</div>
+  	</body>
+	<script>
+	const timer = document.querySelector('.js-timer'),
+	stopBtn = document.querySelector('.js-timer__stopBtn'),
+	startBtn = document.querySelector('.js-timer__startBtn'),
+	resetBtn = document.querySelector('.js-timer__resetBtn');
 	
 	let TIME = 0;
 	let cron;
@@ -118,9 +118,9 @@
 	  const minutes = checkMinutes % 60;
 	  
 	  timer.innerText = hours.toString().padStart(2,"0") + ":" + minutes.toString().padStart(2,"0") + ":" + seconds.toString().padStart(2,"0")
-
+	
 	  TIME++;
-	  console.log(TIME - 1);
+	  /* console.log(TIME - 1); */
 	}
 	
 	function init() {
@@ -129,5 +129,5 @@
 	  resetBtn.addEventListener('click', resetButton);
 	}
 	init();
-  </script>
+	</script>
 </html>
