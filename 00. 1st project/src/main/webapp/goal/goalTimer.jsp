@@ -93,6 +93,9 @@
 	let timeno = 0;
 	
 	function startButton() {
+		if(TIME > 0){
+			TIME--;
+		}
 	  updateTimer();
 	  stopButton();
 	  cron = setInterval(updateTimer, 1000);
