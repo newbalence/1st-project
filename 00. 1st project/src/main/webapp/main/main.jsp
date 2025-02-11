@@ -160,42 +160,53 @@
     		}
     	%>
 		    <!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	        <form>
-	        	<div class="login-container">
-       			<h1>로그인</h1>
-           <label for="username">아이디</label>
-           <input type="text" id="username" name="username" placeholder="아이디를 입력하세요">
-           <div id="username-feedback" class="feedback"></div>
-
-           <label for="password">비밀번호</label>
-           <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
-           <div id="password-feedback" class="feedback"></div>
-
-           <button type="button" id="submit" class="login">로그인</button>
-	        <div class="alternate-option">
-	            <p>계정이 없으신가요? <a href="../signup/signup.jsp">회원가입</a></p>
-	        </div>
-  		 </div>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	
         <h2 align="center">메뉴</h2>
         <div class="nav">
         	<a href="#">타이머</a>
             <a href="../board/board.jsp">자유 게시판</a>
-            <a href="#">프로필 관리</a>
-            <a href="../login/logout.jsp">로그아웃</a>
+            <a href="../signup/myPage.jsp">마이페이지</a>
+            <% 
+            	if(user != null){
+            		%>
+   		            	<a href="../login/logout.jsp">로그아웃</a>
+            		<%
+            	}else{
+            		%>
+            		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        <form>
+					        	<div class="login-container">
+					       			<h1>로그인</h1>
+						            <label for="username">아이디</label>
+						            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요">
+						            <div id="username-feedback" class="feedback"></div>
+					
+						            <label for="password">비밀번호</label>
+						            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
+						            <div id="password-feedback" class="feedback"></div>
+					
+						            <button type="button" id="submit" class="login">로그인</button>
+							        <div class="alternate-option">
+						            	<p>계정이 없으신가요? <a href="../signup/signup.jsp">회원가입</a></p>
+						        	</div>
+				  		 		</div>
+					        </form>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+            		<%
+            	}
+            %>
+
         </div>
         <div class="info">
             <p>© 2025 Your Website. All Rights Reserved.</p>

@@ -32,7 +32,6 @@
 	List<BoardVO> list = bdao.selBoardAll(svo);
 	
 	int totalCount = bdao.getcount(svo);
-	System.out.println("total : " + totalCount);
 	
 	int pageGroupSize = 10;
 	
@@ -365,9 +364,7 @@
         			String userType = bvo.getUserType();
         			String nick = bvo.getNick();
         			int hit = bvo.getHit();
-        			int push = bvo.getPush();
-        			System.out.println(bno);
-        			System.out.println(push);
+        			int push = bvo.getPush();;
         			createDate = createDate.substring(0, 10);
         			if(userType.equals("2") || bvo.getBoardType().equals("99")){
         				continue;

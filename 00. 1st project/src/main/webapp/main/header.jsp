@@ -104,11 +104,11 @@
    			if(user != null){
    	   			if(type.equals("0")){
    	   				%>
-   	        		<a href="#">회원관리</a>
+   	        		<a href="../main/user_management.jsp">회원관리</a>
    	   				<%
    				}
    	   			%>
-   				<a href="#">마이페이지</a>	
+   				<a href="../signup/myPage.jsp">마이페이지</a>	
    				<a href="../login/logout.jsp">로그아웃</a>	
    				<%
    			}

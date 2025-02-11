@@ -43,8 +43,7 @@ public class UserDAO extends DBManager {
 		
 		String sql = "select * from user where id = '" + id + "' and pw = md5('" + pw + "') ";
 		sql += "and (user_type != 2 or user_type != 99)";
-		
-		System.out.println(sql);
+
 		
 		executeQuery(sql);
 		
@@ -90,22 +89,26 @@ public class UserDAO extends DBManager {
 		String pw = vo.getPw();
 		String nick = vo.getNick();
 		String hobby = vo.getHobby();
+		String userType = vo.getUserType();
 		
 		driverLoad();
 		DBConnect();
 		
-		String sql = "update user set user_type = now(), ";
-		if(pw != null) {
-			sql += "pw = md5('" + pw;
+		String sql = "update user set update_date = now()";
+		if(pw != null && !pw.isEmpty()) {
+			sql += ", pw = md5('" + pw + "')";
 		}
-		if(nick != null	) {
-			sql += "'), nick = '" + nick;
+		if(nick != null	&& !nick.isEmpty()) {
+			sql += ", nick = '" + nick + "'";
 		}
-		if(hobby != null) {
-			sql += "', hobby = " + hobby;
+		if(hobby != null && !hobby.isEmpty()) {
+			sql += ", hobby = " + hobby;
+		}
+		if(userType != null && !userType.isEmpty()) {
+			sql += ", user_type = " + userType;
 		}
 		sql +=  " where id = '" + id + "';";
-				
+		
 		executeUpdate(sql);
 		
 		DBDisConnect();
@@ -169,20 +172,25 @@ public class UserDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from user where user_type != 0;";
+		String sql = "select * from user order by user_type;";
 		executeQuery(sql);
 		
 		List<UserVO> list = new ArrayList<>(); 
 		while(next()) {
 			UserVO vo = new UserVO();
 			String id = getString("id");
-			String email = getString("email");
+			String name = getString("name");
 			String nick = getString("nick");
+			String email = getString("email");
+			String hobby = getString("hobby");
 			String userType = getString("user_Type");
 			
+			
 			vo.setId(id);
-			vo.setEmail(email);
+			vo.setName(name);
 			vo.setNick(nick);
+			vo.setEmail(email);
+			vo.setHobby(hobby);
 			vo.setUserType(userType);
 			
 			list.add(vo);

@@ -73,7 +73,6 @@ public class BoardDAO extends DBManager {
 		}
 		sql += "update_date = now() ";
 		sql += "where bno = " + bno;
-		System.out.println(sql);
 		executeUpdate(sql);
 		DBDisConnect();
 	}
@@ -104,7 +103,7 @@ public class BoardDAO extends DBManager {
 		String sql = "select board.*, user.*, (select count(*) from push where bno = board.bno) as push, (select count(*) from hit where bno = board.bno) as hit from board ";
 		sql += "left join user on board.author = user.id ";
 		sql += "where (board.board_type != 99 and user.user_type != 2)";
-		System.out.println(sql);
+		
 		if(boardType != null && !boardType.equals("") && !boardType.equals("null")) {
 			 sql += " and board.board_type = " + boardType; 
 		}
@@ -165,6 +164,7 @@ public class BoardDAO extends DBManager {
 		sql += "(select count(*) from push where bno = " + no + ") as push ";
 		sql += "from board where board_type != 99";
 		sql += " and bno = " + no;
+		
 		executeQuery(sql);
 		
 		if(next()) {
@@ -219,13 +219,13 @@ public class BoardDAO extends DBManager {
 		if(searchType != null && keyword != null) {
 			sql += " and " + searchType + " like '%" + keyword + "%'";
 		}
-		System.out.println(sql);
+		
 		executeQuery(sql);
 		
 		if(next()) {
 			int count = getInt("cnt");
 			DBDisConnect();
-			System.out.println(count);
+			
 			return count;
 		}else{
 			DBDisConnect();
