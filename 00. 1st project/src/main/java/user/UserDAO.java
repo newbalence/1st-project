@@ -172,7 +172,7 @@ public class UserDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from user order by user_type;";
+		String sql = "select * from user where user_type != 0;";
 		executeQuery(sql);
 		
 		List<UserVO> list = new ArrayList<>(); 

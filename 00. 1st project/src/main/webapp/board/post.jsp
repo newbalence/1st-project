@@ -90,6 +90,9 @@
 		//Size = (fileSize / (1024 * 1024 * 1024)) + 1 + "GB";
 	}
 	
+	String path = request.getContextPath();
+	System.out.println(path);
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -311,11 +314,16 @@
         </div>
         <%
         	if(uploadName != null && !uploadName.equals("null")){
-        		%>
+		                	if(uploadName.split("\\.")[1].contains("jpg")){
+		                		%>
+		                			<img src="<%= path %>/upload/<%= uploadName %>"></img>
+		                		<%
+		                	}
+		                %>
        		     <div class="attachments">
 		            <h3>첨부파일</h3>
 		            <div class="attachment-item">
-		                <a download="<%= originName %>" href="/JspBoard/upload/<%= uploadName %>" class="attachment-name"><%= originName %></a>
+		                <a download="<%= originName %>" href="<%= path %>/upload/<%= uploadName %>" class="attachment-name"><%= originName %></a>
 		                <span class="attachment-size">(<%= data %>)</span>
 		            </div>
 		        </div>

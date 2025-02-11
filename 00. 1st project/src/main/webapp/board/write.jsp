@@ -125,6 +125,9 @@
 	            <input type="file" id="file" name="file">
 			</div>
 			
+			<div id="img-container">
+			</div>
+			
             <div class="action">
                 <button type="submit">등록</button>
                 <button type="button" onclick="history.back()">취소</button>
@@ -132,4 +135,27 @@
         </form>
     </div>
 </body>
+<script>
+$("#file").change(function(e) {
+    console.log($("#file")[0].files)
+    const files = $("#file")[0].files;
+    
+    for(let i = 0; i < files.length; i ++){
+    	let file =  files[i];
+    	let reader = new FileReader();
+    	
+    	reader.onload = function(e){
+        	console.log(e.target.result)
+        	if(file.type.includes("image")){
+        		let html = "<img src='"+e.target.result+"'></img>"
+        		$("#img-container").append(html);
+        	}
+        }
+        
+        reader.readAsDataURL(file);
+    }
+    
+    
+});
+</script>
 </html>

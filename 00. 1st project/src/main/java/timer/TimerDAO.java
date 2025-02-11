@@ -80,15 +80,15 @@ public class TimerDAO extends DBManager {
 	}
 	
 //	타이머 종료
-	public void endTime(int num, String startTime) {
+	public void endTime(int num, int time, String uid) {
 		driverLoad();
 		DBConnect();
 		
 		String sql = "";
 		sql += "update timer "; 
 		sql += "set end_time = now(), "; 
-		sql += "all_time = TIMESTAMPDIFF(MINUTE,'" + startTime + "', now()), ";
-		sql += "add_time = (select all_time from (select sum(all_time) from timer where id='hong') as t) "; 
+		sql += "all_time = " + time;
+		sql += " add_time = (select all_time from (select sum(all_time) from timer where id='" + uid + "') as t) "; 
 		sql += "where timeno = " + num;
 		executeUpdate(sql);
 		DBDisConnect();
