@@ -40,5 +40,5 @@
 	}
 	
 	session.setAttribute("user", user);
-	response.sendRedirect("../main/main.jsp");
+	response.sendRedirect("../main/home.jsp");
 %>

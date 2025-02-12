@@ -115,8 +115,6 @@
 			<div id="article"> 
 				<div class="innerArticle"> 
 					<div class="articleLeft"> 
-					
-					
 						<div class="Ranking-from-All">
 							<div class="Content-from-All">
 								<h2 class="screen_out">베스트 게시글</h2>
