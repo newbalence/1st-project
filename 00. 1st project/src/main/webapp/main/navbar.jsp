@@ -44,15 +44,29 @@
 		.btn-dark {
 			padding: 0 23px;
 			box-sizing: border-box;
-			font-size: 13px;
 			height: 40px;
 			min-width: 120px;
 			line-height: 38px;
 			border-radius: 30px;
 			margin-left: 50px;
 		}
-		.btn-dark:hover {
+		.login{
+			padding: 0 23px;
+			box-sizing: border-box;
+			height: 40px;
+			min-width: 120px;
+			line-height: 38px;
+			border-radius: 30px;
+			margin-left: 50px;
+			background-color: #23272B;
 			color: white;
+		}
+		.btn-dark:hover {
+			background-color: #c40000;
+			border: none;
+			line-height: 40px;
+		}
+		.login:hover{
 			background-color: #c40000;
 			border: none;
 			line-height: 40px;
@@ -127,8 +141,130 @@
 		.bi-person-circle:hover {
 			color: #000000;
 		}
-		
+		.menu-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #2575fc;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .menu-toggle:hover {
+            background: #1a5fc4;
+        }
+        .dropdown-menus {
+        	text-align: center;
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            right: 40px;
+            top: 100%;
+        }
+        .dropdown-menus a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+        }
+        .dropdown-menus a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-menus a:hover {
+            background: #f4f4f4;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+        .login-container {
+	            background: white;
+	            padding: 30px 40px;
+	        }
+	        h1 {
+	            text-align: center;
+	            margin-bottom: 20px;
+	            color: #23272B;
+	            font-family: 'Verdana', sans-serif;
+	        }
+	        label {
+	            display: block;
+	            margin-bottom: 8px;
+	            font-weight: bold;
+	            color: #444;
+	        }
+	        input {
+	            display: block;
+	            width: calc(100% - 20px);
+	            padding: 10px;
+	            margin-bottom: 5px;
+	            border: 1px solid #ddd;
+	            border-radius: 5px;
+	            font-size: 1rem;
+	            margin-right: auto;
+	        }
+	        input:focus {
+	            outline: none;
+	            border-color: #2575fc;
+	            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+	        }
+	        .feedback {
+	            font-size: 0.9rem;
+	            color: red;
+	            margin-bottom: 10px;
+	        }
+	        .feedback.success {
+	            color: green;
+	        }
+	        button:hover {
+	            background: #1a5fc4;
+	        }
+	        .alternate-option {
+	            text-align: center;
+	            margin-top: 20px;
+	        }
+	        .alternate-option a {
+	            color: #23272B;
+	            text-decoration: none;
+	            font-weight: bold;
+	        }
+	        .alternate-option a:hover {
+	            text-decoration: underline;
+	            color: red;
+	        }
 	</style>
+	<script>
+		function toggleMenu() {
+	        var menu = document.getElementById('dropdown-menu');
+	        var overlay = document.getElementById('overlay');
+	        if (menu.style.display === 'block') {
+	            menu.style.display = 'none';
+	            overlay.style.display = 'none';
+	        } else {
+	            menu.style.display = 'block';
+	            overlay.style.display = 'block';
+	        }
+	    }
+	    function closeMenu() {
+	        var menu = document.getElementById('dropdown-menu');
+	        var overlay = document.getElementById('overlay');
+	        menu.style.display = 'none';
+	        overlay.style.display = 'none';
+	    }
+	</script>
 	</head>
 		<body>
 		
@@ -147,7 +283,7 @@
 			        </li>
 			        
 			        <li class="nav-item">
-			          <a class="nav-link" href="#">목표</a>
+			          <a class="nav-link" href="../goal/goalTimer.jsp">목표</a>
 			        </li>
 			        
 			        <li class="nav-item">
@@ -165,6 +301,7 @@
  					<i onclick="del()" class="bi bi-x-circle-fill"></i>	                
 	                <i onclick="search()" class="fa fa-search"></i>                    
                 </div>
+
 			      <%
 			      	if(user == null){
 			      		%>
@@ -173,22 +310,26 @@
 						  <div class="modal-dialog">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+						        
 						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						      </div>
 						      <div class="modal-body">
 						        <form>
 						        	<div class="login-container">
 						       			<h1>로그인</h1>
-							            <label for="username">아이디</label>
-							            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" value="admin">
-							            <div id="username-feedback" class="feedback"></div>
-						
-							            <label for="password">비밀번호</label>
-							            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" value="1234">
-							            <div id="password-feedback" class="feedback"></div>
-						
-							            <button type="button" id="submit" class="login">로그인</button>
+						       			<div>
+								            <label for="username">아이디</label>
+								            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" value="admin">
+								            <div id="username-feedback" class="feedback"></div>
+										</div>
+										<div>
+								            <label for="password">비밀번호</label>
+								            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" value="1234">
+								            <div id="password-feedback" class="feedback"></div>
+										</div>
+										<div style="margin-left: 80px;">
+							            	<button type="button" id="submit" class="login">로그인</button>
+							            </div>
 								        <div class="alternate-option">
 							            	<p>계정이 없으신가요? <a href="../signup/signup.jsp">회원가입</a></p>
 							        	</div>
@@ -201,11 +342,26 @@
 			      		<%
 			      	}else{
 			      		%>
-			      		<a class="btn btn-dark" href="../main/user_management.jsp" role="button"><%= user.getNick() %></a>
-			      		<%
-			      	}
-			      %>
-			    
+   		                <button type="button" onclick="toggleMenu()" class="btn btn-dark" >메뉴</button>
+      					<div class="dropdown-menus" id="dropdown-menu">
+      					<%
+			   			if(user != null){
+			   	   			if(type.equals("0")){
+			   	   				%>
+			   	        		<a href="../main/user_management.jsp">회원관리</a>
+			   	   				<%
+			   				}
+			   	   			%>
+			   				<a href="../signup/myPage.jsp">마이페이지</a>	
+			   				<a href="../login/logout.jsp">로그아웃</a>	
+			   				<%
+			   				%>
+			   				</div>
+        					<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+			   				<%
+			   			}
+			     	}
+			     %>
 				</div>
 			    </div>
 			</nav>
@@ -274,47 +430,4 @@
 			});
 		</script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
