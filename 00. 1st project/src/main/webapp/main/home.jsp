@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="navbar.jsp" %>
+<%@ include file="../main/navbar.jsp" %>
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -232,90 +232,6 @@
 											</div>
 										</a>
 									</div>
-									<div class="item_group">
-										<a class="link_cont" href="#">
-											<div class="wrap_int">
-												<strong class="tit_int">듣지 중 군용으로 권고할 않다, 장 규모로 밀도는 오다.</strong>
-												<div class="wrap_desc">
-													<p class="desc_int">대선이나 아니다 일가를 준 요리가 예고하는데. 진료실이 생기게 있은 보아 초청할지 비닐하우스와 빠지면 문화가 거 마주치다 있다. 깨달음 있어야 건강한 극복하고자 장군, 인사가 나가자 발전부터 각목이 영원하다. 방의 바로 백골단이 회의까지 있는다.
-												</div>
-												<div class="wrap_btn">
-													<span class="int_btn">
-														<span class="icon_like">추천</span>
-														<span class="int_txt">17</span> <!-- 추천 수 가져오기 -->
-													</span>
-													<span class="int_btn">
-														<span class="icon_comment">댓글</span>
-														<span class="int_txt">11</span> <!-- 댓글 수 가져오기 -->
-													</span>
-													<span class="int_txt">25. 01. 21</span>
-												</div>
-											</div>
-										</a>
-									</div>
-									<div class="item_group">
-										<a class="link_cont" href="#">
-											<div class="wrap_int">
-												<strong class="tit_int">신호등은 생각이라, 뉴스는 조선소와 절대, 차이를 하다.</strong>
-												<div class="wrap_desc">
-													<p class="desc_int">아닌 작으려고, 합디다 차장이 마음의 사라진다 많이 실팍하나 삶을 전위가 보세요. 말짱 요새에 시청자는 속담의 같는 들어가아 뻗치고 군댈, 발급받다. 거 컵이, 시집이고 길을 신체는, 친절한 전면은 학년 감독인 말한다.
-												</div>
-												<div class="wrap_btn">
-													<span class="int_btn">
-														<span class="icon_like">추천</span>
-														<span class="int_txt">17</span> <!-- 추천 수 가져오기 -->
-													</span>
-													<span class="int_btn">
-														<span class="icon_comment">댓글</span>
-														<span class="int_txt">11</span> <!-- 댓글 수 가져오기 -->
-													</span>
-													<span class="int_txt">25. 01. 21</span>
-												</div>
-											</div>
-										</a>
-									</div>
-									<div class="item_group">
-										<a class="link_cont" href="#">
-											<div class="wrap_int">
-												<strong class="tit_int">전공도 한에 아프는 선달의 다가올 유행하다.</strong>
-												<div class="wrap_desc">
-													<p class="desc_int">나다 그러라 길일은 고장의 씨 빠르라. 할머니가 탄생의 한잔하려니와 그렇다 거 촉촉이 또래를 먹는다 생각되다 번거롭지. 대폭 위원장을 걸칠 식사한 둘까.
-												</div>
-												<div class="wrap_btn">
-													<span class="int_btn">
-														<span class="icon_like">추천</span>
-														<span class="int_txt">17</span> <!-- 추천 수 가져오기 -->
-													</span>
-													<span class="int_btn">
-														<span class="icon_comment">댓글</span>
-														<span class="int_txt">11</span> <!-- 댓글 수 가져오기 -->
-													</span>
-													<span class="int_txt">25. 01. 21</span>
-												</div>
-											</div>
-										</a>
-									</div>
-									<div class="item_group">
-										<a class="link_cont" href="#">
-											<div class="wrap_int">
-												<strong class="tit_int">교황은 집처럼 감독으로 세계와 도중이 그러나 않다 받다.</strong>
-												<div class="wrap_desc">
-													<p class="desc_int">변덕쟁이가 그는 가하면 테이블이다 어떻으라면 다닐까. 대한 그렇다 연속극은 백자도 일도, 운영되라 망아지를 하다. 이 빚인 되다 상담을, 아득하여요.
-												</div>
-												<div class="wrap_btn">
-													<span class="int_btn">
-														<span class="icon_like">추천</span>
-														<span class="int_txt">17</span> <!-- 추천 수 가져오기 -->
-													</span>
-													<span class="int_btn">
-														<span class="icon_comment">댓글</span>
-														<span class="int_txt">11</span> <!-- 댓글 수 가져오기 -->
-													</span>
-													<span class="int_txt">25. 01. 21</span>
-												</div>
-											</div>
-										</a>
-									</div>
 								</div>
 								
 								
@@ -344,117 +260,59 @@
 										</div>
 									</a>
 								</div>
-								
-								<div class="item_group">
-									<a class="link_cont" href="#">
-										<div class="wrap_done">
-											<strong class="tit_done">결국에 대금의 공부를, 먹는 하에요.</strong>
-											<div class="wrap_desc">
-												<p class="desc_done">모두 못한 분야가 법적 일컬어진 우량부터 없고 오전으로 54대 말한다. 후보자에 부족하나 미술과 위하는 행정부가 야구로 책임진 싶다. 공식적이라고 나그네의 대우라고 승 은폐를 뻗치다.
-											</div>
-											<div class="wrap_btn">
-												<span class="done_btn">
-													<span class="icon_like">추천</span>
-													<span class="done_txt">17</span> <!-- 추천 수 가져오기 -->
-												</span>
-												<span class="done_btn">
-													<span class="icon_comment">댓글</span>
-													<span class="done_txt">11</span> <!-- 댓글 수 가져오기 -->
-												</span>
-												<span class="done_txt">25. 01. 21</span>
-											</div>
-										</div>
-									</a>
-								</div>
-								
-								<div class="item_group">
-									<a class="link_cont" href="#">
-										<div class="wrap_done">
-											<strong class="tit_done">다루어진 여자가 이렇고 그를 싶구나.</strong>
-											<div class="wrap_desc">
-												<p class="desc_done">모두 못한 분야가 법적 일컬어진 우량부터 없고 오전으로 54대 말한다. 후보자에 부족하나 미술과 위하는 행정부가 야구로 책임진 싶다. 공식적이라고 나그네의 대우라고 승 은폐를 뻗치다.
-											</div>
-											<div class="wrap_btn">
-												<span class="done_btn">
-													<span class="icon_like">추천</span>
-													<span class="done_txt">17</span> <!-- 추천 수 가져오기 -->
-												</span>
-												<span class="done_btn">
-													<span class="icon_comment">댓글</span>
-													<span class="done_txt">11</span> <!-- 댓글 수 가져오기 -->
-												</span>
-												<span class="done_txt">25. 01. 21</span>
-											</div>
-										</div>
-									</a>
-								</div>
-								
-								<div class="item_group">
-									<a class="link_cont" href="#">
-										<div class="wrap_done">
-											<strong class="tit_done">이 있어 범법이나 집념에, 산만한 맑은 있기, 전망합니다.</strong>
-											<div class="wrap_desc">
-												<p class="desc_done">모두 못한 분야가 법적 일컬어진 우량부터 없고 오전으로 54대 말한다. 후보자에 부족하나 미술과 위하는 행정부가 야구로 책임진 싶다. 공식적이라고 나그네의 대우라고 승 은폐를 뻗치다.
-											</div>
-											<div class="wrap_btn">
-												<span class="done_btn">
-													<span class="icon_like">추천</span>
-													<span class="done_txt">17</span> <!-- 추천 수 가져오기 -->
-												</span>
-												<span class="done_btn">
-													<span class="icon_comment">댓글</span>
-													<span class="done_txt">11</span> <!-- 댓글 수 가져오기 -->
-												</span>
-												<span class="done_txt">25. 01. 21</span>
-											</div>
-										</div>
-									</a>
-								</div>
-								
-								<div class="item_group">
-									<a class="link_cont" href="#">
-										<div class="wrap_done">
-											<strong class="tit_done">한 잘 관리가 보호할 마을부터 핵전쟁을 방법에 늦는다.</strong>
-											<div class="wrap_desc">
-												<p class="desc_done">모두 못한 분야가 법적 일컬어진 우량부터 없고 오전으로 54대 말한다. 후보자에 부족하나 미술과 위하는 행정부가 야구로 책임진 싶다. 공식적이라고 나그네의 대우라고 승 은폐를 뻗치다.
-											</div>
-											<div class="wrap_btn">
-												<span class="done_btn">
-													<span class="icon_like">추천</span>
-													<span class="done_txt">17</span> <!-- 추천 수 가져오기 -->
-												</span>
-												<span class="done_btn">
-													<span class="icon_comment">댓글</span>
-													<span class="done_txt">11</span> <!-- 댓글 수 가져오기 -->
-												</span>
-												<span class="done_txt">25. 01. 21</span>
-											</div>
-										</div>
-									</a>
-								</div>
-								
 							</div>
 						</div>
-					</div>	
-						
-						<div class="seekPeople"></div>
+					</div>
+					<div class="seekPeople"></div>
 				</div>
-
-				
-					<div class="articleRight"> <!-- article right side --> <!-- margin&padding left side -->
-						<div class="logmein">
-							<h2 class="screen_out">나의 티스토리</h2>
-							<form method="post" action="#" id="login-form">
+				<div class="articleRight"> <!-- article right side --> <!-- margin&padding left side -->
+					<div class="logmein">
+						<h2 class="screen_out">나의 티스토리</h2>
+						<div id="login-form">
+						<%
+							if(user == null){
+								%>
 								<p class="desc_login">로그인하시고 더 많은 기능을 이용해 보세요!</p>
-								<input type="text" name="userName" placeholder="아이디" autocomplete="off">
-								<input type="password" name="userPassword" placeholder="비밀번호" autocomplete="off">
-								<button type="button" class="login_btn">로그인</button>
-								<button type="button" class="login_kkt">카카오 계정으로 시작하기</button>
-								<div class="auth-container">
-									<a class="findId" href="#">아이디/비밀번호 찾기</a>
-									<a class="signup" href="#">회원가입</a>
-								</div>
-							</form>
+								<button type="button" class="btn btn-dark" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  	<div class="modal-dialog">
+								    	<div class="modal-content">
+								      		<div class="modal-header">
+								        		<h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+								        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								      		</div>
+								      		<div class="modal-body">
+								        		<form>
+									        		<div class="login-container">
+									       				<h1>로그인</h1>
+											            <label for="username">아이디</label>
+											            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" value="admin">
+											            <div id="username-feedback" class="feedback"></div>
+										
+											            <label for="password">비밀번호</label>
+											            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" value="1234">
+											            <div id="password-feedback" class="feedback"></div>
+										
+											            <button type="button" id="submit" class="login">로그인</button>
+												        <div class="alternate-option">
+											            	<p>계정이 없으신가요? <a href="../signup/signup.jsp">회원가입</a></p>
+											        	</div>
+								  		 			</div>
+									        	</form>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+									<%
+								}else{
+									%>
+									<div class="user_profile">
+									<span><%= user.getNick() %>님 환영합니다</span>
+									</div>
+									<%
+								}
+							%>
+							</div>
 						</div>
 						
 						<div class="weather">
@@ -466,13 +324,7 @@
 							<h2 class="screen_out">채팅</h2>
 							<div class="chat_list">
 							
-								<div class="chat_wrap">
-									<a class="chat" href="#">
-										<img src=""> <!-- 프로필 사진 -->
-										<span class="chat_name">사용자</span>
-										<span class="chat_cont">안녕하세요?</span>
-									</a>								
-								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -480,25 +332,54 @@
 			</div>
 		</div>
 	</body>
-	</html>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<script>
+		$("#submit").click(function(){
+			let id = $("#username");
+			let idFeedback = $("#username-feedback");
+			let pw = $("#password");
+			let pwFeedback = $("#password-feedback");
+			
+			$.ajax({
+				url : "../login/loginok.jsp",
+				type : "post",
+				data : {
+					id : id.val().trim(),
+					pw : pw.val().trim()
+				},
+				success : function(result){
+					console.log(result)
+					
+					if(result.trim() != "0"){
+						location.href = "../main/home.jsp";
+					}else{
+						if(id.val().trim() == ""){
+							id.focus();
+							id.val("");
+							idFeedback.css("display", "block");
+							idFeedback.text("아이디를 입력하여 주십시오.");
+							return;
+						}
+						
+						idFeedback.css("display", "none");
+						
+						if(pw.val().trim() == ""){
+							pw.focus();
+							pw.val("");
+							pwFeedback.css("display", "block");
+							pwFeedback.text("비밀번호를 입력하여 주십시오.");
+							return;
+						}
+						
+						pwFeedback.css("display", "block");
+						pwFeedback.text("아이디 혹은 비밀번호를 잘못 입력하였습니다.");
+						return;
+					}
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
+		});
+	</script>
+</html>
+		
