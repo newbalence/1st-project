@@ -27,7 +27,7 @@
 		margin-top: 10px;
 		min-width: 300px;
 		text-align: center;
-	}
+	} 
 	
 	.each-goal {
 		display: flex;
