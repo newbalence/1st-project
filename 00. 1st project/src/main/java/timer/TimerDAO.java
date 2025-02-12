@@ -44,8 +44,6 @@ public class TimerDAO extends DBManager {
 			int allTime = getInt("all_time");
 			int addTime = getInt("add_time");
 			
-			System.out.println(timeno);
-			
 			TimerVO vo = new TimerVO();
 			vo.setTimeNO(timeno);
 			vo.setId(id);

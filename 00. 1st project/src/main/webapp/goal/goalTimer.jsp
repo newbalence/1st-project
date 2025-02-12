@@ -191,12 +191,12 @@
     	</div>
   	</body>
 	<script>
-	function t(){
-		return "hello";
-	}
+	
+	$(document).ready(function(){
+		$(".timer-list").scrollTop($(".timer-list")[0].scrollHeight);
+	})
 	
 	dayjs.extend(window.dayjs_plugin_duration)
-	let allTime = dayjs.duration(1502, 'seconds').format('H[h] m[m] s[s]');
 	
 	const timer = document.querySelector('.js-timer'),
 	stopBtn = document.querySelector('.js-timer__stopBtn'),
