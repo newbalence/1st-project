@@ -36,5 +36,5 @@
 	UserDAO dao = new UserDAO();
 	dao.join(vo);
 	
-	response.sendRedirect("../main/main.jsp");
+	response.sendRedirect("../main/home.jsp");
 %>

@@ -1,20 +1,29 @@
 <%@page import="user.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	UserVO user = (UserVO)session.getAttribute("user");
+	String type = request.getParameter("type");
+	String order = request.getParameter("order");
+	
+	if(user != null){
+		type = user.getUserType();
+	}
+%>
 <!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="UTF-8">
 	<title>Good Life</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link rel="stylesheet" href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css>
-	<link rel="stylesheet" href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js>
-	<link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js>
+	<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js></script>
+	<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
 	<link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/ed2cfa7d40.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
+	<script src="https://kit.fontawesome.com/ed2cfa7d40.js"></script>
 	<style>
 		.mb-5 {
 		    margin-bottom: 0 !important;
@@ -127,14 +136,14 @@
 			
 			  <div class="container-fluid">
 			  
-			    <a class="navbar-brand" href="#"><i class="bi-alarm"></i></a>
+			    <a class="navbar-brand" href="../main/home.jsp"><i class="bi-alarm"></i></a>
 			    
 			    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			    
 			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			      
 			        <li class="nav-item">
-			          <a class="nav-link" href="#">홈</a>
+			          <a class="nav-link" href="../main/home.jsp">홈</a>
 			        </li>
 			        
 			        <li class="nav-item">
@@ -142,7 +151,7 @@
 			        </li>
 			        
 			        <li class="nav-item">
-			          <a class="nav-link" href="#">커뮤니티</a>
+			          <a class="nav-link" href="../board/board.jsp">커뮤니티</a>
 			        </li>
 			        
 			        <li class="nav-item">
@@ -152,23 +161,118 @@
 			      </ul>
 			      
  				<div class="input-box">
-	                <input type="text" class="form-control" placeholder="검색어 입력">
- 					<i class="bi bi-x-circle-fill"></i>	                
-	                <i class="fa fa-search"></i>                    
+	                <input type="text" id="search" class="form-control" placeholder="검색어 입력">
+ 					<i onclick="del()" class="bi bi-x-circle-fill"></i>	                
+	                <i onclick="search()" class="fa fa-search"></i>                    
                 </div>
-			      
-			    <a class="btn btn-dark" href="#" role="button">시작하기</a>
-
-			    <!-- <i class="fa-solid fa-bell"></i>
-			    <i class="bi bi-person-circle"></i> -->
-			      
-				</div>
-				  
-			    </div>
+			      <%
+			      	if(user == null){
+			      		%>
+						<button type="button" class="btn btn-dark" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      <div class="modal-body">
+						        <form>
+						        	<div class="login-container">
+						       			<h1>로그인</h1>
+							            <label for="username">아이디</label>
+							            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" value="admin">
+							            <div id="username-feedback" class="feedback"></div>
+						
+							            <label for="password">비밀번호</label>
+							            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" value="1234">
+							            <div id="password-feedback" class="feedback"></div>
+						
+							            <button type="button" id="submit" class="login">로그인</button>
+								        <div class="alternate-option">
+							            	<p>계정이 없으신가요? <a href="../signup/signup.jsp">회원가입</a></p>
+							        	</div>
+					  		 		</div>
+						        </form>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+			      		<%
+			      	}else{
+			      		%>
+			      		<a class="btn btn-dark" href="../main/user_management.jsp" role="button"><%= user.getNick() %></a>
+			      		<%
+			      	}
+			      %>
 			    
+				</div>
+			    </div>
 			</nav>
-			
 		</body>
+		<script>
+			function search(){
+				let search = $("#search").val();
+				if(search.trim() == ""){
+					return alert("검색어를 입력해주세요");
+				}
+				location.href = "../board/board.jsp?searchType=title&searchKeyword="+search;
+			}
+			
+			function del(){
+				$("#search").val("").focus();
+				
+			}
+			
+			
+			$("#submit").click(function(){
+				let id = $("#username");
+				let idFeedback = $("#username-feedback");
+				let pw = $("#password");
+				let pwFeedback = $("#password-feedback");
+				
+				$.ajax({
+					url : "../login/loginok.jsp",
+					type : "post",
+					data : {
+						id : id.val().trim(),
+						pw : pw.val().trim()
+					},
+					success : function(result){
+						console.log(result)
+						
+						if(result.trim() != "0"){
+							location.href = "../main/home.jsp";
+						}else{
+							if(id.val().trim() == ""){
+								id.focus();
+								id.val("");
+								idFeedback.css("display", "block");
+								idFeedback.text("아이디를 입력하여 주십시오.");
+								return;
+							}
+							
+							idFeedback.css("display", "none");
+							
+							if(pw.val().trim() == ""){
+								pw.focus();
+								pw.val("");
+								pwFeedback.css("display", "block");
+								pwFeedback.text("비밀번호를 입력하여 주십시오.");
+								return;
+							}
+							
+							pwFeedback.css("display", "block");
+							pwFeedback.text("아이디 혹은 비밀번호를 잘못 입력하였습니다.");
+							return;
+						}
+					},
+					error : function(){
+						console.log("에러 발생");
+					}
+				});
+			});
+		</script>
 </html>
 
 

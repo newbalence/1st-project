@@ -2,11 +2,11 @@
 <%@page import="user.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../main/header.jsp" %>
+<%@ include file="../main/navbar.jsp" %>
 <%
 	//로그인을 안했거나, 관리자가 아니라면 board.jsp로 이동
 	if(user == null || !user.getUserType().equals("0")){
-		response.sendRedirect("../board/board.jsp");
+		response.sendRedirect("../main/home.jsp");
 		return;
 	}
 
