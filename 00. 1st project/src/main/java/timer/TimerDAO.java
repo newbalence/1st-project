@@ -66,7 +66,7 @@ public class TimerDAO extends DBManager {
 		String sql = "insert into timer(id, start_time) values('" + uid + "', now());";
 		executeUpdate(sql);
 		
-		String lastNum = "select last_insert_id() ad num";
+		String lastNum = "select last_insert_id() as num";
 		executeQuery(lastNum);
 		
 		if(next()) {
@@ -80,7 +80,7 @@ public class TimerDAO extends DBManager {
 	}
 	
 //	타이머 종료
-	public void endTime(int num, int time, String uid) {
+	public void endTime(String num, String time, String uid) {
 		driverLoad();
 		DBConnect();
 		
@@ -88,7 +88,7 @@ public class TimerDAO extends DBManager {
 		sql += "update timer "; 
 		sql += "set end_time = now(), "; 
 		sql += "all_time = " + time;
-		sql += " add_time = (select all_time from (select sum(all_time) from timer where id='" + uid + "') as t) "; 
+		sql += ", add_time = (select all_time from (select sum(all_time) from timer where id='" + uid + "') as t) "; 
 		sql += "where timeno = " + num;
 		executeUpdate(sql);
 		DBDisConnect();

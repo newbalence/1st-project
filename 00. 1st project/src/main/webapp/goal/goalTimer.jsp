@@ -79,6 +79,10 @@
 			.start + div > .timerBtn:nth-child(1) {
 			  display: none;
 			}
+			.stop + div > .timerBtn:nth-child(2) {
+			  display: none;
+			}
+			
 			.timer-list{
 			    direction: rtl;
 			    text-align: left;
@@ -136,7 +140,7 @@
 				%>
 			</div>
 			<div class="timer-box">
-	      		<div class="timer js-timer">00:00:00</div>
+	      		<div class="timer js-timer stop">00:00:00</div>
 	      		<div class="timer-form__Btn">
 			        <div class="timerBtn js-timer__startBtn">
 			        	<i class="fas fa-play"></i>
@@ -160,6 +164,8 @@
 	let TIME = 0;
 	let cron;
 	let timeno = 0;
+	let id = "<%= user.getId() %>";
+	let timeNo = 0;
 	
 	function startButton() {
 		if(TIME > 0){
@@ -169,18 +175,75 @@
 	  stopButton();
 	  cron = setInterval(updateTimer, 1000);
 	  timer.classList.add('start');
+	  timer.classList.remove('stop');
+	  
+	  if(timeNo != 0 ){
+		return;
+	  }else{
+		  $.ajax({
+				url : "startTime.jsp",
+				type : "post",
+				data : {
+					id : id
+				},
+				success : function(result){
+					let no = result.trim()
+					timeNo = no;
+					console.log(timeNo);
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
+		    
+	  }
+	  
+	  
 	}
 	
 	function stopButton() {
 	  clearInterval(cron);
+	  timer.classList.add('stop');
 	  timer.classList.remove('start');
 	}
 	
 	function resetButton() {
 	  timer.innerText = `00:00:00`;
 	  stopButton();
+	  timer.classList.add('stop');
 	  timer.classList.remove('start');
-	  return (TIME = 0);
+	  if(timeNo == 0){
+		  return;
+	  }
+	  $.ajax({
+		 url : "endTime.jsp",
+		 type : "post",
+		 data : {
+			 time : TIME,
+			 timeNo : timeNo,
+			 id : id
+		 },
+		 success : function(result){
+			 console.log(result.trim());
+			 if(result.trim() == "success"){
+				 
+				 let html = "";
+				 html += "<div class='check'>";
+				 html += 	"<div>기록된 날짜</div>"
+				 html +=	"<span>12 : 48 - 14 : 08</span>"
+				 html +=	"<span>(1시간 20분)</span>"
+				 html += "</div>"
+				 $(".timer-list").append(html);
+				 
+				 TIME = 0;
+				 timeNo = 0;
+			 }
+		 },
+		 error : function(){
+			 console.log("에러 발생");
+		 }
+	  });
+	  
 	}
 	
 	function updateTimer() {
