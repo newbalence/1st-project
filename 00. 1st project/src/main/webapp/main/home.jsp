@@ -441,7 +441,6 @@
 				</div>
 
 				
-				
 					<div class="articleRight"> <!-- article right side --> <!-- margin&padding left side -->
 						<div class="logmein">
 							<h2 class="screen_out">나의 티스토리</h2>
