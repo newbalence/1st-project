@@ -189,7 +189,6 @@
 				success : function(result){
 					let no = result.trim()
 					timeNo = no;
-					console.log(timeNo);
 				},
 				error : function(){
 					console.log("에러 발생");
@@ -237,6 +236,8 @@
 				 
 				 TIME = 0;
 				 timeNo = 0;
+				 
+				 
 			 }
 		 },
 		 error : function(){
