@@ -1,3 +1,5 @@
+<%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
+<%@page import="timer.TimerVO"%>
 <%@page import="timer.TimerDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -17,9 +19,12 @@
 	}
 	
 	TimerDAO tdao = new TimerDAO();
-	tdao.endTime(timeNo, time, id);
-	out.print("success");
+	TimerVO vo = tdao.endTime(timeNo, time, id);
 	
+	ObjectMapper mapper = new ObjectMapper();
 	
+	String jsonString = mapper.writeValueAsString(vo);
+	
+	out.print(jsonString);
 	
 %>

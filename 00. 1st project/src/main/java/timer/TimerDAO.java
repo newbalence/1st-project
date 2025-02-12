@@ -44,6 +44,8 @@ public class TimerDAO extends DBManager {
 			int allTime = getInt("all_time");
 			int addTime = getInt("add_time");
 			
+			System.out.println(timeno);
+			
 			TimerVO vo = new TimerVO();
 			vo.setTimeNO(timeno);
 			vo.setId(id);
@@ -80,7 +82,7 @@ public class TimerDAO extends DBManager {
 	}
 	
 //	타이머 종료
-	public void endTime(String num, String time, String uid) {
+	public TimerVO endTime(String num, String time, String uid) {
 		driverLoad();
 		DBConnect();
 		
@@ -91,6 +93,31 @@ public class TimerDAO extends DBManager {
 		sql += ", add_time = (select sun from (select sum(all_time) + " + time + " as sun from timer where id='" + uid + "') as t) "; 
 		sql += "where timeno = " + num;
 		executeUpdate(sql);
+		
+		String selectSql = "select * from timer where timeno = " + num;
+		executeQuery(selectSql);
+		
+		if(next()) {
+			String timeno = getString("timeno");
+			String id = getString("id");
+			String startTime = getString("start_time");
+			String endTime = getString("end_time");
+			int allTime = getInt("all_time");
+			int addTime = getInt("add_time");
+			
+			TimerVO vo = new TimerVO();
+			vo.setTimeNO(timeno);
+			vo.setId(id);
+			vo.setStartTime(startTime);
+			vo.setEndTime(endTime);
+			vo.setAllTime(allTime);
+			vo.setAddTime(addTime);
+			
+			DBDisConnect();
+			
+			return vo;
+		}
 		DBDisConnect();
+		return null;
 	}
 }

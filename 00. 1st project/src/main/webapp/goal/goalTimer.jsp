@@ -37,12 +37,13 @@
     		    height: calc(100% - 65px);
 	    		display: flex;
 			    align-items: center;
-			    justify-content: space-around;
+			    justify-content: space-between;;
 	    	}
 	    	.timer-box {
 			  display: flex;
 			  flex-direction: column;
 			  align-items: center;
+		      margin: auto;
 			}
 			
 			.timer {
@@ -95,10 +96,11 @@
 			.timer-list{
 			    direction: rtl;
 			    text-align: left;
-				display:flex;
+    			max-height: 70%;
+    			display: flex;
 				flex-direction: column;
-				overflow-y: scroll;
-    			max-height: 500px;
+				overflow: auto;
+				font-size: 30px;
 			}
 			
 			.timer-list::-webkit-scrollbar-track{
@@ -119,18 +121,18 @@
 			}
 			
 			.timer-list > div{
-				height : 80px;
-				border : 1px solid black;
-				background-color : black;
-				color : white;
-				margin : 5px;
-				border-bottom-right-radius: 10px;
-    			border-top-right-radius: 10px;
+				height: 200px;
+			    border: 1px solid #3C3C3C;
+			    background-color: #3C3C3C;
+			    color: white;
+			    margin: 5px;
+			    border-bottom-right-radius: 100px;
+			    border-top-right-radius: 100px;
 			}
 			.check{
 				text-align: left;
 				direction: ltr;
-				padding : 5px;
+				padding : 15px;
 			}
 	    </style>
 	</head>
@@ -155,21 +157,16 @@
 						int allSecond = allTime - ((allDay * 24 + allHour) * 60 + allMinute) * 60;
 						
 						int addDay = addTime / 60 / 60 / 24;
-						int addHour = (allTime / 60 / 60) - (addDay * 24);
-						int addMinute = (allTime / 60) - (addDay * 24 + addHour) * 60; 
-						int addSecond = allTime - ((addDay * 24 + addHour) * 60 + addMinute) * 60;
-						
-						System.out.println(addDay);
-						System.out.println(addHour);
-						System.out.println(addMinute);
-						System.out.println(addSecond);
-						System.out.println("-----------------");
+						int addHour = (addTime / 60 / 60) - (addDay * 24);
+						int addMinute = (addTime / 60) - (addDay * 24 + addHour) * 60; 
+						int addSecond = addTime - ((addDay * 24 + addHour) * 60 + addMinute) * 60;
+
 						%>
 						<div class="check">
 							<div><%= date %></div>
 							<div>
 								<span><%= sTime %> - <%= eTime %></span>
-								<span><%= allDay > 0 ? allDay : 0 %>일 <%= allHour > 0 ? allHour : 0 %>시간 <%= allMinute > 0 ? allMinute : 0 %>분 <%= allSecond > 0 ? allSecond : 0%>초</span>
+								<span>(<%= allDay > 0 ? allDay : 0 %>일 <%= allHour > 0 ? allHour : 0 %>시간 <%= allMinute > 0 ? allMinute : 0 %>분 <%= allSecond > 0 ? allSecond : 0%>초)</span>
 							</div>
 							<span>총 합 시간 : <%= addDay > 0 ? addDay : 0 %>일 <%= addHour > 0 ? addHour : 0 %>시간 <%= addMinute > 0 ? addMinute : 0 %>분 <%= addSecond > 0 ? addSecond : 0%>초</span>
 						</div>
@@ -201,7 +198,6 @@
 	dayjs.extend(window.dayjs_plugin_duration)
 	let allTime = dayjs.duration(1502, 'seconds').format('H[h] m[m] s[s]');
 	
-	console.log(allTime)
 	const timer = document.querySelector('.js-timer'),
 	stopBtn = document.querySelector('.js-timer__stopBtn'),
 	startBtn = document.querySelector('.js-timer__startBtn'),
@@ -269,12 +265,16 @@
 			 id : id
 		 },
 		 success : function(result){
-			 if(result.trim() == "success"){
+			 if(result.trim() != "fail"){
+				 const data = JSON.parse(result.trim());
 				 let html = "";
 				 html += "<div class='check'>";
-				 html += 	"<div>기록된 날짜</div>"
-				 html +=	"<span>12 : 48 - 14 : 08</span>"
-				 html +=	"<span>(1시간 20분)</span>"
+				 html += 	"<div>" + data.startTime.split(" ")[0] + "</div>"
+				 html += 	"<div>"
+				 html +=	"<span>" + data.startTime.split(" ")[1]+" - "+data.endTime.split(" ")[1] + "</span>&nbsp;"
+				 html +=	"<span>(" + dayjs.duration(data.allTime, 'seconds').format('D[일] H[시간] m[분] s[초]') + ")</span>"
+				 html +=	"</div>"
+				 html +=	"<span>총 합 시간 : "+dayjs.duration(data.addTime, 'seconds').format('D[일] H[시간] m[분] s[초]')+"</span>"
 				 html += "</div>"
 				 $(".timer-list").append(html);
 				 
