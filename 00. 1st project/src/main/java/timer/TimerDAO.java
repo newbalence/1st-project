@@ -32,7 +32,7 @@ public class TimerDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from timer where id = " + uid;
+		String sql = "select * from timer where id = '" + uid + "';";
 		executeQuery(sql);
 		
 		List<TimerVO> list = new ArrayList<>();
@@ -88,7 +88,7 @@ public class TimerDAO extends DBManager {
 		sql += "update timer "; 
 		sql += "set end_time = now(), "; 
 		sql += "all_time = " + time;
-		sql += ", add_time = (select all_time from (select sum(all_time) from timer where id='" + uid + "') as t) "; 
+		sql += ", add_time = (select sun from (select sum(all_time) + " + time + " as sun from timer where id='" + uid + "') as t) "; 
 		sql += "where timeno = " + num;
 		executeUpdate(sql);
 		DBDisConnect();

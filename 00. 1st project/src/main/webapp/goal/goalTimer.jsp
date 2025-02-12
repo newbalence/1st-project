@@ -1,3 +1,6 @@
+<%@page import="timer.TimerVO"%>
+<%@page import="java.util.List"%>
+<%@page import="timer.TimerDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/header.jsp" %>
@@ -6,11 +9,17 @@
 		response.sendRedirect("../main/main.jsp");
 		return;
 	}
+	
+	TimerDAO tdao = new TimerDAO();
+	List<TimerVO> list = tdao.selTime(user.getId());
+	
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+		<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/duration.js"></script>
 	    <meta charset="UTF-8" />
 	    <title>갓 생 살기</title>
 	    <style>
@@ -110,7 +119,7 @@
 			}
 			
 			.timer-list > div{
-				height : 50px;
+				height : 80px;
 				border : 1px solid black;
 				background-color : black;
 				color : white;
@@ -121,6 +130,7 @@
 			.check{
 				text-align: left;
 				direction: ltr;
+				padding : 5px;
 			}
 	    </style>
 	</head>
@@ -128,12 +138,40 @@
 		<div class="container">
 			<div class="timer-list">
 				<% 
-					for(int i = 0; i < 20; i ++){
+					for(int i = 0; i < list.size(); i ++){
+						TimerVO tvo = list.get(i);
+						String tid = tvo.getId();
+						String startTime = tvo.getStartTime();
+						String endTime = tvo.getEndTime();
+						int allTime = tvo.getAllTime();
+						int addTime = tvo.getAddTime();
+						String date = startTime.substring(0, 10);
+						String sTime = startTime.substring(11, 19);
+						String eTime = endTime != null ? endTime.substring(11, 19) : "";
+						
+						int allDay = allTime / 60 / 60 / 24;
+						int allHour = (allTime / 60 / 60) - (allDay * 24);
+						int allMinute = (allTime / 60) - (allDay * 24 + allHour) * 60; 
+						int allSecond = allTime - ((allDay * 24 + allHour) * 60 + allMinute) * 60;
+						
+						int addDay = addTime / 60 / 60 / 24;
+						int addHour = (allTime / 60 / 60) - (addDay * 24);
+						int addMinute = (allTime / 60) - (addDay * 24 + addHour) * 60; 
+						int addSecond = allTime - ((addDay * 24 + addHour) * 60 + addMinute) * 60;
+						
+						System.out.println(addDay);
+						System.out.println(addHour);
+						System.out.println(addMinute);
+						System.out.println(addSecond);
+						System.out.println("-----------------");
 						%>
 						<div class="check">
-							<div>2025-01-24</div>
-							<span>13 : 48 - 15 : 35</span>
-							<span>(1시간 20분)</span>
+							<div><%= date %></div>
+							<div>
+								<span><%= sTime %> - <%= eTime %></span>
+								<span><%= allDay > 0 ? allDay : 0 %>일 <%= allHour > 0 ? allHour : 0 %>시간 <%= allMinute > 0 ? allMinute : 0 %>분 <%= allSecond > 0 ? allSecond : 0%>초</span>
+							</div>
+							<span>총 합 시간 : <%= addDay > 0 ? addDay : 0 %>일 <%= addHour > 0 ? addHour : 0 %>시간 <%= addMinute > 0 ? addMinute : 0 %>분 <%= addSecond > 0 ? addSecond : 0%>초</span>
 						</div>
 						<%
 					}
@@ -156,6 +194,14 @@
     	</div>
   	</body>
 	<script>
+	function t(){
+		return "hello";
+	}
+	
+	dayjs.extend(window.dayjs_plugin_duration)
+	let allTime = dayjs.duration(1502, 'seconds').format('H[h] m[m] s[s]');
+	
+	console.log(allTime)
 	const timer = document.querySelector('.js-timer'),
 	stopBtn = document.querySelector('.js-timer__stopBtn'),
 	startBtn = document.querySelector('.js-timer__startBtn'),
@@ -218,14 +264,12 @@
 		 url : "endTime.jsp",
 		 type : "post",
 		 data : {
-			 time : TIME,
+			 time : TIME - 1,
 			 timeNo : timeNo,
 			 id : id
 		 },
 		 success : function(result){
-			 console.log(result.trim());
 			 if(result.trim() == "success"){
-				 
 				 let html = "";
 				 html += "<div class='check'>";
 				 html += 	"<div>기록된 날짜</div>"
@@ -236,6 +280,8 @@
 				 
 				 TIME = 0;
 				 timeNo = 0;
+				 
+				 $(".timer-list").scrollTop($(".timer-list")[0].scrollHeight);
 				 
 				 
 			 }
@@ -265,5 +311,11 @@
 	  resetBtn.addEventListener('click', resetButton);
 	}
 	init();
+	
+	$(window).on('beforeunload', function() {
+		resetButton();
+	});
+	
+	
 	</script>
 </html>
