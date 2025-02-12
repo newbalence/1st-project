@@ -94,8 +94,7 @@
 		.fa-search {
 			position: absolute;
 			left: 240px;
-			bottom: 15px;
-			top:11px;
+			top: 11px;
 			color:#ced4da;
 		}
 	
@@ -116,7 +115,7 @@
 		
 		.bi-x-circle-fill {
 			position: absolute;
-			bottom: 8px;
+			top: 7px;
 			left: 212px;
 			color: #5b5b5b;
 		}

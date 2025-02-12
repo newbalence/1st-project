@@ -32,7 +32,9 @@
 	    		height: 100%;
 	    		margin: 0px;
     		    padding : 0px;
+    		    max-height: 1000px;
 	    	}
+	    	
 	    	.container{
     		    height: calc(100% - 65px);
 	    		display: flex;
@@ -102,6 +104,7 @@
 				flex-direction: column;
 				overflow: auto;
 				font-size: 30px;
+				margin-right: auto;
 			}
 			
 			.timer-list::-webkit-scrollbar-track{
