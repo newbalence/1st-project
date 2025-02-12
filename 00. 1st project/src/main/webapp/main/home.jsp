@@ -11,16 +11,20 @@
 				color: #000;
 				text-decoration: none;
 			}
+			
+			.screen_out {
+				overflow: hidden; 
+				position: absolute; 
+				width: 0; 
+				height: 0; 
+				line-height: 0; 
+				text-indent: -9999px;
+			}
+			
 			#article {
 				padding-top : 41px;
 			}
-			.innerArticle {
-				display: flex;
-				flex-wrap: nowrap;
-				position: relative;
-				margin: 0 auto;
-				padding: 0 30px;
-			}
+
 			.articleLeft {
 				padding: 0 20px;
 			}
@@ -43,6 +47,66 @@
 			
 			.link_tab:hover {
 				color: #c40000;
+			}
+			
+			.innerArticle {
+				display: flex;
+				flex-wrap: nowrap;
+				position: relative;
+				width: 1216px;
+				margin: 0 auto;	
+				padding: 0 30px;
+				flex-direction: row;
+			}
+			
+			.articleLeft {
+				width: 696px;
+				padding: 0 20px;
+				box-sizing: border-box;
+			}
+			
+			.articleRight {
+				position: relative;
+				box-sizing: border-box;
+				min-width: 460px;
+				max-width: 460px;
+				padding-left: 20px;
+				magin-left: auto;
+			}
+			
+			.articleRight:before {
+				content: "";
+				position: absolute;
+				display: block;
+				left: 0;
+				top: 0;
+				width: 1px;
+				height: 100%;
+				background-color: #f0f0f0;
+			}
+			
+			#login-form {
+				display: flex;
+				flex-direction: column;
+			}
+			
+			#login-form p {
+				text-align: center;
+			}
+			
+			#login-form a {
+				color: #c0c0c0;
+				text-decoration: underline;
+				display: flex;
+				flex-direction: row;
+			}
+			
+			#login-form a:hover {
+				color: #c40000;
+			}
+			.auth-container{
+				    display: flex;
+    				justify-content: space-between;
 			}
 		</style>
 	</head>
@@ -371,26 +435,49 @@
 								
 							</div>
 						</div>
-						
+					</div>	
 						
 						<div class="seekPeople"></div>
-					</div>
+				</div>
+
+				
+				
 					<div class="articleRight"> <!-- article right side --> <!-- margin&padding left side -->
 						<div class="logmein">
 							<h2 class="screen_out">나의 티스토리</h2>
 							<form method="post" action="#" id="login-form">
 								<p class="desc_login">로그인하시고 더 많은 기능을 이용해 보세요!</p>
-								<input type="text" name="userName" placeholder="아이디">
-								<input type="password" name="userPassword" placeholder="비밀번호">
-								<input type="submit" value="로그인">
+								<input type="text" name="userName" placeholder="아이디" autocomplete="off">
+								<input type="password" name="userPassword" placeholder="비밀번호" autocomplete="off">
+								<button type="button" class="login_btn">로그인</button>
+								<button type="button" class="login_kkt">카카오 계정으로 시작하기</button>
+								<div class="auth-container">
+									<a class="findId" href="#">아이디/비밀번호 찾기</a>
+									<a class="signup" href="#">회원가입</a>
+								</div>
 							</form>
 						</div>
 						
-						<div class="weather"></div>
+						<div class="weather">
+							<h2 class="screen_out">날씨</h2>
+							
+						</div>
 						
-						<div class="chat"></div>
+						<div class="chat_main">
+							<h2 class="screen_out">채팅</h2>
+							<div class="chat_list">
+							
+								<div class="chat_wrap">
+									<a class="chat" href="#">
+										<img src=""> <!-- 프로필 사진 -->
+										<span class="chat_name">사용자</span>
+										<span class="chat_cont">안녕하세요?</span>
+									</a>								
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>				
+				</div>
 			</div>
 		</div>
 	</body>
