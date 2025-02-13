@@ -26,8 +26,6 @@
 			}
 
 			.articleLeft {
-				padding: 0 20px;
-			}
 			/* .cont_g {
 				border: 2px solid;
 				padding: 5px 20px;
@@ -60,7 +58,6 @@
 			}
 			
 			.articleLeft {
-				width: 696px;
 				padding: 0 20px;
 				box-sizing: border-box;
 			}
@@ -68,8 +65,7 @@
 			.articleRight {
 				position: relative;
 				box-sizing: border-box;
-				min-width: 460px;
-				max-width: 460px;
+				min-width: 250px;
 				padding-left: 20px;
 				magin-left: auto;
 			}
@@ -107,6 +103,17 @@
 			.auth-container{
 				    display: flex;
     				justify-content: space-between;
+			}
+			
+			.innerArticle > div:nth-child(1){
+		     flex-grow: 3;
+		   }
+		   
+		   .innerArticle > div:nth-child(2){
+		     flex-grow: 1;
+		   }
+		   .login-btn{
+		       margin-left: 0;
 			}
 		</style>
 	</head>
@@ -270,8 +277,8 @@
 						<%
 							if(user == null){
 								%>
-								<p class="desc_login">로그인하시고 더 많은 기능을 이용해 보세요!</p>
-								<button type="button" class="btn btn-dark" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+								
+								<button type="button" class="btn btn-dark login-btn" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
 								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								  	<div class="modal-dialog">
 								    	<div class="modal-content">
@@ -297,10 +304,12 @@
 											        	</div>
 								  		 			</div>
 									        	</form>
+									        	
 									      </div>
 									    </div>
 									  </div>
 									</div>
+									<p class="desc_login">더 많은 기능을 이용해 보세요!</p>
 									<%
 								}else{
 									%>
@@ -318,11 +327,11 @@
 							
 						</div>
 						
-						<div class="chat_main">
+						<div class="screen_out">
 							<h2 class="screen_out">채팅</h2>
 							<div class="chat_list">
-							
-								
+								<a class="content" href="../chat/chatroom.jsp?no=1">1번 채팅방</a><br>
+								<a class="content" href="../chat/chatroom.jsp?no=2">2번 채팅방</a>
 							</div>
 						</div>
 					</div>
@@ -331,6 +340,11 @@
 		</div>
 	</body>
 	<script>
+		let user = "<%= user == null ? null : user.getId() %>";
+		if(user != "null"){
+			$(".screen_out").removeClass();
+		}
+		
 		$("#submit").click(function(){
 			let id = $("#username");
 			let idFeedback = $("#username-feedback");

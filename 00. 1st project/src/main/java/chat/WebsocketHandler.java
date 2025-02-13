@@ -23,16 +23,12 @@ public class WebsocketHandler {
 	//jsp에서 웹소켓 연결 되었을 때 동작
 	@OnOpen
 	public void open(Session session) {
-		System.out.println("누군가 연결");
-		System.out.println(session.getId());
 		clients.put(session.getId(), session);
 	}
 	
 	//jsp에서 웹소켓 연결이 해제되었을 때 동작
 	@OnClose
 	public void close(Session session) {
-		System.out.println("누군가 연결 해제");
-		System.out.println(session.getId());
 		clients.remove(session.getId());
 	}
 	
@@ -42,13 +38,11 @@ public class WebsocketHandler {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			ChatVO chatVO = mapper.readValue(message, ChatVO.class);
-			System.out.println(chatVO);
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.println("누군가 채팅 전송 : " + message);
 		try {
 			for( String key : clients.keySet() ){
 				if(clients.get(key).isOpen()) {

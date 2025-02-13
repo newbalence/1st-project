@@ -212,15 +212,16 @@
             pointer-events: none;
         }
 		.search-bar {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
+			height: 80px;
+			border-radius: 30px;
+			justify-self: center;
         }
         .search-bar select, .search-bar input[type="text"], .search-bar button {
             padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
+		    border: 1px solid #ddd;
+		    border-radius: 20px;
+		    font-size: 1rem;
+		    margin-right: 10px;
         }
         .search-bar button {
             background: #2575fc;
@@ -231,6 +232,13 @@
         }
         .search-bar button:hover {
             background: #1a5fc4;
+        }
+        .search-bar > form{
+        	margin : 10px;
+        	display: flex
+        }
+        .search-bar > form > button{
+        	width: 80px;
         }
     </style>
 </head>
@@ -315,7 +323,7 @@
 			    <li class="option">loooooooooooooooooong text option</li>
 			  </ul>
 			</div>
-	    	<div class="select">
+	    	<!-- <div class="select">
 			  <div class="selected">
 			    <div class="selected-value">자유</div>
 			    <div class="arrow"></div>
@@ -327,7 +335,7 @@
 			    <li class="option">option 3</li>
 			    <li class="option">loooooooooooooooooong text option</li>
 			  </ul>
-			</div>
+			</div> -->
 		</div>
 		<h1>러닝</h1>
 		<form action="board.jsp" method="get" id="typeForm" style="display:inline">

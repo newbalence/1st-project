@@ -282,7 +282,11 @@
 			        </li>
 			        
 			        <li class="nav-item">
-			          <a class="nav-link" href="../goal/goalTimer.jsp">목표</a>
+			        	<% if(user == null){ %>
+			          		<a class="nav-link" onclick="alert('로그인 후 사용 가능합니다.')">목표</a>
+			          	<%}else{%>
+			          		<a class="nav-link" href="../goal/goalTimer.jsp">목표</a>
+			          	<%} %>
 			        </li>
 			        
 			        <li class="nav-item">
@@ -366,6 +370,7 @@
 			</nav>
 		</body>
 		<script>
+
 			function search(){
 				let search = $("#search").val();
 				if(search.trim() == ""){
