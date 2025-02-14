@@ -71,7 +71,7 @@
 		min-height: 100px;
     	margin-bottom: 10px;
     	align-items: baseline;
-    	padding-top: 10px;
+    	padding-top: 18px;
     	padding-left: 30px;
 	}
 	
@@ -108,7 +108,20 @@
       .goal-edit {
       	position: relative;
       	float: right;
-      	margin: 10px 10px 0 0;
+      	margin: 0 10px 0 0;
+      }
+      
+      .editCom {
+      	position: relative;
+      	float: right;
+      	color: white;
+      	background: #343A40;
+      	border: none;
+      	border-radius: 10%;
+      }
+      
+      .editCom:hover {
+      	background: #c40000;
       }
       
       .goal-wrap {
@@ -122,6 +135,8 @@
       .goal-cont {
       	margin-left: 10px;
       	font-size: 18px;
+      	display: flex;
+    	align-items: center;
       }
       
       .profile-edit {
@@ -169,6 +184,7 @@
 			
 				<div class="each-goal">
 					<i class="goal-edit fa-solid fa-ellipsis-vertical"></i>
+					<button class="editCom">완료</button>
 					<div class="contents">
 						<div class="goal-pic"></div>
 						<h3 class="goal-title">목표1</h3>

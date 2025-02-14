@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>Good Life</title>
 		<style>
+			
 		 	a {
 				color: #000;
 				text-decoration: none;
