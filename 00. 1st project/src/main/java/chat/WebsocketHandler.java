@@ -35,9 +35,12 @@ public class WebsocketHandler {
 	//jsp에서 웹소켓으로 데이터를 전달할 때 동작
 	@OnMessage
 	public void message(String message, Session session) {
+		//{sender : kgd, chatcontent : asd, chatroomno : 1, id : kimgd}
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			ChatVO chatVO = mapper.readValue(message, ChatVO.class);
+			ChatVO cVO = mapper.readValue(message, ChatVO.class);
+			ChatDAO cdao = new ChatDAO();
+			cdao.insertChat(cVO);
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {

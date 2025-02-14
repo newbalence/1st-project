@@ -72,6 +72,8 @@ CREATE TABLE chat
 	chatcontent varchar(255) NOT NULL COMMENT '채팅 본문',
 	-- 채팅시간
 	chattime timestamp DEFAULT NOW() NOT NULL COMMENT '채팅시간',
+	-- 사용자 닉네임
+	nick varchar(255) NOT NULL COMMENT '사용자 닉네임',
 	PRIMARY KEY (chatnum)
 );
 
@@ -154,6 +156,8 @@ CREATE TABLE timer
 	end_time timestamp,
 	all_time int,
 	add_time int,
+	-- 목표시간 타입
+	timer_type int COMMENT '목표시간 타입',
 	PRIMARY KEY (timeno)
 );
 

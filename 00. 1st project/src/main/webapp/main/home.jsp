@@ -340,7 +340,47 @@
 		</div>
 	</body>
 	<script>
+		//행정동을 기상청 지점정보 코드로 변환하는 함수
+		function regionToCode(address){
+			if(address.includes("강원")){
+				return 105;
+			}else if(address.includes("서울") || address.includes("인천")|| address.includes("경기")){
+				return 109
+			}else if(address.includes("전북")){
+				return 146
+			}
+		}
+		
+		navigator.geolocation.getCurrentPosition((position) => {
+			console.log(position);
+			let x = position.coords.longitude;
+			let y = position.coords.latitude;
+			
+			$.ajax({
+				url : "https://dapi.kakao.com/v2/local/geo/coord2regioncode.json",
+				type : "get",
+				headers:{
+					Authorization: "KakaoAK 9cecadb4f818e26ddd142e07a808bb21"
+				},
+				data : {
+					x : x,
+					y : y
+				},
+				success : function(result){
+					console.log(result.documents[0].region_1depth_name);
+					const address = result.documents[0].region_1depth_name;
+					
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
+			
+			
+		});
+		
 		let user = "<%= user == null ? null : user.getId() %>";
+		
 		if(user != "null"){
 			$(".screen_out").removeClass();
 		}
@@ -392,6 +432,25 @@
 				}
 			});
 		});
+		
+		/* //기상청 종관기상관측 api 호출 함수
+		function callAsos(code){
+			$.ajax({
+				url : "https://apihub.kma.go.kr/api/typ01/url/kma_sfctm2.php",
+				type : "get",
+				data : {
+					stn : code,
+					authKey : "Tn9bEfk4SUC_WxH5OElAaw"
+				},
+				success : function(result){
+					console.log(result);
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
+		} */
+		
 	</script>
 </html>
 		

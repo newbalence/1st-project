@@ -105,6 +105,7 @@
 				overflow: auto;
 				font-size: 30px;
 				margin-right: auto;
+				min-width: 630px;
 			}
 			
 			.timer-list::-webkit-scrollbar-track{
