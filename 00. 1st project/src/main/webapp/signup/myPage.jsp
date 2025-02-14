@@ -187,12 +187,14 @@
    	            		<li>
 	   	            	<label for="hobby">취미</label>
 			            <select id="hobby" name="hobby">
-			            	<option value="1" <%= user.getHobby().equals("1") ? "selected" : "" %>>공부</option>
-			            	<option value="2" <%= user.getHobby().equals("2") ? "selected" : "" %>>독서</option>
-			            	<option value="3" <%= user.getHobby().equals("3") ? "selected" : "" %>>축구</option>
-			            	<option value="4" <%= user.getHobby().equals("4") ? "selected" : "" %>>런닝</option>
-			            	<option value="5" <%= user.getHobby().equals("5") ? "selected" : "" %>>헬스</option>
-			            	<option value="6" <%= user.getHobby().equals("6") ? "selected" : "" %>>여행</option>
+			            	<option value="1" <%= user.getHobby().equals("1") ? "selected" : "" %>>공부</option> <!-- 기타 -->
+							<option value="2" <%= user.getHobby().equals("2") ? "selected" : "" %>>독서</option> <!-- 기타 -->
+							<option value="3" <%= user.getHobby().equals("3") ? "selected" : "" %>>축구</option> <!-- 경쟁 -->
+							<option value="4" <%= user.getHobby().equals("4") ? "selected" : "" %>>런닝</option> <!-- 개인 -->
+							<option value="5" <%= user.getHobby().equals("5") ? "selected" : "" %>>헬스</option> <!-- 개인 -->
+							<option value="6" <%= user.getHobby().equals("6") ? "selected" : "" %>>여행</option> <!-- 개인 -->
+							<option value="7" <%= user.getHobby().equals("7") ? "selected" : "" %>>우표</option> <!-- 수집 -->
+							<option value="8" <%= user.getHobby().equals("8") ? "selected" : "" %>>야구</option> <!-- 경쟁 -->
 			            </select>
 			            </li>
 		            </ul>

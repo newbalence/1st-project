@@ -118,10 +118,10 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
         h2 {
-            color: #2575fc;
+            color: red;
             margin-bottom: 20px;
             text-align: center;
-            font-size: 1.6rem;
+            font-size: 3.8rem;
         }
         .post-content {
             margin-bottom: 20px;
@@ -314,7 +314,7 @@
         </div>
         <%
         	if(uploadName != null && !uploadName.equals("null")){
-		                	if(uploadName.split("\\.")[1].contains("jpg")){
+		                	if(uploadName.split("\\.")[1].contains("jpg") || uploadName.split("\\.")[1].contains("PNG") || uploadName.split("\\.")[1].contains("tiff") || uploadName.split("\\.")[1].contains("gif")){
 		                		%>
 		                			<img src="<%= path %>/upload/<%= uploadName %>"></img>
 		                		<%
@@ -339,8 +339,8 @@
         	if(user != null && (user.getId().equals(author) || user.getUserType().equals("0"))){
         		%>
 		        <span class="post-actions">
-		            <button onclick="location.href='modify.jsp?no=<%= no %>'">게시글 수정</button>
-		            <button onclick="deletePost(<%= no %>)">게시글 삭제</button>
+		            <button onclick="location.href='modify.jsp?no=<%= no %>'">수정</button>
+		            <button onclick="deletePost(<%= no %>)">삭제</button>
 		        </span>
         		<%
         	}

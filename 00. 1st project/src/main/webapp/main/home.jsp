@@ -402,9 +402,6 @@
 		</div>
 	</body>
 	<script>
-	
-		console.log(navigator.permissions);
-	
 		navigator.geolocation.getCurrentPosition(function(position) {
 			let x = position.coords.longitude;
 			let y = position.coords.latitude;
