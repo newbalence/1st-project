@@ -500,7 +500,7 @@
 					units : "metric",
 					appid : "a72a6761eb78a480e947d266de911cdc"
 				},
-				success : function(result){;
+				success : function(result){
 					let img = "https://openweathermap.org/img/wn/";
 					img += result.weather[0].icon;
 					img += "@2x.png";
