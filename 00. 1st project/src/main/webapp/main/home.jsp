@@ -115,6 +115,9 @@
 		   .login-btn{
 		       margin-left: 0;
 			}
+			.weather_list{
+			
+			}
 		</style>
 	</head>
 	<body>
@@ -321,17 +324,38 @@
 							%>
 							</div>
 						</div>
-						
-						<div class="weather">
-							<h2 class="screen_out">날씨</h2>
-							
-						</div>
-						
+												
 						<div class="screen_out">
 							<h2 class="screen_out">채팅</h2>
 							<div class="chat_list">
 								<a class="content" href="../chat/chatroom.jsp?no=1">1번 채팅방</a><br>
 								<a class="content" href="../chat/chatroom.jsp?no=2">2번 채팅방</a>
+							</div>
+						</div>
+						
+						<div class="weathers">
+							<h2 class="screen_out">날씨</h2>
+							<div class="weather_list">
+								<div>
+							      	<span>위치</span>
+							      	<span class="place"></span>
+						      	</div>
+								<div>
+									<img class="weatherImg" src="">
+									<span>현재온도</span>
+									<span class="temp"></span>
+									<span>°</span>
+								</div>
+								<div class="weatherBox">
+									<div>
+								      	<span>날씨</span>
+								      	<span class="weather"></span>
+							      	</div>
+							      	<div>
+								      	<span>풍속</span>
+								      	<span class="wind"></span>
+							      	</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -340,17 +364,6 @@
 		</div>
 	</body>
 	<script>
-		//행정동을 기상청 지점정보 코드로 변환하는 함수
-		function regionToCode(address){
-			if(address.includes("강원")){
-				return 105;
-			}else if(address.includes("서울") || address.includes("인천")|| address.includes("경기")){
-				return 109
-			}else if(address.includes("전북")){
-				return 146
-			}
-		}
-		
 		navigator.geolocation.getCurrentPosition((position) => {
 			console.log(position);
 			let x = position.coords.longitude;
@@ -367,9 +380,11 @@
 					y : y
 				},
 				success : function(result){
-					console.log(result.documents[0].region_1depth_name);
+					let place = result.documents[0].region_2depth_name;
+					place += " " + result.documents[0].region_3depth_name;
 					const address = result.documents[0].region_1depth_name;
-					
+					weathers = weather(x, y);
+					$(".place").text(place);
 				},
 				error : function(){
 					console.log("에러 발생");
@@ -432,6 +447,40 @@
 				}
 			});
 		});
+		
+		function weather(x, y){
+			$.ajax({
+				url : "https://api.openweathermap.org/data/2.5/weather",
+				type : "get",
+				data : {
+					lang : "kr",
+					lat : y,
+					lon : x,
+					units : "metric",
+					appid : "a72a6761eb78a480e947d266de911cdc"
+				},
+				success : function(result){
+					console.log(result);
+					console.log(result.main.temp);
+					console.log(result.weather[0].description);
+					console.log(result.wind.speed);
+					let img = "https://openweathermap.org/img/wn/";
+					img += result.weather[0].icon;
+					img += "@2x.png";
+					$(".temp").text(result.main.temp);
+					$(".weather").text(result.weather[0].description);
+					$(".wind").text(result.wind.speed);
+					$(".weatherImg").attr("src", img);
+					
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
+		}
+		
+		
+		
 		
 		/* //기상청 종관기상관측 api 호출 함수
 		function callAsos(code){
