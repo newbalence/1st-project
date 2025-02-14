@@ -110,9 +110,9 @@
         <form method="post" action="writeok.jsp" enctype="multipart/form-data">
         	<div class="title">
 	        	<select name="type">
-	        		<option value="1">인증</option>
-	        		<option value="2">일상</option>
-	        		<option value="3">기타</option>
+	        		<option value="01">인증</option>
+	        		<option value="02">일상</option>
+	        		<option value="03">기타</option>
 	        	</select>
 	            <input type="text" id="title" name="title" placeholder="제목을 입력하세요">
 			</div>

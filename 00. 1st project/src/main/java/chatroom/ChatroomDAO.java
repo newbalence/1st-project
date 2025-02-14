@@ -13,16 +13,38 @@ public class ChatroomDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from chatroom left join chatuser on chatroom.chatroomno = chatuser.chatroomno where chat_type != 99 and id = '" + id + "' ";
+		String sql = "select * from chatroom where chatroomno in(select chatroomno from chatuser where id = '" + id + "') and chat_type != 99 ";
 		sql += "union ";
-		sql += "select * from chatroom left join chatuser on chatroom.chatroomno = chatuser.chatroomno where chat_type != 99 and id != '" + id + "' ";
-		sql += "group by chatroom.chatroomno;";
-		
+		sql += "select * from chatroom where chatroomno not in(select chatroomno from chatuser where id = '" + id + "') and chat_type != 99;";
 		executeQuery(sql);
 		
 		List<ChatroomVO> list = new ArrayList<>();
 		while(next()) {
-			String chatno = getString("chatno");
+			String chatno = getString("chatroomno");
+			String chatname = getString("chatname");
+			
+			ChatroomVO vo = new ChatroomVO();
+			vo.setChatname(chatname);
+			vo.setChatroomno(chatno);
+			
+			list.add(vo);
+		}
+		DBDisConnect();
+		return list;
+	}
+	
+//	내가 들어가있는 채팅방 조회
+	public List<ChatroomVO> userChatRoom(String id) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select * from chatroom where chatroomno in(select chatroomno from chatuser where id = '" + id + "') and chat_type != 99 ";
+		sql += "limit 0, 3";
+		executeQuery(sql);
+		
+		List<ChatroomVO> list = new ArrayList<>();
+		while(next()) {
+			String chatno = getString("chatroomno");
 			String chatname = getString("chatname");
 			
 			ChatroomVO vo = new ChatroomVO();
@@ -36,23 +58,23 @@ public class ChatroomDAO extends DBManager {
 	}
 	
 //	채팅방 추가
-	public int insertChatRoom(String chatname) {
+	public String insertChatRoom(String chatname) {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into chatroom(chatname) values('" + chatname + "')";
+		String sql = "insert into chatroom(chatname) values('" + chatname + "');";
 		executeUpdate(sql);
 		
 		String lastNum = "select last_insert_id() as num";
 		executeQuery(lastNum);
 		
 		if(next()) {
-			int num = getInt("num");
+			String num = getString("num");
 			DBDisConnect();
 			return num;
 		}else {
 			DBDisConnect();
-			return 0;
+			return null;
 		}
 	}
 	

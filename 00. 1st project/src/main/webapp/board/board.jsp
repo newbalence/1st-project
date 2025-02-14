@@ -137,6 +137,20 @@
             list-style: none;
             padding: 0;
         }
+        .post-item-container{
+       	 	padding: 20px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            margin-top: 50px;
+        }
+        .post-item-container a {
+            text-decoration: none;
+            color: #2575fc;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
         .post-item {
             padding: 20px;
             margin-bottom: 15px;
@@ -238,11 +252,17 @@
             display: flex;
     		justify-content: space-evenly;
         }
+        #typeForm{
+        	float: right;
+        }
+        #content{
+        	font-size: 23px;
+        }
     </style>
 </head>
 <body>
     <div class="board-container">
-    	<div id="sel">
+    	<!-- <div id="sel">
 			<div class="select">
 				<div class="selected">
 			    	<div class="selected-value">전체</div>
@@ -316,7 +336,7 @@
 			    <li class="option">loooooooooooooooooong text option</li>
 			  </ul>
 			</div>
-		</div>
+		</div> -->
 		<h1>러닝</h1>
 		<form action="board.jsp" method="get" id="typeForm" style="display:inline">
 			<select id="type" name="type">
@@ -333,13 +353,13 @@
 		</form>
 		
         <ul class="post-list">
-        	<li class="post-item">
-				<a>번호</a>
-				<a>제목</a>
-				<a>글쓴이</a>
-				<a>등록일</a>
-				<a>조회</a>
-				<a>추천</a>
+        	<li class="post-item-container">
+				<a id="content">번호</a>
+				<a id="content">제목</a>
+				<a id="content">글쓴이</a>
+				<a id="content">등록일</a>
+				<a id="content">조회</a>
+				<a id="content">추천</a>
 				
 			</li>
         	<%
@@ -360,12 +380,12 @@
         			%>
 					<li class="post-item">
 						<a href="post.jsp?bno=<%= bno %><%= searchType != "" ? "&searchType=" + searchType : ""%><%= keyword != "" ? "&searchKeyword=" + keyword : ""%>&pageNum=<%= pageNum %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">
-						<span><%= bno %></span>
-						<span><%= title %></span>
-						<span><%= nick %></span>
-						<span><%= createDate %></span>
-						<span><%= hit %></span>
-						<span><%= push %></span>
+						<span id="content"><%= bno %></span>
+						<span id="content"><%= title %></span>
+						<span id="content"><%= nick %></span>
+						<span id="content"><%= createDate %></span>
+						<span id="content"><%= hit %></span>
+						<span id="content"><%= push %></span>
 						</a>
 					</li>
         			<%
@@ -411,7 +431,7 @@
         		}
         	%>
         </div>
-                <div class="search-bar">
+        <div class="search-bar">
             <form action="board.jsp" method="get">
             	<input type="hidden" name="type" value="<%= listType %>">
             	<input type="hidden" name="order"value="<%= listOrder %>">
