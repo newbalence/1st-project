@@ -187,12 +187,14 @@
    	            		<li>
 	   	            	<label for="hobby">취미</label>
 			            <select id="hobby" name="hobby">
-			            	<option value="1">공부</option>
-			            	<option value="2">독서</option>
-			            	<option value="3">축구</option>
-			            	<option value="4">런닝</option>
-			            	<option value="5">헬스</option>
-			            	<option value="6">여행</option>
+			            	<option value="1">공부</option> <!-- 기타 -->
+							<option value="2">독서</option> <!-- 기타 -->
+							<option value="3">축구</option> <!-- 경쟁 -->
+							<option value="4">런닝</option> <!-- 개인 -->
+							<option value="5">헬스</option> <!-- 개인 -->
+							<option value="6">여행</option> <!-- 개인 -->
+							<option value="7">우표</option> <!-- 수집 -->
+							<option value="8">야구</option> <!-- 경쟁 -->
 			            </select>
 			            </li>
 		            </ul>

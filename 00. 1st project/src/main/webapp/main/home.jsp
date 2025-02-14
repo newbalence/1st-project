@@ -1,6 +1,20 @@
+<%@page import="chatroom.ChatroomVO"%>
+<%@page import="java.util.List"%>
+<%@page import="chatroom.ChatroomDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/navbar.jsp" %>
+<%
+	String id = "";
+	if(user != null){
+		id = user.getId();
+	}
+	
+	ChatroomDAO crdao = new ChatroomDAO();
+	List<ChatroomVO>list = crdao.userChatRoom(id);
+	
+	
+%>
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -85,6 +99,7 @@
 			#login-form {
 				display: flex;
 				flex-direction: column;
+				margin-bottom: 100px;
 			}
 			
 			#login-form p {
@@ -118,6 +133,16 @@
 			}
 			.weather_list{
 			
+			}
+			.weatherBox{
+				display: flex;
+				justify-content: center;
+			}
+			#windBox{
+				padding-left: 25px;
+			}
+			#chatting{
+				margin-top: 100px;
 			}
 		</style>
 	</head>
@@ -276,7 +301,7 @@
 				</div>
 				<div class="articleRight"> <!-- article right side --> <!-- margin&padding left side -->
 					<div class="logmein">
-						<h2 class="screen_out">나의 티스토리</h2>
+						
 						<div id="login-form">
 						<%
 							if(user == null){
@@ -317,28 +342,19 @@
 									<%
 								}else{
 									%>
+									<h2 class="screen_out">나의 티스토리</h2>
 									<div class="user_profile">
-									<span><%= user.getNick() %>님 환영합니다</span>
+										<span><%= user.getNick() %>님 환영합니다</span>
 									</div>
 									<%
 								}
 							%>
 							</div>
 						</div>
-												
-						<div class="screen_out">
-							<h2 class="screen_out">채팅</h2>
-							<div class="chat_list">
-								<a class="content" href="../chat/chatroom.jsp?no=1">1번 채팅방</a><br>
-								<a class="content" href="../chat/chatroom.jsp?no=2">2번 채팅방</a>
-							</div>
-						</div>
-						
 						<div class="weathers">
 							<h2 class="screen_out">날씨</h2>
 							<div class="weather_list">
 								<div>
-							      	<span>위치</span>
 							      	<span class="place"></span>
 						      	</div>
 								<div>
@@ -352,21 +368,44 @@
 								      	<span>날씨</span>
 								      	<span class="weather"></span>
 							      	</div>
-							      	<div>
+							      	<div id="windBox">
 								      	<span>풍속</span>
 								      	<span class="wind"></span>
+								      	<span>m/s</span>
 							      	</div>
 								</div>
 							</div>
+						</div>					
+						<div class="screen_out" id="chatting">
+							<h2 class="screen_out"><a href="../chat/chatlist.jsp">채팅</a></h2>
+							<div class="chat_list">
+							<%
+								if(user != null){
+									for(int i = 0; i < list.size(); i++){
+										ChatroomVO crvo = list.get(i);
+										String chatroomno = crvo.getChatroomno();
+										String chatname = crvo.getChatname();
+										%>
+											<a class="content" href="../chat/chatroom.jsp?no=<%= chatroomno %>"><%= chatname %></a><br>
+										<%
+									}
+								}
+							%>
+								
+							</div>
 						</div>
+						
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</body>
 	<script>
-		navigator.geolocation.getCurrentPosition((position) => {
-			console.log(position);
+	
+		console.log(navigator.permissions);
+	
+		navigator.geolocation.getCurrentPosition(function(position) {
 			let x = position.coords.longitude;
 			let y = position.coords.latitude;
 			
@@ -391,8 +430,10 @@
 					console.log("에러 발생");
 				}
 			});
-			
-			
+		}, function(error) {
+			if(error){
+				$(".weather_list").remove();
+			}
 		});
 		
 		let user = "<%= user == null ? null : user.getId() %>";
@@ -461,10 +502,6 @@
 					appid : "a72a6761eb78a480e947d266de911cdc"
 				},
 				success : function(result){
-					console.log(result);
-					console.log(result.main.temp);
-					console.log(result.weather[0].description);
-					console.log(result.wind.speed);
 					let img = "https://openweathermap.org/img/wn/";
 					img += result.weather[0].icon;
 					img += "@2x.png";

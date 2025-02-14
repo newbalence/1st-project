@@ -93,6 +93,7 @@
 		}
 
 		.fa-search {
+			cursor: pointer;
 			position: absolute;
 			left: 240px;
 			top: 11px;
@@ -116,6 +117,7 @@
 		}
 		
 		.bi-x-circle-fill {
+			cursor: pointer;
 			position: absolute;
 			top: 6px;
 			left: 212px;
@@ -374,11 +376,12 @@
 		<script>
 
 			function search(){
-				let search = $("#search").val();
-				if(search.trim() == ""){
+				let search = $("#search");
+				if(search.val().trim() == ""){
+					search.focus();
 					return alert("검색어를 입력해주세요");
 				}
-				location.href = "../board/board.jsp?searchType=title&searchKeyword="+search;
+				location.href = "../board/board.jsp?searchType=title&searchKeyword="+search.val();
 			}
 			
 			function del(){

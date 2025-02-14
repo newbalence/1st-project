@@ -88,6 +88,10 @@
 	.div::-webkit-scrollbar{
 	  display:none;
 	}
+	#exit{
+    	max-width: max-content;
+   		float: right;
+	}
 </style>
 </head>
 <body>
@@ -117,9 +121,13 @@
 			<input class="text" type="text" id="chat"><br>
 			<input class="button" type="button" value="전송" id="send">
 		</div>
+		<input type="button" id="exit" value="나가기" onClick="location.href='../chat/chatlist.jsp'">
 	</div>
 </body>
 <script>
+	
+	
+	
 	let sender = "<%= nick %>";
 	let id = "<%= user.getId() %>";
 	let socket = new WebSocket("ws://" + location.host + "/1st_project/chat");
