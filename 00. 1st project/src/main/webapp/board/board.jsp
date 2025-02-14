@@ -62,7 +62,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유 게시판</title>
-    
     <style>
     	
     	ul {
@@ -78,18 +77,12 @@
 		
 		.select .selected {
 		  display: flex;
-		  justify-content: space-between;
+		  justify-content: center;
 		  padding: 8px 5px;
 		}
 		
 		.select .selected .selected-value {
 		  max-width: 90px;
-		}
-		
-		.select .selected .arrow {
-		  width: 24px;
-		  background: url("https://uxwing.com/wp-content/themes/uxwing/download/02-arrow-direction/arrow-bottom.png") no-repeat 70% 50%;
-		  background-size: 50% 50%;
 		}
 		
 		.select ul {
@@ -101,6 +94,7 @@
 		  margin: 1px 0 0 -1px;
 		  cursor: pointer;
 		  display : none;
+	      
 		}
 		.select.active ul {
 		  display: initial;
@@ -240,15 +234,18 @@
         .search-bar > form > button{
         	width: 80px;
         }
+        #sel{
+            display: flex;
+    		justify-content: space-evenly;
+        }
     </style>
 </head>
 <body>
     <div class="board-container">
-    	<div>
+    	<div id="sel">
 			<div class="select">
 				<div class="selected">
 			    	<div class="selected-value">전체</div>
-			    	<div class="arrow"></div>
 			  	</div>
 			  	<ul>
 			    	<li class="option">none</li>
@@ -274,7 +271,6 @@
 	     	<div class="select">
 			  <div class="selected">
 			    <div class="selected-value">실외취미</div>
-			    <div class="arrow"></div>
 			  </div>
 			  <ul>
 			    <li class="option">none</li>
@@ -287,7 +283,6 @@
 	     	<div class="select">
 			  <div class="selected">
 			    <div class="selected-value">수집취미</div>
-			    <div class="arrow"></div>
 			  </div>
 			  <ul>
 			    <li class="option">none</li>
@@ -300,7 +295,6 @@
 	    	<div class="select">
 			  <div class="selected">
 			    <div class="selected-value">경쟁취미</div>
-			    <div class="arrow"></div>
 			  </div>
 			  <ul>
 			    <li class="option">none</li>
@@ -313,7 +307,6 @@
 	    	<div class="select">
 			  <div class="selected">
 			    <div class="selected-value">관찰취미</div>
-			    <div class="arrow"></div>
 			  </div>
 			  <ul>
 			    <li class="option">none</li>
@@ -323,19 +316,6 @@
 			    <li class="option">loooooooooooooooooong text option</li>
 			  </ul>
 			</div>
-	    	<!-- <div class="select">
-			  <div class="selected">
-			    <div class="selected-value">자유</div>
-			    <div class="arrow"></div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div> -->
 		</div>
 		<h1>러닝</h1>
 		<form action="board.jsp" method="get" id="typeForm" style="display:inline">

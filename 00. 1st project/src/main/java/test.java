@@ -5,7 +5,7 @@ public class test {
 	public static void main(String[] args) {
 		
 		BoardVO bvo = new BoardVO();
-		bvo.setAuthor("집가고 싶은 사람");
+		bvo.setAuthor("집가고 싶은 사람 ㄴㄴ");
 		bvo.setTitle("안녕하세요");
 		bvo.setContent("집가고 싶어요");
 		bvo.setBoardType("1");

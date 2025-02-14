@@ -1,3 +1,6 @@
+<%@page import="chat.ChatVO"%>
+<%@page import="java.util.List"%>
+<%@page import="chat.ChatDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/navbar.jsp" %>
@@ -8,6 +11,9 @@
 	}
 	String cno = request.getParameter("no");
 	String nick = user.getNick();
+	
+	ChatDAO cdao = new ChatDAO();
+	List<ChatVO> list = cdao.selChat(cno);
 %>
 <!DOCTYPE html>
 <html>
@@ -41,24 +47,71 @@
 	}
 	.container{
 		display: flex;
+		max-width: 60%;
 	}
 	#div{
- 		/* position: fixed;
+		position: fixed;
 	    bottom: 0;
-	    width: 100%; */
+	    width: 100%;
 	    height: 85.5vh;
 	    overflow-y: scroll;
-	    padding:80px;
 	    font-size: 25px;
-	    /* margin-bottom: 73px; */
+	    padding: 10px 30% 80px 30%;
+	    margin-bottom: 75px;
+	    word-break: break-all;
     }
     .you{
-    	text-align: right
+    	text-align: right;
+	  width: 80%;	  
     }
+    .user{
+   		text-align: left;
+   		width: 40%;
+   }
+   .id{
+   		font-size: 15px;
+   }
+   
+   body{
+		
+	}
+	
+	::-webkit-scrollbar {
+		display: none;
+	}
+	
+	/*특정 부분 스크롤바 없애기*/
+	
+	#div{
+	   -ms-overflow-style: none;
+	}
+	.div::-webkit-scrollbar{
+	  display:none;
+	}
 </style>
 </head>
 <body>
-	<div id="div"></div>
+	<div id="div">
+	<%
+		for(int i = 0; i < list.size(); i++){
+			ChatVO cvo = list.get(i);
+			String content = cvo.getChatcontent();
+			String sender = cvo.getSender();
+			String cid = cvo.getId();
+			if(cid.equals(user.getId())){
+				%>
+				<div class="id you"> you : </div>
+				<div class="you"><%= content %></div>
+				<%
+			}else{
+				%>
+				<div class="id user"><%= sender %></div>
+				<div class="user"><%= content %></div>
+				<%	
+			}
+		}
+	%>
+	</div>
 	<div class="chat">
 		<div class="container">
 			<input class="text" type="text" id="chat"><br>
@@ -67,7 +120,8 @@
 	</div>
 </body>
 <script>
-	let sender = "<%= user.getId() %>";
+	let sender = "<%= nick %>";
+	let id = "<%= user.getId() %>";
 	let socket = new WebSocket("ws://" + location.host + "/1st_project/chat");
 	let chat = document.getElementById("chat");
 	let btn = document.getElementById("send");
@@ -97,9 +151,11 @@
 		let log = document.getElementById("div")
 		
 		if(data.sender == sender){
-			log.innerHTML += "<div class='you'> you : "+ data.chatcontent + "</div>";
+			log.innerHTML += "<div class='id you'> you : </div>";
+			log.innerHTML += "<div class='you'>" + data.chatcontent + "</div>";
 		}else{
-			log.innerHTML += "<div> " + data.sender + " : " + data.chatcontent+ "</div>";
+			log.innerHTML += "<div class='id user'> " + data.sender + " : </div>";
+			log.innerHTML += "<div class='user'>" + data.chatcontent+ "</div>";
 		}
 		div.scrollTop = div.scrollHeight;
 		chat.focus();
@@ -110,9 +166,10 @@
 		//웹소켓 데이터 전송
 		//일반 텍스트
 		//{sender : sender, message : chat.value}
-		const data = JSON.stringify({sender : sender, chatcontent : chat.value, chatroomno : <%= cno %>});
+		const data = JSON.stringify({sender : sender, chatcontent : chat.value, chatroomno : <%= cno %>, id : id});
 		socket.send(data);
 		chat.value = "";
+		chat.focus();
 	}
 
 	btn.addEventListener("click", function(){

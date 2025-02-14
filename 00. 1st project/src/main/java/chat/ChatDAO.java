@@ -10,14 +10,15 @@ public class ChatDAO extends DBManager {
 	
 //	채팅 추가
 	public int insertChat(ChatVO vo) {
-		String chatno = vo.getChatroomno();
-		String sender = vo.getSender();
+		String chatnum = vo.getChatroomno();
+		String id = vo.getId();
 		String chatcontent = vo.getChatcontent();
+		String nick = vo.getSender();
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into chat(chatno, sender, chatcontent) ";
-		sql += "values(" + chatno + ", '" + sender + "', '" + chatcontent + "')";
+		String sql = "insert into chat(chatroomno, sender, chatcontent, chattime, nick) ";
+		sql += "values(" + chatnum + ", '" + id + "', '" + chatcontent + "', now(), '" + nick + "')";
 		executeUpdate(sql);
 		
 		String lastNum = "select last_insert_id() as num;";
@@ -38,23 +39,25 @@ public class ChatDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from chat where chatno = " + num;
+		String sql = "select * from chat where chatroomno = " + num;
 		executeQuery(sql);
 		
 		List<ChatVO> list = new ArrayList<>();
 		while(next()) {
 			String chatnum = getString("chatnum");
-			String chatno = getString("chatno");
-			String sender = getString("sender");
+			String chatno = getString("chatroomno");
+			String sender = getString("nick");
 			String chatContent = getString("chatcontent");
 			String chatTime = getString("chattime");
+			String id = getString("sender");
 			
 			ChatVO vo = new ChatVO();
-			vo.setChatnum(chatnum);
+			vo.setChatno(chatnum);
 			vo.setChatroomno(chatno);
 			vo.setSender(sender);
 			vo.setChatcontent(chatContent);
 			vo.setChattime(chatTime);
+			vo.setId(id);
 			
 			list.add(vo);
 		}
