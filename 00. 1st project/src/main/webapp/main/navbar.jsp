@@ -25,6 +25,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
 	<script src="https://kit.fontawesome.com/ed2cfa7d40.js"></script>
 	<style>
+	
 		.mb-5 {
 		    margin-bottom: 0 !important;
 		}
@@ -105,6 +106,7 @@
 			height: 38px;
 			background-color:#ffffff;
 			border-radius: 30px;
+			font-family: auto;
 		}
 	
 		.form-control:focus {
@@ -115,7 +117,7 @@
 		
 		.bi-x-circle-fill {
 			position: absolute;
-			top: 7px;
+			top: 6px;
 			left: 212px;
 			color: #5b5b5b;
 		}

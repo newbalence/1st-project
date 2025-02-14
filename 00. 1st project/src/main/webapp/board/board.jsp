@@ -238,6 +238,11 @@
             display: flex;
     		justify-content: space-evenly;
         }
+        
+        .post-item {
+        	display: flex;
+        	justify-content: space-between;
+        }
     </style>
 </head>
 <body>
