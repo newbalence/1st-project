@@ -29,7 +29,9 @@
 	
 	String title = multi.getParameter("title");
 	String content = multi.getParameter("content");
-	String listType = multi.getParameter("type");
+	String listType = multi.getParameter("listType");
+	String boardType = multi.getParameter("boardType");
+	
 	
 	if(title == null || content == null){
 		response.sendRedirect("write.jsp");

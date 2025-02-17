@@ -14,6 +14,8 @@ public class BoardDAO extends DBManager {
 		String title = vo.getTitle();
 		String content = vo.getContent();
 		String boardType = vo.getBoardType();
+		String listType = vo.getListType();
+		String nick = vo.getNick();
 		
 		//첨부파일
 		String originName = vo.getOriginName();
@@ -24,9 +26,9 @@ public class BoardDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into board(author, title, content, board_type, ";
+		String sql = "insert into board(author, nick, title, content, board_type,  list_type, ";
 		sql += "origin_name, upload_name, location, file_size) ";
-		sql += "values('" + author + "', '" + title + "', '" + content + "', " + boardType + ", ";
+		sql += "values('" + author + "', '" + nick + "', '" + title + "', '" + content + "', " + boardType + ", " + listType + ", ";
 		sql += "'" + originName + "', '" + uploadName + "', '" + location + "', " + fileSize + ");";
 		
 		executeUpdate(sql);
@@ -49,6 +51,7 @@ public class BoardDAO extends DBManager {
 		String title = vo.getTitle();
 		String content = vo.getContent();
 		String bno = vo.getBno();
+		String listType = vo.getListType();
 		
 		String originName = vo.getOriginName();
 		String uploadName = vo.getUploadname();
@@ -71,8 +74,8 @@ public class BoardDAO extends DBManager {
 			sql += "location = '" + location + "', ";
 			sql += "file_size = " + fileSize;
 		}
-		sql += "update_date = now() ";
-		sql += "where bno = " + bno;
+		sql += "update_date = now(), list_type = " + listType;
+		sql += " where bno = " + bno;
 		executeUpdate(sql);
 		DBDisConnect();
 	}
@@ -120,7 +123,6 @@ public class BoardDAO extends DBManager {
 		}else {
 			sql += " order by board.bno desc";
 		}
-		
 		sql += " limit " + startNum + ", " + limitSize;
 		executeQuery(sql);
 		
@@ -128,7 +130,7 @@ public class BoardDAO extends DBManager {
 		while(next()) {
 			String bno = getString("bno");
 			String author = getString("author");
-			String nick = getString("nick");
+			String nick = getString("user.nick");
 			String title = getString("title");
 			String createDate = getString("create_date");
 			String updateDate = getString("update_date");
@@ -170,7 +172,7 @@ public class BoardDAO extends DBManager {
 		if(next()) {
 			String bno = getString("bno");
 			String author = getString("author");
-			//String nick = getString("nick");
+			String nick = getString("nick");
 			String title = getString("title");
 			String content = getString("content");
 			String createDate = getString("create_date");
@@ -194,6 +196,7 @@ public class BoardDAO extends DBManager {
 			vo.setFileSize(fileSize);
 			vo.setUserPush(userPush);
 			vo.setPush(push);
+			vo.setNick(nick);
 			
 			DBDisConnect();
 			return vo;

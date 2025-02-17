@@ -39,7 +39,7 @@ public class ReplyDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select* from reply left join user on "; 
+		String sql = "select * from reply left join user on "; 
 		sql += "reply.rauthor = user.id ";
 		sql += "where bno = " + bno + " order by rno desc;";
 		executeQuery(sql);
@@ -75,7 +75,7 @@ public class ReplyDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "update reply set rcontent = " + rcontent;
+		String sql = "update reply set rcontent = '" + rcontent + "'";
 		sql += ", update_date = now() where rno = " + rno;
 		executeUpdate(sql);
 		

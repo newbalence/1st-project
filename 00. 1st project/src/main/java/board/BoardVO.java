@@ -17,7 +17,14 @@ public class BoardVO {
 	private int hit;
 	private int push;
 	private int userPush;
+	private String listType;
 	
+	public String getListType() {
+		return listType;
+	}
+	public void setListType(String listType) {
+		this.listType = listType;
+	}
 	public int getUserPush() {
 		return userPush;
 	}

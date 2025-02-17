@@ -18,7 +18,7 @@
 	int startNum = (currentPage - 1) * limitSize;
 	String searchType = request.getParameter("searchType");
 	String keyword = request.getParameter("searchKeyword");
-	String listType = request.getParameter("type");
+	String listType = request.getParameter("listType");
 	String listOrder = request.getParameter("order");
 
 	
@@ -64,7 +64,7 @@
     <title>자유 게시판</title>
     <style>
     	
-    	ul {
+    	li {
 		  list-style-type: none;
 		  padding-left: 0px;
 		}
@@ -85,7 +85,7 @@
 		  max-width: 90px;
 		}
 		
-		.select ul {
+		.select li {
 		  width: 120px;
 		  border: 1px solid #999;
 		  position: absolute;
@@ -96,7 +96,7 @@
 		  display : none;
 	      
 		}
-		.select.active ul {
+		.select.active li {
 		  display: initial;
 		}
 		
@@ -145,7 +145,7 @@
             border: 1px solid #ddd;
             margin-top: 50px;
         }
-        .post-item-container a {
+        .post-item-container table {
             text-decoration: none;
             color: #2575fc;
             font-weight: bold;
@@ -162,16 +162,15 @@
         .post-item:hover {
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             transform: translateY(-3px);
+            text-decoration: underline;
+            text-decoration-color: #2575fc;
         }
-        .post-item a {
+        .post-item td {
             text-decoration: none;
             color: #2575fc;
             font-weight: bold;
-            font-size: 1.2rem;
         }
-        .post-item a:hover {
-            text-decoration: underline;
-        }
+
         .post-item .meta {
             font-size: 0.9rem;
             color: #777;
@@ -252,18 +251,31 @@
             display: flex;
     		justify-content: space-evenly;
         }
-<<<<<<< HEAD
-        
+
         .post-item {
-        	display: flex;
-        	justify-content: space-between;
-=======
+        	cursor:pointer;
+        	color: black;
+		}
         #typeForm{
         	float: right;
         }
         #content{
         	font-size: 23px;
->>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
+        }
+        .title{
+			max-width: 50px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap; 
+			text-align: left;
+        }
+        table{
+        	border-collapse: separate;
+    		border-spacing: 1px 20px;
+    		text-align: center;
+    		width: 100%;
+    		font-size: 23px;
+    		
         }
     </style>
 </head>
@@ -346,7 +358,7 @@
 		</div> -->
 		<h1>러닝</h1>
 		<form action="board.jsp" method="get" id="typeForm" style="display:inline">
-			<select id="type" name="type">
+			<select id="type" name="listType">
 				<option value="" <%= listType.equals("") ? "selected" : ""  %>>전체</option>
 				<option value="1" <%= listType.equals("1") ? "selected" : ""  %>>인증</option>
 				<option value="2" <%= listType.equals("2") ? "selected" : ""  %>>일상</option>
@@ -359,16 +371,18 @@
 		</select>
 		</form>
 		
-        <ul class="post-list">
-        	<li class="post-item-container">
-				<a id="content">번호</a>
-				<a id="content">제목</a>
-				<a id="content">글쓴이</a>
-				<a id="content">등록일</a>
-				<a id="content">조회</a>
-				<a id="content">추천</a>
-				
-			</li>
+        <table class="post-list">
+        	<thead>
+        		<tr class="post-item-container">
+				<th style="width: 67px" id="content">번호</th>
+				<th id="content">제목</th>
+				<th style="width: 103px" id="content">글쓴이</th>
+				<th style="width: 140px" id="content">등록일</th>
+				<th style="width: 67px" id="content">조회</th>
+				<th style="width: 67px" id="content">추천</th>
+				</tr>
+			</thead>
+			<tbody>
         	<%
         		for(int i = 0; i < list.size(); i++){
         			BoardVO bvo = list.get(i);
@@ -385,20 +399,21 @@
         				continue;
         			}
         			%>
-					<li class="post-item">
-						<a href="post.jsp?bno=<%= bno %><%= searchType != "" ? "&searchType=" + searchType : ""%><%= keyword != "" ? "&searchKeyword=" + keyword : ""%>&pageNum=<%= pageNum %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">
-						<span id="content"><%= bno %></span>
-						<span id="content"><%= title %></span>
-						<span id="content"><%= nick %></span>
-						<span id="content"><%= createDate %></span>
-						<span id="content"><%= hit %></span>
-						<span id="content"><%= push %></span>
-						</a>
-					</li>
+					
+					<tr class="post-item" onclick="location.href='post.jsp?bno=<%= bno %><%= searchType != "" ? "&searchType=" + searchType : ""%><%= keyword != "" ? "&searchKeyword=" + keyword : ""%>&pageNum=<%= pageNum %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>'">
+					<td><%= bno %></td>
+					<td class="title"><%= title %></td>
+					<td class="title"><%= nick %></td>
+					<td><%= createDate %></td>
+					<td><%= hit %></td>
+					<td><%= push %></td>
+					</tr>
+					
         			<%
         		}
         	%>
-        </ul>
+        	</tbody>
+        </table>
         <%
         	if(user != null){
         		%>
@@ -412,7 +427,7 @@
         	<%
         		if(startPage > 1){
         			%>
-                	<a href="board.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&Type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">&lt;</a>
+                	<a href="board.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">&lt;</a>
                 	<%
         		}
         	%>
@@ -420,12 +435,12 @@
         	for(int i = startPage; i <= endPage; i++){
         		if(i == currentPage){
             		%>
-            		<a class="active" href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>"><%= i %></a>
+            		<a class="active" href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>"><%= i %></a>
             		<%
         			continue;
         		}else{
             		%>
-            		<a href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>"><%= i %></a>
+            		<a href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>"><%= i %></a>
             		<%
         		}
         	}
@@ -433,7 +448,7 @@
         	<%
         		if(endPage < totalPage){
         			%>
-       				<a href="board.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">&gt;</a>
+       				<a href="board.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">&gt;</a>
         			<%
         		}
         	%>

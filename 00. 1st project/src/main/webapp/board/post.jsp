@@ -13,8 +13,9 @@
 	String searchType = request.getParameter("searchType");
 	String keyword = request.getParameter("keyword");
 	String pageNum = request.getParameter("pageNum");
-	String listType = request.getParameter("type");
+	String listType = request.getParameter("listType");
 	String listOrder = request.getParameter("order");
+	String boardType = request.getParameter("boardType");
 
 	if(no == null){
 		response.sendRedirect("../board/board.jsp");
@@ -44,13 +45,14 @@
 	
 	String bno = bvo.getBno();
 	String author = bvo.getAuthor();
-	//String nick = bvo.getNick();
+	String nick = bvo.getNick();
 	String title = bvo.getTitle();
 	String content = bvo.getContent();
 	String createDate = bvo.getCreateDate();
 	String updateDate = bvo.getUpdateDate();
 	String originName = bvo.getOriginName();
 	String uploadName = bvo.getUploadname();
+	
 	long fileSize = bvo.getFileSize();
 	int userPush = bvo.getUserPush();
 	int push = bvo.getPush();
@@ -91,7 +93,10 @@
 	}
 	
 	String path = request.getContextPath();
-	System.out.println(path);
+	
+	if(nick.equals("") || nick == null){
+		nick = "익명";
+	}
 	
 %>
 <!DOCTYPE html>
@@ -291,13 +296,17 @@
             font-size: 0.9rem;
             color: #777;
         }
+        #img{
+        	max-width: 100%
+        }
+        
     </style>
 </head>
 <body>
     <div class="detail-container">
         <h2><%= title %></h2>
         <div class="meta">
-        <span>작성자: <%= author %> | 작성일: <%= createDate %><%= updateDate == null ? "" : "(수정됨)" %></span>
+        <span>작성자: <%= nick %> | 작성일: <%= createDate %><%= updateDate == null ? "" : "(수정됨)" %></span>
         <span style="float:right">
         	<span id="pushNum">조회<%= hit %> 추천<%= push %></span> 
         <%
@@ -316,7 +325,9 @@
         	if(uploadName != null && !uploadName.equals("null")){
 		                	if(uploadName.split("\\.")[1].contains("jpg") || uploadName.split("\\.")[1].contains("PNG") || uploadName.split("\\.")[1].contains("tiff") || uploadName.split("\\.")[1].contains("gif")){
 		                		%>
-		                			<img src="<%= path %>/upload/<%= uploadName %>"></img>
+		                		<div>
+		                			<img id="img" src="<%= path %>/upload/<%= uploadName %>"></img>
+	                			</div>
 		                		<%
 		                	}
 		                %>
@@ -331,7 +342,7 @@
         	}
         %>
         <div class="actions">
-			<button onclick="location.href='board.jsp?page=<%= pageNum %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>'">뒤로가기</button>
+			<button onclick="location.href='board.jsp?page=<%= pageNum %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>'">뒤로가기</button>
 
         <%
         	//로그인을 하였고, 로그인한 사용자의 아이디(user.getId())와 
@@ -339,7 +350,7 @@
         	if(user != null && (user.getId().equals(author) || user.getUserType().equals("0"))){
         		%>
 		        <span class="post-actions">
-		            <button onclick="location.href='modify.jsp?no=<%= no %>'">수정</button>
+		            <button onclick="location.href='modify.jsp?no=<%= no %>&boardType=<%= boardType %>'">수정</button>
 		            <button onclick="deletePost(<%= no %>)">삭제</button>
 		        </span>
         		<%
@@ -538,11 +549,11 @@
 						
 						rcontent.val("");
 					}else{
-						alert("에러 발생");
+						$("#rcontent").val("").focus();
 					}
 				},
 				error : function(){
-					console.log("에러 발생");
+					$("#rcontent").val("").focus();
 				}
 			});
 			
@@ -602,5 +613,7 @@
 				return;
 			}
 		});
+		
+		
 	</script>
 </html>

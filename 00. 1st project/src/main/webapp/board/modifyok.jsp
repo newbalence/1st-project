@@ -30,6 +30,7 @@
 	String title = multi.getParameter("title");
 	String content = multi.getParameter("content");
 	String bno = multi.getParameter("no");
+	String listType = multi.getParameter("listType");
 	
 	if(title == null || content == null){
 		response.sendRedirect("write.jsp");
