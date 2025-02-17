@@ -35,8 +35,6 @@ public class UserDAO extends DBManager {
 		
 		String id = uvo.getId();
 		String pw = uvo.getPw();
-		String xlocation = uvo.getxLocation();
-		String ylocation = uvo.getyLocaton();
 		
 		driverLoad();
 		DBConnect();
@@ -72,8 +70,6 @@ public class UserDAO extends DBManager {
 			vo.setDeleteDate(deleteDate);
 			vo.setLastPw(lastPw);
 			vo.setUserType(userType);
-			vo.setxLocation(xlocation);
-			vo.setyLocaton(ylocation);
 			
 			DBDisConnect();
 			return vo;

@@ -7,7 +7,7 @@
 <%@ include file="../main/navbar.jsp" %>
 <%
 	BoardDAO bdao = new BoardDAO();
-	
+	String boardType = request.getParameter("boardType");
 	String pageNum = request.getParameter("page");
 	if(pageNum == null || pageNum.equals("null")){
 		pageNum = "1";
@@ -63,7 +63,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유 게시판</title>
     <style>
-    	
     	li {
 		  list-style-type: none;
 		  padding-left: 0px;
@@ -281,88 +280,14 @@
 </head>
 <body>
     <div class="board-container">
-    	<!-- <div id="sel">
-			<div class="select">
-				<div class="selected">
-			    	<div class="selected-value">전체</div>
-			  	</div>
-			  	<ul>
-			    	<li class="option">none</li>
-			    	<li class="option">option 1</li>
-			    	<li class="option">option 2</li>
-			    	<li class="option">option 3</li>
-			    	<li class="option">loooooooooooooooooong text option</li>
-			  	</ul>
-			</div>     
-			<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">실내취미</div>
-			    <div class="arrow"></div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-	     	<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">실외취미</div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-	     	<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">수집취미</div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-	    	<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">경쟁취미</div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-	    	<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">관찰취미</div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-		</div> -->
+    	
 		<h1>러닝</h1>
 		<form action="board.jsp" method="get" id="typeForm" style="display:inline">
-			<select id="type" name="listType">
+			<select id="listType" name="listType">
 				<option value="" <%= listType.equals("") ? "selected" : ""  %>>전체</option>
 				<option value="1" <%= listType.equals("1") ? "selected" : ""  %>>인증</option>
 				<option value="2" <%= listType.equals("2") ? "selected" : ""  %>>일상</option>
-				<option value="3" <%= listType.equals("3") ? "selected" : ""  %>>기타</option>
+				<option value="3" <%= listType.equals("3") ? "selected" : ""  %>>자유</option>
 			</select>
 		<select id="order" name="order">
 			<option value="" <%= listOrder.equals("") ? "selected" : ""  %>>최신순</option>
@@ -472,51 +397,9 @@
 	$("#order").change(function(e){
 		$("#typeForm").submit();
 	})
-	$("#type").change(function(e){
+	$("#listType").change(function(e){
 		$("#typeForm").submit();
 	})
-	
-	const selectBoxElements = document.querySelectorAll(".select");
-	
-	function toggleSelectBox(selectBox) {
-	  selectBox.classList.toggle("active");
-	}
-	
-	function selectOption(optionElement) {
-	  const selectBox = optionElement.closest(".select");
-	  const selectedElement = selectBox.querySelector(".selected-value");
-	  selectedElement.textContent = optionElement.textContent;
-	}
-	
-	selectBoxElements.forEach(selectBoxElement => {
-	  selectBoxElement.addEventListener("click", function (e) {
-	    const targetElement = e.target;
-	    const isOptionElement = targetElement.classList.contains("option");
-	
-	    if (isOptionElement) {
-	      selectOption(targetElement);
-	    }
-	
-	    toggleSelectBox(selectBoxElement);
-	  });
-	});
-	
-	document.addEventListener("click", function (e) {
-	  const targetElement = e.target;
-	  const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
-	
-	  if (isSelect) {
-	    return;
-	  }
-	
-	  const allSelectBoxElements = document.querySelectorAll(".select");
-	
-	  allSelectBoxElements.forEach(boxElement => {
-	    boxElement.classList.remove("active");
-	  });
-	});
-	
-	
 	
 </script>
 </html>

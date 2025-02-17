@@ -30,8 +30,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>갓 생 살기</title>
     <style>
-        body {
-             font-family: 'Arial', sans-serif;
+         body {
+            font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #e9f5ff, #ffffff);
             margin: 0;
             padding: 0;
@@ -56,16 +56,20 @@
             padding: 0;
         }
         .post-item-container{
-        	padding: 20px;
+       	 	padding: 20px;
             margin-bottom: 15px;
             background: #f9f9f9;
             border-radius: 10px;
             border: 1px solid #ddd;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            margin-top: 50px;
+        }
+        .post-item-container table {
+            text-decoration: none;
+            color: #2575fc;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
         .post-item {
-       	 	color: #0d6efd;
-        	cursor: pointer;
             padding: 20px;
             margin-bottom: 15px;
             background: #f9f9f9;
@@ -76,18 +80,13 @@
         .post-item:hover {
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             transform: translateY(-3px);
+            text-decoration: underline;
+            text-decoration-color: #2575fc;
         }
-        .post-item-container a {
+        .post-item td {
             text-decoration: none;
             color: #2575fc;
             font-weight: bold;
-            font-size: 1.2rem;
-        }
-        .post-item a {
-            text-decoration: none;
-            color: #2575fc;
-            font-weight: bold;
-            font-size: 1.2rem;
         }
         .post-item a:hover {
             text-decoration: underline;
@@ -97,24 +96,6 @@
             font-size: 0.9rem;
             color: #777;
             margin-top: 10px;
-        }
-        .action {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .action button {
-            background: #2575fc;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
-        .action button:hover {
-            background: #1a5fc4;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .pagination {
             display: flex;
@@ -173,6 +154,32 @@
             display: flex;
     		justify-content: space-evenly;
         }
+
+        .post-item {
+        	cursor:pointer;
+        	color: black;
+		}
+        #typeForm{
+        	float: right;
+        }
+        #content{
+        	font-size: 23px;
+        }
+        .title{
+			max-width: 50px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap; 
+			text-align: left;
+        }
+        table{
+        	border-collapse: separate;
+    		border-spacing: 1px 20px;
+    		text-align: center;
+    		width: 100%;
+    		font-size: 23px;
+    		
+        }
         #login-form{
    	    	justify-self: center;
     		padding-right: 49px;
@@ -188,30 +195,34 @@
 </head>
 <body>
     <div class="board-container">
-        <ul class="post-list">
-        	<li class="post-item-container">
-				<a>번호</a>
-				<a>제목</a>
-				<a>참여자 수</a>
-			</li>
+        <table class="post-list">
+        	<thead>
+        		<tr class="post-item-container">
+				<th style="width: 67px" id="content">번호</th>
+				<th id="content">제목</th>
+				<th style="width: 150px" id="content">참여자 수</th>
+				</tr>
+			</thead>
+			<tbody>
         	<%
         		for(int i = 0; i < list.size(); i++){
 					ChatroomVO cvo = list.get(i);
-					String chatno = cvo.getChatroomno();
+					String chatroomno = cvo.getChatroomno();
 					String chatname = cvo.getChatname();
-					int count = cudao.countChatUser(chatno);
+					int count = cudao.countChatUser(chatroomno);
         			%>
-					<li class="post-item" onclick="chatClick(this)">
-						<a id="line">
-							<span><%= chatno %></span>
-							<span><%= chatname %></span>
-							<span><%= count %></span>
-						</a>
-					</li>
+					<tr class="post-item" onclick="chatClick(this)">
+						<td><%= chatroomno %></td>
+						<td class="title"><%= chatname %></td>
+						<td><%= count %></td>
+					</tr>
+					
         			<%
         		}
         	%>
-        </ul>
+        	</tbody>
+        </table>
+        
         <div id="login-form">
 		<%
 			if(user != null){

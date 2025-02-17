@@ -123,12 +123,12 @@
 			                    <td><%= email %></td>
 			                    <td class="select">
 						            <select name="hobby">
-						            	<option value="1" <%= hobby.equals("1") ? "selected" : "" %>>공부</option>
-						            	<option value="2" <%= hobby.equals("2") ? "selected" : "" %>>독서</option>
-						            	<option value="3" <%= hobby.equals("3") ? "selected" : "" %>>축구</option>
-						            	<option value="4" <%= hobby.equals("4") ? "selected" : "" %>>런닝</option>
-						            	<option value="5" <%= hobby.equals("5") ? "selected" : "" %>>헬스</option>
-						            	<option value="6" <%= hobby.equals("6") ? "selected" : "" %>>여행</option>
+										<option value="1" <%= hobby.equals("1") ? "selected" : "" %>>공부</option>
+										<option value="2" <%= hobby.equals("2") ? "selected" : "" %>>독서</option>
+										<option value="3" <%= hobby.equals("3") ? "selected" : "" %>>축구</option>
+										<option value="4" <%= hobby.equals("4") ? "selected" : "" %>>런닝</option>
+										<option value="5" <%= hobby.equals("5") ? "selected" : "" %>>헬스</option>
+										<option value="6" <%= hobby.equals("6") ? "selected" : "" %>>여행</option>
 						            </select>
 			                    </td>
 			                    <td class="select">

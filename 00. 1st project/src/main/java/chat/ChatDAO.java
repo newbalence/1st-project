@@ -10,7 +10,7 @@ public class ChatDAO extends DBManager {
 	
 //	채팅 추가
 	public int insertChat(ChatVO vo) {
-		String chatnum = vo.getChatroomno();
+		String chatroomno = vo.getChatroomno();
 		String id = vo.getId();
 		String chatcontent = vo.getChatcontent();
 		String nick = vo.getSender();
@@ -18,7 +18,7 @@ public class ChatDAO extends DBManager {
 		DBConnect();
 		
 		String sql = "insert into chat(chatroomno, sender, chatcontent, chattime, nick) ";
-		sql += "values(" + chatnum + ", '" + id + "', '" + chatcontent + "', now(), '" + nick + "')";
+		sql += "values(" + chatroomno + ", '" + id + "', '" + chatcontent + "', now(), '" + nick + "')";
 		executeUpdate(sql);
 		
 		String lastNum = "select last_insert_id() as num;";
@@ -44,16 +44,16 @@ public class ChatDAO extends DBManager {
 		
 		List<ChatVO> list = new ArrayList<>();
 		while(next()) {
-			String chatnum = getString("chatnum");
-			String chatno = getString("chatroomno");
+			String chatno = getString("chatno");
+			String chatroomno = getString("chatroomno");
 			String sender = getString("nick");
 			String chatContent = getString("chatcontent");
 			String chatTime = getString("chattime");
 			String id = getString("sender");
 			
 			ChatVO vo = new ChatVO();
-			vo.setChatno(chatnum);
-			vo.setChatroomno(chatno);
+			vo.setChatno(chatno);
+			vo.setChatroomno(chatroomno);
 			vo.setSender(sender);
 			vo.setChatcontent(chatContent);
 			vo.setChattime(chatTime);

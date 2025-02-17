@@ -131,8 +131,8 @@
 		   .login-btn{
 		       margin-left: 0;
 			}
-			.weather_list{
-			
+			.weathers{
+				width: 250px;
 			}
 			.weatherBox{
 				display: flex;
@@ -365,13 +365,12 @@
 								</div>
 								<div class="weatherBox">
 									<div>
-								      	<span>날씨</span>
+								      	<span>날씨</span><br>
 								      	<span class="weather"></span>
 							      	</div>
 							      	<div id="windBox">
-								      	<span>풍속</span>
+								      	<span>풍속</span><br>
 								      	<span class="wind"></span>
-								      	<span>m/s</span>
 							      	</div>
 								</div>
 							</div>
@@ -504,7 +503,7 @@
 					img += "@2x.png";
 					$(".temp").text(result.main.temp);
 					$(".weather").text(result.weather[0].description);
-					$(".wind").text(result.wind.speed);
+					$(".wind").text(result.wind.speed + " m/s");
 					$(".weatherImg").attr("src", img);
 					
 				},
