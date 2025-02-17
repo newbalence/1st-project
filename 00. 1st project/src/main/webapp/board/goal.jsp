@@ -27,6 +27,7 @@
 	}
 	
 	#whole-wrap {
+		justify-content: center;
 		display: flex;
 		flex-wrap: nowrap;
 		position: relative;
