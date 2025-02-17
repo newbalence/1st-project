@@ -164,7 +164,7 @@
             position: absolute;
             background: white;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            /* border-radius: 5px; */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             right: 40px;
@@ -248,6 +248,33 @@
 	            text-decoration: underline;
 	            color: red;
 	        }
+	        
+	        .goal-dropdown {
+	        	display: none;
+	        	position: absolute;
+	        	z-index: 1;
+	        	font-weight: 400;
+	        	background-color: #f9f9f9;
+	        	min-width: 200px;
+	        	text-align: center;
+	        }
+	        
+	        .goal-dropdown a {
+	        	display: block;
+	        	text-decoration: none;
+	        	color: rgb(37, 37, 37);
+	        	font-size: 12px;
+	        	padding: 12px 20px;
+	        }
+	        
+	        .goal-dropdown a:hover {
+	        	background-color : #c40000;
+	        	color: white;
+	        }
+	        
+	        .nav-goal:hover .goal-dropdown {
+	        	display: block;
+	        }
 	</style>
 	<script>
 		function toggleMenu() {
@@ -285,16 +312,22 @@
 			          <a class="nav-link" href="../main/home.jsp">홈</a>
 			        </li>
 			        
-			        <li class="nav-item">
+			        <li class="nav-item nav-goal">
 			        	<% if(user == null){ %>
 			          		<a class="nav-link" onclick="alert('로그인 후 사용 가능합니다.')">목표</a>
 			          	<%}else{%>
-			          		<a class="nav-link" href="../goal/goalTimer.jsp">목표</a>
+			          		<!-- <a class="nav-link" href="../goal/goalTimer.jsp">목표</a> -->
+			          		<a class="nav-link" href="../board/goal.jsp">목표</a>
+						        <div class="goal-dropdown">
+						        	<a href="../board/goal.jsp">나의 목표</a>
+						        	<a href="#">뽀모도로</a>
+						        	<a href="../board/report.jsp">보고서</a>
+						        </div>
 			          	<%} %>
 			        </li>
 			        
 			        <li class="nav-item">
-			          <a class="nav-link" href="../board/board.jsp">커뮤니티</a>
+			        	<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
 			        </li>
 			        
 			        <li class="nav-item">
