@@ -273,5 +273,7 @@
 		
 		$("#goal-add").before(html);
 	});
+	
+	
 </script>
 </html>
