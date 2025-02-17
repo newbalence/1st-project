@@ -307,7 +307,7 @@
 							if(user == null){
 								%>
 								
-								<button type="button" class="btn btn-dark login-btn" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+								<button type="button" class="btn btn-dark login-btn" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">시작하기</button>
 								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								  	<div class="modal-dialog">
 								    	<div class="modal-content">
@@ -342,7 +342,7 @@
 									<%
 								}else{
 									%>
-									<h2 class="screen_out">나의 티스토리</h2>
+									<h2 class="screen_out">나의 스토리</h2>
 									<div class="user_profile">
 										<span><%= user.getNick() %>님 환영합니다</span>
 									</div>

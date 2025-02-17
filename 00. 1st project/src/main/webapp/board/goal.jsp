@@ -1,3 +1,6 @@
+<%@page import="goal.goalVO"%>
+<%@page import="java.util.List"%>
+<%@page import="goal.goalDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/navbar.jsp" %>
@@ -7,6 +10,10 @@
 		response.sendRedirect("../main/home.jsp");
 		return;
 	}
+
+	goalDAO dao = new goalDAO();
+	List<goalVO> list = dao.selectAll(user.getId());
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -47,6 +54,7 @@
 		min-width: 300px;
 		text-align: center;
 		min-height: 500px;
+		max-height: 500px;
 	} 
 	
 	.profile-pic {
@@ -69,6 +77,7 @@
 	}
 	
 	.each-goal {
+		position:relative;
 		display: block;
 		flex-direction: column;
 		border: 1px solid black;
@@ -158,12 +167,13 @@
       .ic-plus{
     	position: absolute;
 	    left: calc(50% + 50px);
+	    
 	    transform: translate(calc(-50%), 0%);
 	    font-size: 35px;
 	    margin-top: 20px;
 	    border: 1px solid black;
 	    border-radius: 50%;
-	    padding: 3px 3px 0px 3px;
+	    padding: 3px 4px 0px 3px;
       }
       
 </style>
@@ -189,7 +199,29 @@
 			
 			<div class="goal-wrap">
 			
-				<div class="each-goal">
+				<%
+					for(int i = 0; i < list.size(); i ++){
+						goalVO vo = list.get(i);
+						String goalNo = vo.getGoalNo();
+						String goalTime = vo.getGoalTime();
+						String goalTitle = vo.getGoalTitle();
+						String goalCont = vo.getGoalCont();
+						%>
+							<div class="each-goal">
+								<i class="goal-edit fa-solid fa-ellipsis-vertical"></i>
+								<button class="editCom">완료</button>
+								<div class="contents">
+									<div class="goal-pic"></div>
+									<h3 class="goal-title"><%= goalTitle %></h3>
+									<div class="goal-cont"><%= goalCont %></div>
+									<progress id="progress" class="goal-per" value="0" min="0" max="100"></progress>
+								</div>
+							</div>
+						<%
+					}
+				%>
+			
+				<!-- <div class="each-goal">
 					<i class="goal-edit fa-solid fa-ellipsis-vertical"></i>
 					<button class="editCom">완료</button>
 					<div class="contents">
@@ -198,40 +230,28 @@
 						<div class="goal-cont">목표1설명</div>
 						<progress id="progress" class="goal-per" value="35" min="0" max="100"></progress>
 					</div>
-				</div>
-				<div class="each-goal">
-					<i class="goal-edit fa-solid fa-ellipsis-vertical"></i>
-					<div class="contents">
-						<div class="goal-pic"></div>
-						<h3 class="goal-title">목표2</h3>
-						<div class="goal-cont">목표2설명</div>
-						<progress id="progress" class="goal-per" value="60" min="0" max="100"></progress>
-					</div>
-				</div>
-				<div class="each-goal">
-					<i class="goal-edit fa-solid fa-ellipsis-vertical"></i>
-					<div class="contents">
-						<div class="goal-pic"></div>
-						<h3 class="goal-title">목표3</h3>
-						<div class="goal-cont">목표3설명</div>
-						<progress id="progress" class="goal-per" value="50" min="0" max="100"></progress>
-					</div>
-				</div>
-				<div class="each-goal">
-					<i class="goal-edit fa-solid fa-ellipsis-vertical"></i>
-					<div class="contents">
-						<div class="goal-pic"></div>
-						<h3 class="goal-title">목표4</h3>
-						<div class="goal-cont">목표4설명</div>
-						<progress id="progress" class="goal-per" value="70" min="0" max="100"></progress>
-					</div>
-				</div>
+				</div> -->
 				
-				<i class="fa-solid fa-plus ic-plus"></i>
+				<i class="fa-solid fa-plus ic-plus" id="goal-add"></i>
 				
 			</div>
 		</div>
 		</div>
 	</div>
 </body>
+<script>
+	$("#goal-add").click(function(){
+		let html = '<div class="each-goal">';
+		html +=			'<i class="goal-edit fa-solid fa-ellipsis-vertical"></i>';
+		html +=			'<div class="contents">';
+		html +=				'<div class="goal-pic"></div>';
+		html +=				'<h3 class="goal-title">목표</h3>';
+		html +=				'<div class="goal-cont">목표 설명</div>';
+		html +=				'<progress id="progress" class="goal-per" value="0" min="0" max="100"></progress>';
+		html +=			'</div>'
+		html +=		'</div>';
+		
+		$("#goal-add").before(html);
+	});
+</script>
 </html>

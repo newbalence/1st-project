@@ -312,7 +312,7 @@
 			      <%
 			      	if(user == null){
 			      		%>
-						<button type="button" class="btn btn-dark" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+						<button type="button" class="btn btn-dark" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">시작하기</button>
 						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
