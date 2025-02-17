@@ -27,8 +27,55 @@
 	<style>
 	
 		li {
+		z-index:99;
+		position: relative;
 		  list-style-type: none;
 		  padding-left: 0px;
+		  background-color: white;
+		}
+		.select {
+		  display: inline-block;
+		  width: 120px;
+		  border: 1px solid #999;
+		  text-align-last: center;
+		}
+		
+		.select .selected {
+		  display: flex;
+		  justify-content: center;
+		  padding: 8px 5px;
+		}
+		
+		.select .selected .selected-value {
+		  max-width: 90px;
+		}
+		
+		.select li {
+		  width: 120px;
+		  border: 1px solid #999;
+		  position: absolute;
+		  background: #fff;
+		  border-top: none;
+		  margin: 1px 0 0 -1px;
+		  cursor: pointer;
+		  display : none;
+	      
+		}
+		.select.active li {
+		  display: initial;
+		}
+		
+		.select ul li {
+		  padding: 8px 5px;
+		}
+		.select ul li,
+		.select .selected .selected-value {
+		  white-space: nowrap; /* 줄바꿈 안함 */
+		  overflow: hidden;
+		  text-overflow: ellipsis; /* 말줄임 적용 */
+		}
+		.select ul li:hover {
+		  background: rgba(168, 156, 235, 0.35)
 		}
 		.mb-5 {
 		    margin-bottom: 0 !important;
