@@ -167,8 +167,7 @@
       
       .ic-plus{
     	position: absolute;
-	    left: calc(50% + 50px);
-	    
+	    left: calc(50% + 175px);
 	    transform: translate(calc(-50%), 0%);
 	    font-size: 35px;
 	    margin-top: 20px;
