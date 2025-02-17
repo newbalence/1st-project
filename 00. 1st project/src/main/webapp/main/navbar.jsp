@@ -27,11 +27,12 @@
 	<style>
 	
 		li {
-		z-index:99;
-		position: relative;
-		  list-style-type: none;
-		  padding-left: 0px;
-		  background-color: white;
+			z-index:99;
+			position: relative;
+			list-style-type: none;
+			padding-left: 0px;
+			background-color: white;
+			display: table-cell;
 		}
 		.select {
 		  display: inline-block;
@@ -305,7 +306,7 @@
 		.menu > li:hover .depth_1 {display:block;}
 		.depth_1 > li > a:hover{display:block; color:red;}
 		.menu .depth_1{display:none; position:absolute; left:0; right:0; text-align:center;}
-		.menu .depth_1 a{display:block; padding:5px; background:white; color:black;}
+		.menu .depth_1 a{display:block; padding:5px; background:white; color:black; width: 50px;}
 	</style>
 	<script>
 		function toggleMenu() {

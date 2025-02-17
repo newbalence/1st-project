@@ -326,7 +326,7 @@
         	</tbody>
         </table>
         <%
-        	if(user != null == !boardType.equals("")){
+        	if(user != null && !boardType.equals("")){
         		%>
   			<div class="action">
 	            <button onclick="location.href='write.jsp?boardType=<%= boardType %><%= listType != "" ? "&listType=" + listType : "" %>'">글쓰기</button>
