@@ -255,7 +255,7 @@
 	        	z-index: 1;
 	        	font-weight: 400;
 	        	background-color: #f9f9f9;
-	        	min-width: 200px;
+	        	min-width: 150px;
 	        	text-align: center;
 	        }
 	        
