@@ -241,6 +241,26 @@
 </body>
 <script>
 	$("#goal-add").click(function(){
+
+		//ajax로 다른 jsp에 데이터 전달하고 해당 jsp에서 insert
+		$.ajax({
+			url : "goaladd.jsp",
+			type : "post",
+			data : {
+				title : "목표",
+				content : "목표 설명",
+				time : 0,
+				id : "<%= user.getId() %>"
+			},
+			success : function(result){
+				console.log(result);
+			},
+			error : function(){
+				console.log("error");
+			}
+		
+		})
+		
 		let html = '<div class="each-goal">';
 		html +=			'<i class="goal-edit fa-solid fa-ellipsis-vertical"></i>';
 		html +=			'<div class="contents">';
