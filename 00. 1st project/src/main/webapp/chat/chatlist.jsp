@@ -227,7 +227,6 @@
 		<%
 			if(user != null){
 				%>
-				
 				<button type="button" class="btn btn-dark login-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">채팅방 개설</button>
 				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  	<div class="modal-dialog">
@@ -263,7 +262,7 @@
 	let user = "<%= user == null ? null : user.getId() %>";
 	
 	function chatClick(obj){
-		let chatNo = $(obj).children().children().eq(0).text();
+		let chatNo = $(obj).children().eq(0).text();
 		$.ajax({
 			url : "../chat/userCheck.jsp",
 			type : "post",

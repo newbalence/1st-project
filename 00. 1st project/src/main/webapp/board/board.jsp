@@ -8,6 +8,11 @@
 <%
 	BoardDAO bdao = new BoardDAO();
 	String boardType = request.getParameter("boardType");
+	
+	if(boardType == null || boardType.isEmpty()){
+		boardType = "";
+	}
+	
 	String pageNum = request.getParameter("page");
 	if(pageNum == null || pageNum.equals("null")){
 		pageNum = "1";
@@ -28,7 +33,7 @@
 	svo.setStartNum(startNum);
 	svo.setLimitSize(limitSize);
 	svo.setSelectlist(listOrder);
-	svo.setBoardType(listType);
+	svo.setBoardType(boardType);
 	List<BoardVO> list = bdao.selBoardAll(svo);
 	
 	int totalCount = bdao.getcount(svo);
@@ -38,6 +43,7 @@
 	int startPage = ((currentPage - 1) / pageGroupSize) * pageGroupSize + 1;
 	int totalPage = (int)Math.ceil(totalCount / (double)limitSize);
 	int endPage = Math.min(startPage + pageGroupSize - 1, totalPage);
+	
 	if(searchType == null){
 		searchType = "";
 	}
@@ -53,7 +59,26 @@
 	if(listOrder == null){
 		listOrder = "";
 	}
-	
+	String topTitle = "";
+	if(boardType.equals("1")){
+		topTitle= "공부";
+	}else if(boardType.equals("2")){
+		topTitle= "독서";
+	}else if(boardType.equals("3")){
+		topTitle= "축구";
+	}else if(boardType.equals("4")){
+		topTitle= "런닝";
+	}else if(boardType.equals("5")){
+		topTitle= "헬스";
+	}else if(boardType.equals("6")){
+		topTitle= "여행";
+	}else if(boardType.equals("7")){
+		topTitle= "우표수집";
+	}else if(boardType.equals("8")){
+		topTitle= "야구";
+	}else{
+		topTitle= "전체";
+	}
 	
 %>
 <!DOCTYPE html>
@@ -280,20 +305,28 @@
 </head>
 <body>
     <div class="board-container">
-    	
-		<h1>러닝</h1>
+		<h1><%= topTitle %></h1>
 		<form action="board.jsp" method="get" id="typeForm" style="display:inline">
+			<% 
+			if(!boardType.equals("")){
+				%>
+				<input type="hidden" name="boardType" value="<%= boardType %>">
+				<%
+			}
+			%>
+
+			
 			<select id="listType" name="listType">
 				<option value="" <%= listType.equals("") ? "selected" : ""  %>>전체</option>
 				<option value="1" <%= listType.equals("1") ? "selected" : ""  %>>인증</option>
 				<option value="2" <%= listType.equals("2") ? "selected" : ""  %>>일상</option>
 				<option value="3" <%= listType.equals("3") ? "selected" : ""  %>>자유</option>
 			</select>
-		<select id="order" name="order">
-			<option value="" <%= listOrder.equals("") ? "selected" : ""  %>>최신순</option>
-			<option value="push" <%= listOrder.equals("push") ? "selected" : ""  %>>추천순</option>
-			<option value="old" <%= listOrder.equals("old") ? "selected" : ""  %>>오래된순</option>
-		</select>
+			<select id="order" name="order">
+				<option value="" <%= listOrder.equals("") ? "selected" : ""  %>>최신순</option>
+				<option value="push" <%= listOrder.equals("push") ? "selected" : ""  %>>추천순</option>
+				<option value="old" <%= listOrder.equals("old") ? "selected" : ""  %>>오래된순</option>
+			</select>
 		</form>
 		
         <table class="post-list">
@@ -325,7 +358,7 @@
         			}
         			%>
 					
-					<tr class="post-item" onclick="location.href='post.jsp?bno=<%= bno %><%= searchType != "" ? "&searchType=" + searchType : ""%><%= keyword != "" ? "&searchKeyword=" + keyword : ""%>&pageNum=<%= pageNum %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>'">
+					<tr class="post-item" onclick="location.href='post.jsp?bno=<%= bno %><%= searchType != "" ? "&searchType=" + searchType : ""%><%= keyword != "" ? "&searchKeyword=" + keyword : ""%>&pageNum=<%= pageNum %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>'">
 					<td><%= bno %></td>
 					<td class="title"><%= title %></td>
 					<td class="title"><%= nick %></td>
@@ -340,10 +373,10 @@
         	</tbody>
         </table>
         <%
-        	if(user != null){
+        	if(user != null == !boardType.equals("")){
         		%>
   			<div class="action">
-	            <button onclick="location.href='write.jsp'">글쓰기</button>
+	            <button onclick="location.href='write.jsp?boardType=<%= boardType %><%= listType != "" ? "&listType=" + listType : "" %>'">글쓰기</button>
 	        </div>
         		<%
         	}
@@ -352,7 +385,7 @@
         	<%
         		if(startPage > 1){
         			%>
-                	<a href="board.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">&lt;</a>
+                	<a href="board.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>">&lt;</a>
                 	<%
         		}
         	%>
@@ -360,12 +393,12 @@
         	for(int i = startPage; i <= endPage; i++){
         		if(i == currentPage){
             		%>
-            		<a class="active" href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>"><%= i %></a>
+            		<a class="active" href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>"><%= i %></a>
             		<%
         			continue;
         		}else{
             		%>
-            		<a href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>"><%= i %></a>
+            		<a href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>"><%= i %></a>
             		<%
         		}
         	}
@@ -373,7 +406,7 @@
         	<%
         		if(endPage < totalPage){
         			%>
-       				<a href="board.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">&gt;</a>
+       				<a href="board.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>">&gt;</a>
         			<%
         		}
         	%>

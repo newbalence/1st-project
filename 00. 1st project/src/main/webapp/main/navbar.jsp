@@ -26,6 +26,10 @@
 	<script src="https://kit.fontawesome.com/ed2cfa7d40.js"></script>
 	<style>
 	
+		li {
+		  list-style-type: none;
+		  padding-left: 0px;
+		}
 		.mb-5 {
 		    margin-bottom: 0 !important;
 		}
@@ -194,60 +198,67 @@
             z-index: 999;
         }
         .login-container {
-	            background: white;
-	            padding: 30px 40px;
-	        }
-	        h1 {
-	            text-align: center;
-	            margin-bottom: 20px;
-	            color: #23272B;
-	            font-family: 'Verdana', sans-serif;
-	        }
-	        label {
-	            display: block;
-	            margin-bottom: 8px;
-	            font-weight: bold;
-	            color: #444;
-	        }
-	        input {
-	            display: block;
-	            width: calc(100% - 20px);
-	            padding: 10px;
-	            margin-bottom: 5px;
-	            border: 1px solid #ddd;
-	            border-radius: 5px;
-	            font-size: 1rem;
-	            margin-right: auto;
-	        }
-	        input:focus {
-	            outline: none;
-	            border-color: #2575fc;
-	            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
-	        }
-	        .feedback {
-	            font-size: 0.9rem;
-	            color: red;
-	            margin-bottom: 10px;
-	        }
-	        .feedback.success {
-	            color: green;
-	        }
-	        button:hover {
-	            background: #1a5fc4;
-	        }
-	        .alternate-option {
-	            text-align: center;
-	            margin-top: 20px;
-	        }
-	        .alternate-option a {
-	            color: #23272B;
-	            text-decoration: none;
-	            font-weight: bold;
-	        }
-	        .alternate-option a:hover {
-	            text-decoration: underline;
-	            color: red;
-	        }
+            background: white;
+            padding: 30px 40px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #23272B;
+            font-family: 'Verdana', sans-serif;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #444;
+        }
+        input {
+            display: block;
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-right: auto;
+        }
+        input:focus {
+            outline: none;
+            border-color: #2575fc;
+            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+        }
+        .feedback {
+            font-size: 0.9rem;
+            color: red;
+            margin-bottom: 10px;
+        }
+        .feedback.success {
+            color: green;
+        }
+        button:hover {
+            background: #1a5fc4;
+        }
+        .alternate-option {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .alternate-option a {
+            color: #23272B;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .alternate-option a:hover {
+            text-decoration: underline;
+            color: red;
+        }
+		.menu:after{display:block; content:''; clear:both;}
+		.menu > li{position:relative; float:left; margin-right:5px;}
+		.menu > li > a{display:block; padding:0 15px; height:40px; line-height:40px; color:black;}
+		.menu > li:hover .depth_1 {display:block;}
+		.depth_1 > li > a:hover{display:block; color:red;}
+		.menu .depth_1{display:none; position:absolute; left:0; right:0; text-align:center;}
+		.menu .depth_1 a{display:block; padding:5px; background:white; color:black;}
 	</style>
 	<script>
 		function toggleMenu() {
@@ -272,15 +283,10 @@
 		<body>
 		
 			<nav class="navbar navbar-expand-lg nav-container shadow-sm p-3 mb-5 rounded">
-			
 			  <div class="container-fluid">
-			  
 			    <a class="navbar-brand" href="../main/home.jsp"><i class="bi-alarm"></i></a>
-			    
 			    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			    
-			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			      
+			      <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu">
 			        <li class="nav-item">
 			          <a class="nav-link" href="../main/home.jsp">홈</a>
 			        </li>
@@ -294,15 +300,23 @@
 			        </li>
 			        
 			        <li class="nav-item">
-			          <a class="nav-link" href="../board/board.jsp">커뮤니티</a>
+						<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
+						<ul class="depth_1">
+					      <li><a href="../board/board.jsp?boardType=1">공부</a></li>
+					      <li><a href="../board/board.jsp?boardType=2">독서</a></li>
+					      <li><a href="../board/board.jsp?boardType=3">축구</a></li>
+					      <li><a href="../board/board.jsp?boardType=4">런닝</a></li>
+					      <li><a href="../board/board.jsp?boardType=5">헬스</a></li>
+					      <li><a href="../board/board.jsp?boardType=6">여행</a></li>
+					      <li><a href="../board/board.jsp?boardType=7">우표</a></li>
+					      <li><a href="../board/board.jsp?boardType=8">야구</a></li>
+						</ul>
 			        </li>
 			        
 			        <li class="nav-item">
 			          <a class="nav-link" href="#">마켓</a>
 			        </li>
-			        
-			      </ul>
-			      
+				</ul>
  				<div class="input-box">
 	                <input type="text" id="search" class="form-control" placeholder="검색어 입력">
  					<i onclick="del()" class="bi bi-x-circle-fill"></i>	                

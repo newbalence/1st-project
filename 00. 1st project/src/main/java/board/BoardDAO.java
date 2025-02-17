@@ -23,15 +23,19 @@ public class BoardDAO extends DBManager {
 		String location = vo.getLocation();
 		long fileSize = vo.getFileSize();
 		
+		System.out.println(location);
+		
 		driverLoad();
 		DBConnect();
 		
 		String sql = "insert into board(author, nick, title, content, board_type,  list_type, ";
 		sql += "origin_name, upload_name, location, file_size) ";
 		sql += "values('" + author + "', '" + nick + "', '" + title + "', '" + content + "', " + boardType + ", " + listType + ", ";
-		sql += "'" + originName + "', '" + uploadName + "', '" + location + "', " + fileSize + ");";
+		sql += "'" + originName + "', '" + uploadName + "', '" + escapeString(location) + "', " + fileSize + ");";
 		
 		executeUpdate(sql);
+		
+		System.out.println(sql);
 		
 		String num = "select last_insert_id() as bno";
 		executeQuery(num);

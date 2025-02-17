@@ -11,6 +11,7 @@
 	request.setCharacterEncoding("utf-8");
 	
 	String savePath = application.getRealPath("/upload");
+	System.out.println(savePath);
 	
 	int maxFileSize = 1024 * 1024 * 10;
 	
@@ -78,6 +79,7 @@
 	vo.setContent(content);
 	vo.setBoardType(listType);
 	vo.setAuthor(user.getId());
+	vo.setNick(user.getNick());
 	
 	int no = dao.insertBoard(vo);
 	

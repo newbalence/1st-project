@@ -1,3 +1,4 @@
+<%@page import="java.util.regex.Pattern"%>
 <%@page import="push.PushDAO"%>
 <%@page import="hit.HitDAO"%>
 <%@page import="reply.ReplyVO"%>
@@ -323,7 +324,8 @@
         </div>
         <%
         	if(uploadName != null && !uploadName.equals("null")){
-		                	if(uploadName.split("\\.")[1].contains("jpg") || uploadName.split("\\.")[1].contains("PNG") || uploadName.split("\\.")[1].contains("tiff") || uploadName.split("\\.")[1].contains("gif")){
+        		boolean imageExtention =  Pattern.matches("([^\\s]+(\\.(?i)(png|jpg|gif|bmp|jpeg|tiff|PNG|JPG|GIF|BMP|JPEG|TIFF))?)", uploadName);
+		                	if(imageExtention){
 		                		%>
 		                		<div>
 		                			<img id="img" src="<%= path %>/upload/<%= uploadName %>"></img>
@@ -378,6 +380,7 @@
             		String rcreateDate = rvo.getCreateDate();
             		String ruserType = rvo.getUserType();
             		String rupdateDate = rvo.getUpdateDate();
+            		String rnick = rvo.getRnick();
             		rcreateDate = rcreateDate.substring(0, 16);
             		
             		if(ruserType.equals("2")){
@@ -385,7 +388,7 @@
             		}
             		%>
           	<div class="comment">
-                <div class="meta">작성자: <%= rauthor %></div>
+                <div class="meta">작성자: <%= rnick %></div>
                 <p><%= rcontent %></p>
                 <div class="meta-reply">
                 	<span>작성일: <%= rcreateDate %><%= rupdateDate == null ? "" : "(수정됨)" %></span>
@@ -419,7 +422,8 @@
 	<script>
 		
 		let rauthor = "<%= user == null ? null : user.getId() %>";
-		
+		let rnick = "<%= user == null ? null : user.getNick() %>";
+		console.log(rnick);
 		function replyBtn(obj){
 			let el = $(".comment");
 			for(let i = 0; i < el.length; i++){
@@ -521,6 +525,7 @@
 				data : {
 					no : "<%= bno %>",
 					rauthor : rauthor,
+					rnick : rnick,
 					rcontent : $("#rcontent").val()
 				},
 				success : function(result){
@@ -533,7 +538,7 @@
 						
 						let html = "";
 						html += "<div class='comment'>";
-						html += 	"<div class='meta'>작성자: " + rauthor + "</div>";
+						html += 	"<div class='meta'>작성자: " + rnick + "</div>";
 						html += 	"<p>"+rcontent.val()+"</p>";
 						html +=		"<div class='meta-reply'>"
 						html +=		"<span>작성일 : " + time + "</span>";

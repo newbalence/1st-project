@@ -401,6 +401,12 @@
 		</div>
 	</body>
 	<script>
+	
+		if ("geolocation" in navigator) {
+		  console.log("가능");
+		} else {
+			console.log("불가능");
+		}
 		navigator.geolocation.getCurrentPosition(function(position) {
 			let x = position.coords.longitude;
 			let y = position.coords.latitude;

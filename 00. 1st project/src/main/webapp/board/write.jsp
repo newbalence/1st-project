@@ -8,6 +8,15 @@
 	}
 	String boardType = request.getParameter("boardType");
 	String listType = request.getParameter("listType");
+	
+	if(listType == null || listType.isEmpty()){
+		listType = "";
+	}
+	
+	if(boardType == null || boardType.isEmpty()){
+		response.sendRedirect("../board/board.jsp");
+		return;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -112,11 +121,12 @@
         <h2>새 게시글 작성</h2>
         <form method="post" action="writeok.jsp" enctype="multipart/form-data">
         <input type="hidden" name="boardType" value="<%= boardType %>">
+        <input type="hidden" name="listType" value="<%= listType %>">
         	<div class="title">
 	        	<select name="listType">
-	        		<option value="01" <%= listType.equals("01") ? "selected" : "" %>>인증</option>
-	        		<option value="02" <%= listType.equals("02") ? "selected" : "" %>>일상</option>
-	        		<option value="03" <%= listType.equals("03") ? "selected" : "" %>>자유</option>
+	        		<option value="1" <%= listType.equals("1") ? "selected" : "" %>>인증</option>
+	        		<option value="2" <%= listType.equals("2") ? "selected" : "" %>>일상</option>
+	        		<option value="3" <%= listType.equals("3") ? "selected" : "" %>>자유</option>
 	        	</select>
 	            <input type="text" id="title" name="title" placeholder="제목을 입력하세요">
 			</div>
