@@ -126,7 +126,8 @@ public class DBManager {
 	}
 	
 	//6. 문자열 \escape
-	public String escapeString(String text) {
-		return text.replace("\\", "\\\\");
-	}
+	/*
+	 * public String escapeString(String text) { return text.replace("\\", "\\\\");
+	 * }
+	 */
 }

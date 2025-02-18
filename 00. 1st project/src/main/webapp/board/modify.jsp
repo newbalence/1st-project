@@ -118,13 +118,13 @@
 <body>
     <div class="board-container">
         <h2>게시글 수정</h2>
-        <form method="post" action="modifyok.jsp">
+        <form method="post" action="modifyok.jsp" enctype="multipart/form-data">
         	<input type="hidden" name="no" value="<%= no %>">
             <div class="title">
 	        	<select name="listType">
-	        		<option value="01" <%= listType.equals("01") ? "selected" : "" %>>인증</option>
-	        		<option value="02" <%= listType.equals("02") ? "selected" : "" %>>일상</option>
-	        		<option value="03" <%= listType.equals("03") ? "selected" : "" %>>자유</option>
+	        		<option value="1" <%= listType.equals("1") ? "selected" : "" %>>인증</option>
+	        		<option value="2" <%= listType.equals("2") ? "selected" : "" %>>일상</option>
+	        		<option value="3" <%= listType.equals("3") ? "selected" : "" %>>자유</option>
 	        	</select>
 	            <input type="text" id="title" name="title" placeholder="제목을 입력하세요" value="<%= title %>">
 			</div>

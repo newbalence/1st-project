@@ -23,19 +23,14 @@ public class BoardDAO extends DBManager {
 		String location = vo.getLocation();
 		long fileSize = vo.getFileSize();
 		
-		System.out.println(location);
-		
 		driverLoad();
 		DBConnect();
 		
 		String sql = "insert into board(author, nick, title, content, board_type,  list_type, ";
 		sql += "origin_name, upload_name, location, file_size) ";
 		sql += "values('" + author + "', '" + nick + "', '" + title + "', '" + content + "', " + boardType + ", " + listType + ", ";
-		sql += "'" + originName + "', '" + uploadName + "', '" + escapeString(location) + "', " + fileSize + ");";
-		
+		sql += "'" + originName + "', '" + uploadName + "', '" + location + "', " + fileSize + ");";
 		executeUpdate(sql);
-		
-		System.out.println(sql);
 		
 		String num = "select last_insert_id() as bno";
 		executeQuery(num);
@@ -65,20 +60,20 @@ public class BoardDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "update board set ";
+		String sql = "update board set";
 		if(title != null) {
-			sql += "title = '" + title + "', ";
+			sql += " title = '" + title + "', ";
 		}
 		if(content != null) {
-			sql += "content = '" + content + "', ";
+			sql += " content = '" + content + "', ";
 		}
 		if(originName != null) {
-			sql += "origin_name = '" + originName + "', ";
-			sql += "upload_name = '" + uploadName + "', ";
-			sql += "location = '" + location + "', ";
-			sql += "file_size = " + fileSize;
+			sql += " origin_name = '" + originName + "', ";
+			sql += " upload_name = '" + uploadName + "', ";
+			sql += " location = '" + location + "', ";
+			sql += " file_size = " + fileSize + ", ";
 		}
-		sql += "update_date = now(), list_type = " + listType;
+		sql += " update_date = now(), list_type = " + listType;
 		sql += " where bno = " + bno;
 		executeUpdate(sql);
 		DBDisConnect();
@@ -103,6 +98,7 @@ public class BoardDAO extends DBManager {
 		int limitSize = svo.getLimitSize();
 		String selectlist = svo.getSelectlist();
 		String boardType = svo.getBoardType();
+		String slistType = svo.getListType();
 		
 		driverLoad();
 		DBConnect();
@@ -113,6 +109,9 @@ public class BoardDAO extends DBManager {
 		
 		if(boardType != null && !boardType.equals("") && !boardType.equals("null")) {
 			 sql += " and board.board_type = " + boardType; 
+		}
+		if(slistType != null && !slistType.equals("") && !slistType.equals("null")) {
+			 sql += " and board.list_type = " + slistType; 
 		}
 		if(searchType != null && keyword != null) {
 			sql += " and " + searchType + " like '%" + keyword + "%'";
@@ -142,6 +141,7 @@ public class BoardDAO extends DBManager {
 			int hit = getInt("hit");
 			int push = getInt("push");
 			String bordType = getString("board_type");
+			String listType = getString("list_type");
 			
 			BoardVO vo = new BoardVO();
 			vo.setBno(bno);
@@ -154,6 +154,7 @@ public class BoardDAO extends DBManager {
 			vo.setPush(push);
 			vo.setHit(hit);
 			vo.setBoardType(bordType);
+			vo.setListType(listType);
 			
 			list.add(vo);
 		}
@@ -186,6 +187,8 @@ public class BoardDAO extends DBManager {
 			int fileSize = getInt("file_size");
 			int userPush = getInt("cnt");
 			int push = getInt("push");
+			String boardType = getString("board_type");
+			String listType = getString("list_type");
 			
 			
 			BoardVO vo = new BoardVO();
@@ -201,6 +204,8 @@ public class BoardDAO extends DBManager {
 			vo.setUserPush(userPush);
 			vo.setPush(push);
 			vo.setNick(nick);
+			vo.setBoardType(boardType);
+			vo.setListType(listType);
 			
 			DBDisConnect();
 			return vo;

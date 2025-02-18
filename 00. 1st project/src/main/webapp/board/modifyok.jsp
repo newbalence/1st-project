@@ -76,8 +76,9 @@
 	vo.setTitle(title);
 	vo.setContent(content);
 	vo.setBno(bno);
+	vo.setListType(listType);
 	dao.updateBoard(vo);
 	
-	response.sendRedirect("post.jsp?bno="+ bno);
+	response.sendRedirect("post.jsp?bno="+ bno + "&listType=" + listType);
 
 %>

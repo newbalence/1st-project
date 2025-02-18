@@ -34,6 +34,7 @@
 	svo.setLimitSize(limitSize);
 	svo.setSelectlist(listOrder);
 	svo.setBoardType(boardType);
+	svo.setListType(listType);
 	List<BoardVO> list = bdao.selBoardAll(svo);
 	
 	int totalCount = bdao.getcount(svo);
@@ -285,7 +286,7 @@
         <table class="post-list">
         	<thead>
         		<tr class="post-item-container">
-				<th style="width: 67px" id="content">번호</th>
+				<th style="width: 67px" id="content">타입</th>
 				<th id="content">제목</th>
 				<th style="width: 103px" id="content">글쓴이</th>
 				<th style="width: 140px" id="content">등록일</th>
@@ -304,7 +305,17 @@
         			String userType = bvo.getUserType();
         			String nick = bvo.getNick();
         			int hit = bvo.getHit();
-        			int push = bvo.getPush();;
+        			int push = bvo.getPush();
+        			String blistType = bvo.getListType();
+        			String blist = "기타";
+        			if(blistType.equals("1")){
+        				blist = "인증";
+        			}else if(blistType.equals("2")){
+        				blist = "일상";
+        			}else if(blistType.equals("3")){
+        				blist = "자유";
+        			}
+        			
         			createDate = createDate.substring(0, 10);
         			if(userType.equals("2") || bvo.getBoardType().equals("99")){
         				continue;
@@ -312,7 +323,7 @@
         			%>
 					
 					<tr class="post-item" onclick="location.href='post.jsp?bno=<%= bno %><%= searchType != "" ? "&searchType=" + searchType : ""%><%= keyword != "" ? "&searchKeyword=" + keyword : ""%>&pageNum=<%= pageNum %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>'">
-					<td><%= bno %></td>
+					<td><%= blist %></td>
 					<td class="title"><%= title %></td>
 					<td class="title"><%= nick %></td>
 					<td><%= createDate %></td>
@@ -326,7 +337,7 @@
         	</tbody>
         </table>
         <%
-        	if(user != null && !boardType.equals("")){
+        	if(user != null && !boardType.equals("") && !boardType.equals("null") && boardType != null){
         		%>
   			<div class="action">
 	            <button onclick="location.href='write.jsp?boardType=<%= boardType %><%= listType != "" ? "&listType=" + listType : "" %>'">글쓰기</button>

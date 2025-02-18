@@ -54,6 +54,7 @@
 	String originName = bvo.getOriginName();
 	String uploadName = bvo.getUploadname();
 	
+	
 	long fileSize = bvo.getFileSize();
 	int userPush = bvo.getUserPush();
 	int push = bvo.getPush();
@@ -300,6 +301,9 @@
         #img{
         	max-width: 100%
         }
+        #push{
+        	cursor: pointer;
+        }
         
     </style>
 </head>
@@ -313,8 +317,12 @@
         <%
         	if(user != null){
         		%>
-        		        <i id="push" class=<%= userPush == 1 ? "bi-hand-thumbs-up-fill" : "bi-hand-thumbs-up" %>></i>
+   		        <i id="push" class=<%= userPush == 1 ? "bi-hand-thumbs-up-fill" : "bi-hand-thumbs-up" %>></i>
       			<%
+        	}else{
+        		%>
+        		<i class="bi-hand-thumbs-up"></i>
+        		<%
         	}
         %>
 		</span>
@@ -344,7 +352,7 @@
         	}
         %>
         <div class="actions">
-			<button onclick="location.href='board.jsp?page=<%= pageNum %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>'">뒤로가기</button>
+			<button onclick="location.href='board.jsp?page=<%= pageNum %><%= boardType != "" ? "&boardType=" + boardType : ""%><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>'">뒤로가기</button>
 
         <%
         	//로그인을 하였고, 로그인한 사용자의 아이디(user.getId())와 
@@ -352,7 +360,7 @@
         	if(user != null && (user.getId().equals(author) || user.getUserType().equals("0"))){
         		%>
 		        <span class="post-actions">
-		            <button onclick="location.href='modify.jsp?no=<%= no %>&boardType=<%= boardType %>'">수정</button>
+		            <button onclick="location.href='modify.jsp?no=<%= no %>&boardType=<%= bvo.getBoardType() %><%= bvo.getListType() != "" ? "&listType=" + bvo.getListType() : "" %>'">수정</button>
 		            <button onclick="deletePost(<%= no %>)">삭제</button>
 		        </span>
         		<%

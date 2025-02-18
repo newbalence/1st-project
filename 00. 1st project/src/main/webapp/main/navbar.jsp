@@ -300,13 +300,43 @@
             text-decoration: underline;
             color: red;
         }
-		.menu:after{display:block; content:''; clear:both;}
-		.menu > li{position:relative; float:left; margin-right:5px;}
-		.menu > li > a{display:block; padding:0 15px; height:40px; line-height:40px; color:black;}
+		.menu:after{
+			display:block;
+			content:'';
+			clear:both;
+		}
+		.menu > li{
+			position:relative;
+			float:left;
+			margin-right:5px;
+		}
+		.menu > li > a{
+			display:block;
+			padding:0 15px;
+			height:40px;
+			line-height:40px;
+			color:black;
+		}
 		.menu > li:hover .depth_1 {display:block;}
-		.depth_1 > li > a:hover{display:block; color:red;}
-		.menu .depth_1{display:none; position:absolute; left:0; right:0; text-align:center;}
-		.menu .depth_1 a{display:block; padding:5px; background:white; color:black; width: 50px;}
+		.depth_1 > li > a:hover{
+			display:block;
+			color:red;
+		}
+		.menu .depth_1{
+			display:none; 
+			position:absolute; 
+			left:-156px;
+			right:0;
+			text-align:center;
+		}
+		.menu .depth_1 a{
+			display:block; 
+			padding:5px; 
+			background:white; 
+			color:black; 
+			width: 60px;
+    		font-size: 20px;
+    	}
 	</style>
 	<script>
 		function toggleMenu() {
