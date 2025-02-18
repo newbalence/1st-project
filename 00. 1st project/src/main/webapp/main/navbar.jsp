@@ -320,7 +320,7 @@
 			          		<a class="nav-link" href="../board/goal.jsp">목표</a>
 						        <div class="goal-dropdown">
 						        	<a href="../board/goal.jsp">나의 목표</a>
-						        	<a href="#">뽀모도로</a>
+						        	<a href="../board/pomodoro.jsp">뽀모도로</a>
 						        	<a href="../board/report.jsp">보고서</a>
 						        </div>
 			          	<%} %>
