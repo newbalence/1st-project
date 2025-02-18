@@ -301,7 +301,7 @@
         #img{
         	max-width: 100%
         }
-        #push{
+        #push, #unpush{
         	cursor: pointer;
         }
         
@@ -321,7 +321,7 @@
       			<%
         	}else{
         		%>
-        		<i class="bi-hand-thumbs-up"></i>
+        		<i id="unpush" class="bi-hand-thumbs-up" onclick="alert('로그인 후 사용가능합니다.')"></i>
         		<%
         	}
         %>

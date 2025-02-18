@@ -1,3 +1,4 @@
+<%@page import="favorit.favoritDAO"%>
 <%@page import="board.BoardVO"%>
 <%@page import="java.util.List"%>
 <%@page import="board.SearchVO"%>
@@ -8,7 +9,7 @@
 <%
 	BoardDAO bdao = new BoardDAO();
 	String boardType = request.getParameter("boardType");
-	
+	String listType = request.getParameter("listType");
 	if(boardType == null || boardType.isEmpty()){
 		boardType = "";
 	}
@@ -23,7 +24,6 @@
 	int startNum = (currentPage - 1) * limitSize;
 	String searchType = request.getParameter("searchType");
 	String keyword = request.getParameter("searchKeyword");
-	String listType = request.getParameter("listType");
 	String listOrder = request.getParameter("order");
 
 	
@@ -53,7 +53,7 @@
 		keyword = "";
 	}
 	
-	if(listType == null){
+	if(listType == null || listType.isEmpty()){
 		listType = "";
 	}
 	
@@ -255,11 +255,46 @@
     		font-size: 23px;
     		
         }
+        #favorit, #unfavorit{
+        	cursor: pointer;
+        	font-size: 40px;
+        	margin-right: 15px;
+        }
+        #favorit:hover{
+        	cursor: pointer;
+       	    color: #C40000;
+        }
+        .bi-star-fill{
+        	color: #FFD966;
+        }
+        .titleLine{
+        	display: flex;
+       	    justify-self: center;
+       	    
+        }
+        h1{
+   	    	margin-right: 30px;
+        }
     </style>
 </head>
 <body>
     <div class="board-container">
+    	<div class="titleLine">
+    	<%
+        	if(user != null && !boardType.equals("") && !boardType.equals("null") && boardType != null){
+        		favoritDAO fdao = new favoritDAO();
+        		int userFavorit = fdao.selFavoritOne(user.getId(), boardType);
+        		%>
+   		        <i id="favorit" class=<%= userFavorit == 1 ? "bi-star-fill" : "bi-star" %>></i>
+      			<%
+        	}else if(!boardType.equals("") && !boardType.equals("null") && boardType != null){
+        		%>
+        		<i id="unfavorit" class="bi-star" onclick="alert('로그인 후 사용가능합니다.')"></i>
+        		<%
+        	}
+        %>
 		<h1><%= topTitle %></h1>
+		</div>
 		<form action="board.jsp" method="get" id="typeForm" style="display:inline">
 			<% 
 			if(!boardType.equals("")){
@@ -392,11 +427,59 @@
 </body>
 <script>
 	$("#order").change(function(e){
+		console.log(e);
 		$("#typeForm").submit();
 	})
 	$("#listType").change(function(e){
 		$("#typeForm").submit();
 	})
+	
+	
+	function getTime(){
+			let date = new Date();
+			console.log(date);
+			
+			let year = date.getFullYear();
+			let month = (date.getMonth() + 1).toString().padStart(2,"0");
+			let day = date.getDate().toString().padStart(2,"0");
+			let hour = date.getHours().toString().padStart(2,"0");
+			let minute = date.getMinutes().toString().padStart(2,"0");
+			let second = date.getSeconds().toString().padStart(2,"0");
+			
+			let time = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second
+			return time;
+		}
+		
+		let id = "<%= user == null ? null : user.getId() %>";
+		let boardType = <%= boardType %>
+		$("#favorit").click(function(){
+			let favorit = $("#favorit");
+			let cName = favorit.attr("class");
+			$.ajax({
+				url : "favoritok.jsp",
+				type : "post",
+				data : {
+					id : id,
+					boardType : boardType
+				},
+				success : function (result){
+					if(result.trim() == "success"){
+						if(cName == "bi-star"){
+							favorit.attr("class", "bi-star-fill")
+						}else if(cName == "bi-star-fill"){
+							favorit.attr("class", "bi-star")
+						}
+					}else{
+						console.log("에러 발생");
+					}
+					
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
+
+		});
 	
 </script>
 </html>

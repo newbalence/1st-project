@@ -2,6 +2,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 /* Drop Tables */
 
+DROP TABLE IF EXISTS favorit;
 DROP TABLE IF EXISTS hit;
 DROP TABLE IF EXISTS push;
 DROP TABLE IF EXISTS reply;
@@ -31,7 +32,7 @@ CREATE TABLE board
 	-- 게시글 본문
 	content text NOT NULL COMMENT '게시글 본문',
 	-- 게시글 작성일
-	create_date timestamp DEFAULT NOW() NOT NULL COMMENT '게시글 작성일',
+	create_date timestamp DEFAULT NOW(), SYSDATE() NOT NULL COMMENT '게시글 작성일',
 	-- 게시글 수정일
 	update_date timestamp COMMENT '게시글 수정일',
 	-- 0 : 전체
@@ -76,7 +77,7 @@ CREATE TABLE chat
 	-- 채팅 본문
 	chatcontent varchar(255) NOT NULL COMMENT '채팅 본문',
 	-- 채팅시간
-	chattime timestamp DEFAULT NOW() NOT NULL COMMENT '채팅시간',
+	chattime timestamp DEFAULT NOW(), SYSDATE() NOT NULL COMMENT '채팅시간',
 	-- 사용자 닉네임
 	nick varchar(255) NOT NULL COMMENT '사용자 닉네임',
 	PRIMARY KEY (chatno)
@@ -109,6 +110,18 @@ CREATE TABLE chatuser
 	-- 사용자 아이디
 	id varchar(255) NOT NULL COMMENT '사용자 아이디',
 	PRIMARY KEY (chatuserno)
+);
+
+
+CREATE TABLE favorit
+(
+	-- 사용자 아이디
+	id varchar(255) NOT NULL COMMENT '사용자 아이디',
+	-- 게시판 타입
+	-- 
+	board_type int NOT NULL COMMENT '게시판 타입
+',
+	PRIMARY KEY (id, board_type)
 );
 
 
@@ -162,7 +175,7 @@ CREATE TABLE reply
 	-- 댓글 본문
 	rcontent varchar(255) NOT NULL COMMENT '댓글 본문',
 	-- 댓글 작성일
-	create_date timestamp DEFAULT NOW() NOT NULL COMMENT '댓글 작성일',
+	create_date timestamp DEFAULT NOW(), SYSDATE() NOT NULL COMMENT '댓글 작성일',
 	-- 댓글 수정일
 	update_date timestamp COMMENT '댓글 수정일',
 	PRIMARY KEY (rno)
@@ -208,7 +221,7 @@ CREATE TABLE user
 3 : 축구
 4 : 런닝
 5 : 헬스',
-	create_date timestamp DEFAULT NOW() NOT NULL,
+	create_date timestamp DEFAULT NOW(), SYSDATE() NOT NULL,
 	update_date timestamp,
 	delete_date timestamp,
 	-- 현재 사용 이전 비밀번호
@@ -229,6 +242,14 @@ CREATE TABLE user
 
 
 /* Create Foreign Keys */
+
+ALTER TABLE favorit
+	ADD FOREIGN KEY (board_type)
+	REFERENCES board (bno)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
 
 ALTER TABLE hit
 	ADD FOREIGN KEY (bno)
@@ -287,6 +308,14 @@ ALTER TABLE chat
 
 
 ALTER TABLE chatuser
+	ADD FOREIGN KEY (id)
+	REFERENCES user (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE favorit
 	ADD FOREIGN KEY (id)
 	REFERENCES user (id)
 	ON UPDATE RESTRICT
