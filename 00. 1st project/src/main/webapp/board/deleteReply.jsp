@@ -18,7 +18,4 @@
 	rdao.dropReply(rno);
 	out.print("success");
 	
-	
-	
-
 %>
