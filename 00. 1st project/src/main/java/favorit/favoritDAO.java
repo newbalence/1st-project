@@ -31,7 +31,7 @@ public class favoritDAO extends DBManager {
 		return list;
 	}
 	
-//	즐겨찾기 조회(단건)
+//	즐겨찾기 갯수 조회(단건)
 	public int selFavoritOne(String fid, String boardType){
 		driverLoad();
 		DBConnect();

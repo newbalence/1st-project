@@ -8,6 +8,53 @@ import db.DBManager;
 public class BoardDAO extends DBManager {
 	//작성 수정 삭제 조회(단건, 여러건)
 	
+//	home 인기 게시글 찾기
+	public List<BoardVO> homePushBoard(){
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select board.*, user.*, (select count(*) from push where bno = board.bno) as push, (select count(*) from hit where bno = board.bno) as hit from board ";
+		sql += "left join user on board.author = user.id ";
+		sql += "where (board.board_type != 99 and user.user_type != 2)";
+		sql += " order by push desc";
+		sql += " limit 0, 3";
+		
+		executeQuery(sql);
+		
+		List<BoardVO> list = new ArrayList<>();
+		while(next()) {
+			String bno = getString("bno");
+			String author = getString("author");
+			String nick = getString("user.nick");
+			String title = getString("title");
+			String createDate = getString("create_date");
+			String updateDate = getString("update_date");
+			String userType = getString("user_type");
+			int hit = getInt("hit");
+			int push = getInt("push");
+			String bordType = getString("board_type");
+			String listType = getString("list_type");
+			
+			BoardVO vo = new BoardVO();
+			vo.setBno(bno);
+			vo.setAuthor(author);
+			vo.setNick(nick);
+			vo.setTitle(title);
+			vo.setCreateDate(createDate);
+			vo.setUpdateDate(updateDate);
+			vo.setUserType(userType);
+			vo.setPush(push);
+			vo.setHit(hit);
+			vo.setBoardType(bordType);
+			vo.setListType(listType);
+			
+			list.add(vo);
+		}
+		DBDisConnect();
+		return list;
+		
+	}
+	
 	//게시글 작성
 	public int insertBoard(BoardVO vo) {
 		String author = vo.getAuthor();
@@ -128,7 +175,7 @@ public class BoardDAO extends DBManager {
 		}
 		sql += " limit " + startNum + ", " + limitSize;
 		executeQuery(sql);
-		System.out.println(sql);
+		
 		List<BoardVO> list = new ArrayList<>();
 		while(next()) {
 			String bno = getString("bno");
