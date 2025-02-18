@@ -7,6 +7,7 @@ public class goalVO {
 	private String goalTitle;
 	private String goalCont;
 	private String id;
+	private int cnt;
 	
 	public String getGoalNo() {
 		return goalNo;
@@ -38,5 +39,13 @@ public class goalVO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	
+	
 
 }

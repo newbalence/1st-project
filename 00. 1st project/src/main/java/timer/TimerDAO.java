@@ -28,11 +28,11 @@ public class TimerDAO extends DBManager {
 	}
 	
 //	타이머 조회(전체)
-	public List<TimerVO> selTime(String uid) {
+	public List<TimerVO> selTime(String no) {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from timer where id = '" + uid + "';";
+		String sql = "select * from timer where goalno = "+no+";";
 		executeQuery(sql);
 		
 		List<TimerVO> list = new ArrayList<>();
@@ -59,11 +59,11 @@ public class TimerDAO extends DBManager {
 	}
 	
 //	타이머 시작
-	public int startTime(String uid) {
+	public int startTime(String uid, String no) {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into timer(id, start_time) values('" + uid + "', now());";
+		String sql = "insert into timer(id, start_time, goalno) values('" + uid + "', now(), "+no+");";
 		executeUpdate(sql);
 		
 		String lastNum = "select last_insert_id() as num";

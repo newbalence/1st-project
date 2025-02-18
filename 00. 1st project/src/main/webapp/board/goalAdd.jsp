@@ -8,12 +8,12 @@
 	String goalTime = request.getParameter("time");
 	String id = request.getParameter("id");
 	
-	if(goalTitle == null || goalCont == null || goalTime == null || id == null){
+	if(goalTitle == null || goalCont == null || goalTime == null || id == null ){
 		out.print(0);
 		return;
 	}
 	
-	if(goalTitle.isEmpty() || goalCont.isEmpty() || goalTime.isEmpty() || id.isEmpty()){
+	if(goalTitle.isEmpty() || goalCont.isEmpty() || goalTime.isEmpty() || id.isEmpty() ){
 		out.print(0);
 		return;
 	}

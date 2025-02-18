@@ -15,7 +15,7 @@ public class goalDAO extends DBManager{
 		
 		
 		String sql = "";
-		sql += "select * from goal where id = '" + id + "'";
+		sql += "select *, (select sum(add_time) from timer where goalno = g.goalno) as cnt from goal g where id = '" + id + "'";
 		
 		executeQuery(sql);
 		List<goalVO> goalList = new ArrayList<>();
@@ -26,6 +26,7 @@ public class goalDAO extends DBManager{
 			String goalTitle = getString("goal_title");
 			String goalCont = getString("goal_cont");
 			String uid = getString("id");
+			int cnt = getInt("cnt");
 			
 			goalVO vo = new goalVO();
 			vo.setGoalNo(goalNo);
@@ -33,6 +34,7 @@ public class goalDAO extends DBManager{
 			vo.setGoalTitle(goalTitle);
 			vo.setGoalCont(goalCont);
 			vo.setId(uid);
+			vo.setCnt(cnt);
 		
 			goalList.add(vo);
 		}
