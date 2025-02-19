@@ -18,7 +18,14 @@ public class BoardVO {
 	private int push;
 	private int userPush;
 	private String listType;
+	private String reply; 
 	
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
 	public String getListType() {
 		return listType;
 	}

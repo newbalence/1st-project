@@ -85,7 +85,7 @@
 			   -ms-text-align-last: center;
 			   -moz-text-align-last: center;
 			}
-			.select{
+			.selected{
 				text-align : center;
 			}
 	    </style>
@@ -121,7 +121,7 @@
 			                    <td><%= name %></td>
 			                    <td><%= nick %></td>
 			                    <td><%= email %></td>
-			                    <td class="select">
+			                    <td class="selected">
 						            <select name="hobby">
 										<option value="1" <%= hobby.equals("1") ? "selected" : "" %>>공부</option>
 										<option value="2" <%= hobby.equals("2") ? "selected" : "" %>>독서</option>
@@ -131,7 +131,7 @@
 										<option value="6" <%= hobby.equals("6") ? "selected" : "" %>>여행</option>
 						            </select>
 			                    </td>
-			                    <td class="select">
+			                    <td class="selected">
 						            <select name="userType">
 						            	<option value="1" <%= userType.equals("1") ? "selected" : "" %>>일반</option>
 						            	<option value="2" <%= userType.equals("2") ? "selected" : "" %>>탈퇴</option>

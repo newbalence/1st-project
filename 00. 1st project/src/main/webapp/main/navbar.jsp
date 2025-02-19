@@ -125,13 +125,16 @@
 			line-height: 40px;
 		}
 		.nav-item {
+			line-height: 2.5;
 			color:var(--bs-black);
 			position: relative;
 			margin: 0 5px 0 10px;
 			padding: 4px 2px;
 			font-size: 17px;
 			font-weight: 600;
+			cursor: pointer;
 		}
+		
 		.nav-link {
 			color: var(--bs-black);
 		}
@@ -142,9 +145,10 @@
 		.input-box {
 			position: relative;
 			right: 60px;
+
 		}
 
-		.fa-search {
+		.whole-search {
 			cursor: pointer;
 			position: absolute;
 			left: 240px;
@@ -160,6 +164,7 @@
 			background-color:#ffffff;
 			border-radius: 30px;
 			font-family: auto;
+			autocomplete: off;
 		}
 	
 		.form-control:focus {
@@ -216,7 +221,7 @@
             position: absolute;
             background: white;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            /* border-radius: 5px; */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             right: 40px;
@@ -246,6 +251,89 @@
             z-index: 999;
         }
         .login-container {
+<<<<<<< HEAD
+	            background: white;
+	            padding: 30px 40px;
+	        }
+	        h1 {
+	            text-align: center;
+	            margin-bottom: 20px;
+	            color: #23272B;
+	            font-family: 'Verdana', sans-serif;
+	        }
+	        label {
+	            display: block;
+	            margin-bottom: 8px;
+	            font-weight: bold;
+	            color: #444;
+	        }
+	        input {
+	            display: block;
+	            width: calc(100% - 20px);
+	            padding: 10px;
+	            margin-bottom: 5px;
+	            border: 1px solid #ddd;
+	            border-radius: 5px;
+	            font-size: 1rem;
+	            margin-right: auto;
+	        }
+	        input:focus {
+	            outline: none;
+	            border-color: #2575fc;
+	            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+	        }
+	        .feedback {
+	            font-size: 0.9rem;
+	            color: red;
+	            margin-bottom: 10px;
+	        }
+	        .feedback.success {
+	            color: green;
+	        }
+	        button:hover {
+	            background: #1a5fc4;
+	        }
+	        .alternate-option {
+	            text-align: center;
+	            margin-top: 20px;
+	        }
+	        .alternate-option a {
+	            color: #23272B;
+	            text-decoration: none;
+	            font-weight: bold;
+	        }
+	        .alternate-option a:hover {
+	            text-decoration: underline;
+	            color: red;
+	        }
+	        
+	        .goal-dropdown {
+	        	display: none;
+	        	position: absolute;
+	        	z-index: 1;
+	        	font-weight: 400;
+	        	background-color: #f9f9f9;
+	        	min-width: 150px;
+	        	text-align: center;
+	        }
+	        
+	        .goal-dropdown a {
+	        	display: block;
+	        	text-decoration: none;
+	        	color: rgb(37, 37, 37);
+	        	font-size: 12px;
+	        	padding: 12px 20px;
+	        }
+	        
+	        .goal-dropdown a:hover {
+	        	background-color : #c40000;
+	        	color: white;
+	        }
+	        
+	        .nav-goal:hover .goal-dropdown {
+	        	display: block;
+	        }
+=======
             background: white;
             padding: 30px 40px;
         }
@@ -340,6 +428,7 @@
     	#unlogin{
     		cursor: pointer;
     	}
+>>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 	</style>
 	<script>
 		function toggleMenu() {
@@ -372,15 +461,24 @@
 			          <a class="nav-link" href="../main/home.jsp">홈</a>
 			        </li>
 			        
-			        <li class="nav-item">
+			        <li class="nav-item nav-goal">
 			        	<% if(user == null){ %>
 			          		<a class="nav-link" id="unlogin" onclick="alert('로그인 후 사용 가능합니다.')">목표</a>
 			          	<%}else{%>
-			          		<a class="nav-link" href="../goal/goalTimer.jsp">목표</a>
+			          		<!-- <a class="nav-link" href="../goal/goalTimer.jsp">목표</a> -->
+			          		<a class="nav-link" href="../board/goal.jsp">목표</a>
+						        <div class="goal-dropdown">
+						        	<a href="../board/goal.jsp">나의 목표</a>
+						        	<a href="../board/pomodoro.jsp">뽀모도로</a>
+						        	<a href="../board/report.jsp">보고서</a>
+						        </div>
 			          	<%} %>
 			        </li>
 			        
 			        <li class="nav-item">
+<<<<<<< HEAD
+			        	<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
+=======
 						<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
 						<ul class="depth_1">
 					      <li><a href="../board/board.jsp?boardType=1">공부</a></li>
@@ -392,6 +490,7 @@
 					      <li><a href="../board/board.jsp?boardType=7">우표</a></li>
 					      <li><a href="../board/board.jsp?boardType=8">야구</a></li>
 						</ul>
+>>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 			        </li>
 			        
 			        <li class="nav-item">
@@ -399,15 +498,15 @@
 			        </li>
 				</ul>
  				<div class="input-box">
-	                <input type="text" id="search" class="form-control" placeholder="검색어 입력">
+	                <input type="text" id="search" class="form-control" autocomplete="off" placeholder="검색어 입력">
  					<i onclick="del()" class="bi bi-x-circle-fill"></i>	                
-	                <i onclick="search()" class="fa fa-search"></i>                    
+	                <i onclick="search()" class="fa fa-search whole-search"></i>                    
                 </div>
 
 			      <%
 			      	if(user == null){
 			      		%>
-						<button type="button" class="btn btn-dark" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+						<button type="button" class="btn btn-dark" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">시작하기</button>
 						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
@@ -421,12 +520,12 @@
 						       			<h1>로그인</h1>
 						       			<div>
 								            <label for="username">아이디</label>
-								            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" value="admin">
+								            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" autocomplete="off" value="admin">
 								            <div id="username-feedback" class="feedback"></div>
 										</div>
 										<div>
 								            <label for="password">비밀번호</label>
-								            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" value="1234">
+								            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" autocomplete="off" value="1234">
 								            <div id="password-feedback" class="feedback"></div>
 										</div>
 										<div style="margin-left: 80px;">

@@ -10,9 +10,19 @@
 		return;
 	}
 	
-	TimerDAO tdao = new TimerDAO();
-	List<TimerVO> list = tdao.selTime(user.getId());
+	//goalTimer.jsp?no=44
+	String no = request.getParameter("no");
+	if(no == null || no.isEmpty()){
+		response.sendRedirect("../board/goal.jsp");
+		return;
+	}
 	
+	//timer테이블 조회
+	//select * from timer where goalno = 44;
+	//select * from timer where id = 'admin';
+	
+	TimerDAO tdao = new TimerDAO();
+	List<TimerVO> list = tdao.selTime(no);
 %>
 <!DOCTYPE html>
 <html>
@@ -231,7 +241,8 @@
 				url : "startTime.jsp",
 				type : "post",
 				data : {
-					id : id
+					id : id,
+					no : "<%= no %>"
 				},
 				success : function(result){
 					let no = result.trim()

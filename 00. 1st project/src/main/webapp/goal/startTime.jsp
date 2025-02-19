@@ -3,18 +3,19 @@
     pageEncoding="UTF-8"%>
 <%
 	String id = request.getParameter("id");
+	String no = request.getParameter("no");
 	
-	if(id == null){
+	if(id == null || no == null){
 		out.print(0);
 		return;
 	}
 	
-	if(id.isEmpty()){
+	if(id.isEmpty() || no.isEmpty()){
 		out.print(0);
 		return;
 	}
 	
 	TimerDAO tdao = new TimerDAO();
-	int timeNo = tdao.startTime(id);
+	int timeNo = tdao.startTime(id, no);
 	out.print(timeNo);
 %>
