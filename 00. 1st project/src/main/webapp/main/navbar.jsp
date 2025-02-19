@@ -79,7 +79,9 @@
 			padding: 4px 2px;
 			font-size: 17px;
 			font-weight: 600;
+			cursor: pointer;
 		}
+		
 		.nav-link {
 			color: var(--bs-black);
 		}
@@ -90,9 +92,10 @@
 		.input-box {
 			position: relative;
 			right: 60px;
+
 		}
 
-		.fa-search {
+		.whole-search {
 			cursor: pointer;
 			position: absolute;
 			left: 240px;
@@ -108,6 +111,7 @@
 			background-color:#ffffff;
 			border-radius: 30px;
 			font-family: auto;
+			autocomplete: off;
 		}
 	
 		.form-control:focus {
@@ -337,9 +341,9 @@
 			      </ul>
 			      
  				<div class="input-box">
-	                <input type="text" id="search" class="form-control" placeholder="검색어 입력">
+	                <input type="text" id="search" class="form-control" autocomplete="off" placeholder="검색어 입력">
  					<i onclick="del()" class="bi bi-x-circle-fill"></i>	                
-	                <i onclick="search()" class="fa fa-search"></i>                    
+	                <i onclick="search()" class="fa fa-search whole-search"></i>                    
                 </div>
 
 			      <%
@@ -359,12 +363,12 @@
 						       			<h1>로그인</h1>
 						       			<div>
 								            <label for="username">아이디</label>
-								            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" value="admin">
+								            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" autocomplete="off" value="admin">
 								            <div id="username-feedback" class="feedback"></div>
 										</div>
 										<div>
 								            <label for="password">비밀번호</label>
-								            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" value="1234">
+								            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" autocomplete="off" value="1234">
 								            <div id="password-feedback" class="feedback"></div>
 										</div>
 										<div style="margin-left: 80px;">
