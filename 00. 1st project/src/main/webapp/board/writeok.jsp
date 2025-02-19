@@ -29,7 +29,9 @@
 	
 	String title = multi.getParameter("title");
 	String content = multi.getParameter("content");
-	String listType = multi.getParameter("type");
+	String listType = multi.getParameter("listType");
+	String boardType = multi.getParameter("boardType");
+	
 	
 	if(title == null || content == null){
 		response.sendRedirect("write.jsp");
@@ -74,11 +76,13 @@
 	
 	vo.setTitle(title);
 	vo.setContent(content);
-	vo.setBoardType(listType);
+	vo.setBoardType(boardType);
+	vo.setListType(listType);
 	vo.setAuthor(user.getId());
+	vo.setNick(user.getNick());
 	
 	int no = dao.insertBoard(vo);
 	
-	response.sendRedirect("post.jsp?bno="+ no + "&type=" + listType);
+	response.sendRedirect("post.jsp?bno="+ no + "&listType=" + listType);
 	
 %>

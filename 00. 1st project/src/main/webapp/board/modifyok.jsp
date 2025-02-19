@@ -30,6 +30,7 @@
 	String title = multi.getParameter("title");
 	String content = multi.getParameter("content");
 	String bno = multi.getParameter("no");
+	String listType = multi.getParameter("listType");
 	
 	if(title == null || content == null){
 		response.sendRedirect("write.jsp");
@@ -75,8 +76,9 @@
 	vo.setTitle(title);
 	vo.setContent(content);
 	vo.setBno(bno);
+	vo.setListType(listType);
 	dao.updateBoard(vo);
 	
-	response.sendRedirect("post.jsp?bno="+ bno);
+	response.sendRedirect("post.jsp?bno="+ bno + "&listType=" + listType);
 
 %>

@@ -124,4 +124,10 @@ public class DBManager {
 			e.printStackTrace();
 		}
 	}
+	
+	//6. 문자열 \escape
+	/*
+	 * public String escapeString(String text) { return text.replace("\\", "\\\\");
+	 * }
+	 */
 }

@@ -7,7 +7,14 @@ public class SearchVO {
 	private int limitSize;
 	private String selectlist;
 	private String boardType;
+	private String listType;
 	
+	public String getListType() {
+		return listType;
+	}
+	public void setListType(String listType) {
+		this.listType = listType;
+	}
 	public String getBoardType() {
 		return boardType;
 	}

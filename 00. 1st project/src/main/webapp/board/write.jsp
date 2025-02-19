@@ -6,6 +6,17 @@
 		response.sendRedirect("../board/board.jsp");
 		return;
 	}
+	String boardType = request.getParameter("boardType");
+	String listType = request.getParameter("listType");
+	
+	if(listType == null || listType.isEmpty()){
+		listType = "";
+	}
+	
+	if(boardType == null || boardType.isEmpty()){
+		response.sendRedirect("../board/board.jsp");
+		return;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -45,12 +56,13 @@
             color: #555;
             width: 90px;
         }
-        input[type="text"] {
+        #title {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
+            margin-bottom: 0;
         }
         input[type="file"]{
         	width: 100%;
@@ -108,11 +120,13 @@
     <div class="board-container">
         <h2>새 게시글 작성</h2>
         <form method="post" action="writeok.jsp" enctype="multipart/form-data">
+        <input type="hidden" name="boardType" value="<%= boardType %>">
+        <input type="hidden" name="listType" value="<%= listType %>">
         	<div class="title">
-	        	<select name="type">
-	        		<option value="01">인증</option>
-	        		<option value="02">일상</option>
-	        		<option value="03">기타</option>
+	        	<select name="listType">
+	        		<option value="1" <%= listType.equals("1") ? "selected" : "" %>>인증</option>
+	        		<option value="2" <%= listType.equals("2") ? "selected" : "" %>>일상</option>
+	        		<option value="3" <%= listType.equals("3") ? "selected" : "" %>>자유</option>
 	        	</select>
 	            <input type="text" id="title" name="title" placeholder="제목을 입력하세요">
 			</div>

@@ -46,9 +46,10 @@
 		ul{
 	   		list-style:none;
 	    	display: inline-block;
+	    	text-align: center;
 	    }
 	    li{
-	    	display:inline-block;
+	    	display: table-cell;
 	    	margin-right : 20px;
 	    }
 	    .radio-label{

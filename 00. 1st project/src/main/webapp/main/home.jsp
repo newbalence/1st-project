@@ -1,3 +1,7 @@
+<%@page import="board.BoardVO"%>
+<%@page import="board.BoardDAO"%>
+<%@page import="favorit.favoritVO"%>
+<%@page import="favorit.favoritDAO"%>
 <%@page import="chatroom.ChatroomVO"%>
 <%@page import="java.util.List"%>
 <%@page import="chatroom.ChatroomDAO"%>
@@ -11,7 +15,19 @@
 	}
 	
 	ChatroomDAO crdao = new ChatroomDAO();
-	List<ChatroomVO>list = crdao.userChatRoom(id);
+	List<ChatroomVO> clist = crdao.userChatRoom(id);
+	
+	favoritDAO fdao = new favoritDAO();
+	List<favoritVO> flist = fdao.selFavorit(id);
+	String topTitle = "";
+	String boardType = "";
+	
+	BoardDAO bdao = new BoardDAO();
+	List<BoardVO> blist = bdao.homePushBoard();
+	
+	
+	
+	
 	
 	
 %>
@@ -49,6 +65,7 @@
 				text-align: left; */
 			}
 			.cont_num{
+				margin-right: 10px;
 				float: left;
 			}
 			.content {
@@ -131,8 +148,8 @@
 		   .login-btn{
 		       margin-left: 0;
 			}
-			.weather_list{
-			
+			.weathers{
+				width: 250px;
 			}
 			.weatherBox{
 				display: flex;
@@ -144,6 +161,14 @@
 			#chatting{
 				margin-top: 100px;
 			}
+			.Ranking-from-All, .choiceBoard, .doneList{
+				margin-bottom: 10px;
+				border: 1px solid;
+			    border-radius: 15px;
+			}
+			.list_category{
+			    font-size: 25px;
+		    }
 		</style>
 	</head>
 	<body>
@@ -153,161 +178,163 @@
 					<div class="articleLeft"> 
 						<div class="Ranking-from-All">
 							<div class="Content-from-All">
-								<h2 class="screen_out">베스트 게시글</h2>
-								<div class="cont_g">
-									<div class="wrap_cont">
-										<em class="cont_num">1. </em>
-										<a class="link_cont" href="#">
-											<div class="cont_title">
-												<strong class="content">대충이렇게콘텐츠가들어갈예정</strong>
-											</div>
-										</a>
-										<em class="author">작성자 1</em>
-									</div>
-								</div>
-								<div class="cont_g">
-									<div class="wrap_cont">
-										<em class="cont_num">2. </em>
-										<a class="link_cont" href="#">
-											<div class="cont_title">
-												<strong class="content">아 박스 뺄까 이대ㅐ로</strong>
-											</div>
-										</a>
-										<em class="author">작성자 2</em>
-									</div>
-								</div>
-								<div class="cont_g">
-									<div class="wrap_cont">
-										<em class="cont_num">3. </em>
-										<a class="link_cont" href="#">
-											<div class="cont_title">
-												<strong class="content">페이지꾸미기가어렵다</strong>
-											</div>
-										</a>
-										<em class="author">작성자 3</em>
-									</div>
-								</div>
-								<div class="cont_g">
-									<div class="wrap_cont">
-										<em class="cont_num">4. </em>
-										<a class="link_cont" href="#">
-											<div class="cont_title">
-												<strong class="content">날씨가 장난 아니네</strong>
-											</div>
-										</a>
-										<em class="author">작성자 3</em>
-									</div>
-								</div>
-								<div class="cont_g">
-									<div class="wrap_cont">
-										<em class="cont_num">5. </em>
-										<a class="link_cont" href="#">
-											<div class="cont_title">
-												<strong class="content">아 눈 또 안 오나 출근하기 싫다</strong>
-											</div>
-										</a>
-										<em class="author">작성자 3</em>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						
-						<div class="Ranking-from-Interest">
-							<div class="list_category">
-								<div class="wrap_category">
-									<a class="link_tab" href="#">
-										<span class="int_headText"> <!-- :before든 :after든 넣어서 구분해 드려야지... -->
-											수영 <!-- 카테고리별 별표 누른 것만 보이게, 최대 다섯 개 -->
-										</span>
-									</a>
-									<a class="link_tab" href="#">
-										<span class="int_headText">
-											독서
-										</span>
-									</a>
-									<a class="link_tab" href="#">
-										<span class="int_headText">
-											런닝
-										</span>
-									</a>
-									<a class="link_tab" href="#">
-										<span class="int_headText">
-											여행
-										</span>
-									</a>
-									<a class="link_tab" href="#">
-										<span class="int_headText">
-											헬스
-										</span>
-									</a>
-								</div>
-							</div>
-								<h2 class="screen_out">수영</h2>
-								<div class="int_top">
-									<div class="item_group">
-										<a class="link_cont" href="#">
-											<div class="wrap_int">
-												<strong class="tit_int">나는 20년간 수영을 했다</strong>
-												<div class="wrap_desc">
-													<p class="desc_int">모두 못한 분야가 법적 일컬어진 우량부터 없고 오전으로 54대 말한다. 후보자에 부족하나 미술과 위하는 행정부가 야구로 책임진 싶다. 공식적이라고 나그네의 대우라고 승 은폐를 뻗치다.
-												</div>
-												<div class="wrap_btn">
-													<span class="int_btn">
-														<span class="icon_like">추천</span>
-														<span class="int_txt">17</span> <!-- 추천 수 가져오기 -->
-													</span>
-													<span class="int_btn">
-														<span class="icon_comment">댓글</span>
-														<span class="int_txt">11</span> <!-- 댓글 수 가져오기 -->
-													</span>
-													<span class="int_txt">25. 01. 21</span>
-												</div>
-											</div>
-										</a>
-									</div>
-								</div>
-								
-								
-						<div class="doneList">
-							<h2 class="screen_out">인증</h2> <!-- 여긴 최신글로 -->
-							<div class="done_top">
-							
-								<div class="item_group">
-									<a class="link_cont" href="#">
-										<div class="wrap_done">
-											<strong class="tit_done">오늘 공부 8시간 인증함</strong>
-											<div class="wrap_desc">
-												<p class="desc_done">모두 못한 분야가 법적 일컬어진 우량부터 없고 오전으로 54대 말한다. 후보자에 부족하나 미술과 위하는 행정부가 야구로 책임진 싶다. 공식적이라고 나그네의 대우라고 승 은폐를 뻗치다.
-											</div>
-											<div class="wrap_btn">
-												<span class="done_btn">
-													<span class="icon_like">추천</span>
-													<span class="done_txt">17</span> <!-- 추천 수 가져오기 -->
-												</span>
-												<span class="done_btn">
-													<span class="icon_comment">댓글</span>
-													<span class="done_txt">11</span> <!-- 댓글 수 가져오기 -->
-												</span>
-												<span class="done_txt">25. 01. 21</span>
+								<h2 class="screen_out">BEST 게시글</h2>
+								<%
+									for(int i = 0; i< 3; i++){
+										BoardVO bvo = blist.get(i);
+										String title = bvo.getTitle();
+										String nick = bvo.getNick();
+										String bno = bvo.getBno();
+										String num = "";
+										if(i == 0){
+											num = "1st";
+										}else if(i == 1){
+											num = "2nd";
+										}else if(i == 2){
+											num = "3ed";
+										}
+										%>
+										<div class="cont_g">
+											<div class="wrap_cont">
+												<em class="cont_num"><%= num %></em>
+												<a class="link_cont" href="../board/post.jsp?bno=<%= bno %>">
+													<div class="cont_title">
+														<strong class="content"><%= title %></strong>
+														<em class="author"><%= nick %></em>
+													</div>
+												</a>
 											</div>
 										</div>
-									</a>
-								</div>
+										<%
+									}
+								%>
 							</div>
 						</div>
-					</div>
+						<%
+							if(user != null){
+								%>
+								<div class="Ranking-from-Interest">
+									<div class="choiceBoard">
+										<div class="list_category">
+											<div class="wrap_category">
+											<%
+												for(int i = 0; i < flist.size(); i++){
+													favoritVO fvo = flist.get(i);
+													boardType = fvo.getBoard_type();
+													
+													if(boardType.equals("1")){
+														topTitle= "공부";
+													}else if(boardType.equals("2")){
+														topTitle= "독서";
+													}else if(boardType.equals("3")){
+														topTitle= "축구";
+													}else if(boardType.equals("4")){
+														topTitle= "런닝";
+													}else if(boardType.equals("5")){
+														topTitle= "헬스";
+													}else if(boardType.equals("6")){
+														topTitle= "여행";
+													}else if(boardType.equals("7")){
+														topTitle= "우표수집";
+													}else if(boardType.equals("8")){
+														topTitle= "야구";
+													}else{
+														topTitle= "전체";
+													}
+													
+													%>
+													<a class="link_tab" >
+														<span class="int_headText"><%= topTitle %></span>
+													</a>
+													<%
+												}
+											%>
+											</div>
+										</div>
+
+										<div class="intList">
+											<h2 class="screen_out">board_type =choice</h2>
+											<div class="int_top">
+												<%
+													for(int i = 0; i < 5; i++){
+														%>
+														<div class="item_group">
+															<a class="link_cont" href="#">
+																<div class="wrap_int">
+																	<strong class="tit_int">board_title</strong>
+																	
+																	<div class="wrap_btn">
+																		<span class="done_txt">board_create_date</span>
+																		<span class="int_btn">
+																			<span class="icon_like">hit</span>
+																			<span class="int_txt">hit_count</span> <!-- 추천 수 가져오기 -->
+																		</span>
+																		<span class="int_btn">
+																			<span class="icon_comment">reply</span>
+																			<span class="int_txt">reply_count</span> <!-- 댓글 수 가져오기 -->
+																		</span>
+																	</div>
+																	<div class="wrap_desc">
+																		<p class="desc_int">board_content</p>
+																	</div>
+																</div>
+															</a>
+														</div>
+														<%
+													}
+												%>
+											</div>
+										</div>
+									</div>
+									<div class="doneList">
+										<h2 class="screen_out">list_type = 인증</h2> <!-- 여긴 최신글로 -->
+										<div class="done_top">
+										<%
+											for(int i = 0; i< 3; i++){
+												%>
+												<div class="item_group">
+													<a class="link_cont" href="#">
+														<div class="wrap_done">
+															<strong class="tit_done">board_title</strong>
+															<div class="wrap_btn">
+																<span class="done_btn">
+																	<span class="icon_like">hit</span>
+																	<span class="done_txt">hit_count</span> <!-- 추천 수 가져오기 -->
+																</span>
+																<span class="done_btn">
+																	<span class="icon_comment">reply</span>
+																	<span class="done_txt">reply_count</span> <!-- 댓글 수 가져오기 -->
+																</span>
+															</div>
+															<div class="wrap_desc">
+																<p class="desc_done">board_contene</p>
+															</div>
+														</div>
+													</a>
+												</div>
+												<%
+											}
+										%>
+										</div>
+									</div>
+								</div>
+								<%
+							}
+						%>
 					<div class="seekPeople"></div>
 				</div>
-				<div class="articleRight"> <!-- article right side --> <!-- margin&padding left side -->
+				<div class="articleRight">
 					<div class="logmein">
-						
 						<div id="login-form">
 						<%
 							if(user == null){
 								%>
+<<<<<<< HEAD
 								
 								<button type="button" class="btn btn-dark login-btn" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">시작하기</button>
+=======
+								<button type="button" class="btn btn-dark login-btn" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+>>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								  	<div class="modal-dialog">
 								    	<div class="modal-content">
@@ -333,7 +360,6 @@
 											        	</div>
 								  		 			</div>
 									        	</form>
-									        	
 									      </div>
 									    </div>
 									  </div>
@@ -365,13 +391,12 @@
 								</div>
 								<div class="weatherBox">
 									<div>
-								      	<span>날씨</span>
+								      	<span>날씨</span><br>
 								      	<span class="weather"></span>
 							      	</div>
 							      	<div id="windBox">
-								      	<span>풍속</span>
+								      	<span>풍속</span><br>
 								      	<span class="wind"></span>
-								      	<span>m/s</span>
 							      	</div>
 								</div>
 							</div>
@@ -381,8 +406,8 @@
 							<div class="chat_list">
 							<%
 								if(user != null){
-									for(int i = 0; i < list.size(); i++){
-										ChatroomVO crvo = list.get(i);
+									for(int i = 0; i < clist.size(); i++){
+										ChatroomVO crvo = clist.get(i);
 										String chatroomno = crvo.getChatroomno();
 										String chatname = crvo.getChatname();
 										%>
@@ -394,14 +419,18 @@
 								
 							</div>
 						</div>
-						
-						
 					</div>
 				</div>
 			</div>
 		</div>
 	</body>
 	<script>
+	
+		if ("geolocation" in navigator) {
+		  console.log("가능");
+		} else {
+			console.log("불가능");
+		}
 		navigator.geolocation.getCurrentPosition(function(position) {
 			let x = position.coords.longitude;
 			let y = position.coords.latitude;
@@ -504,7 +533,7 @@
 					img += "@2x.png";
 					$(".temp").text(result.main.temp);
 					$(".weather").text(result.weather[0].description);
-					$(".wind").text(result.wind.speed);
+					$(".wind").text(result.wind.speed + " m/s");
 					$(".weatherImg").attr("src", img);
 					
 				},

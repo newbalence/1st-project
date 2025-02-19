@@ -7,7 +7,9 @@
 	String no = request.getParameter("no");
 	//modify.jsp?no=5
 	
-	if(no == null || no.isEmpty()){
+	String listType = request.getParameter("listType");
+	
+	if(no == null || no.isEmpty() || listType == null || listType.isEmpty()){
 		response.sendRedirect("board.jsp");
 		return;
 	}
@@ -54,16 +56,25 @@
             margin-bottom: 5px;
             color: #555;
         }
-        input[type="text"], textarea, input[type="file"] {
+        #title {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        input[type="file"]{
+        	width: 100%;
+            padding: 10px;
             font-size: 1rem;
         }
         textarea {
             height: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
         }
         button {
             background: #2575fc;
@@ -83,22 +94,51 @@
             text-align: center;
             margin-top: 20px;
         }
+        .title{
+        	display: flex;
+        	margin-bottom: 15px;
+        	align-items: center;
+        }
+        select{
+        	height : 40px;
+        	border : 1px solid black;
+        	border-radius : 5px;
+        	margin-right : 10px;
+       	}
+       	.file{
+       		border-top : 1px solid black;
+       		border-bottom : 1px solid black;
+       		display: flex;
+        	margin-top: 15px;
+        	align-items: center;
+        	padding: 5px 0px 5px 0px;
+       	}
     </style>
 </head>
 <body>
     <div class="board-container">
         <h2>게시글 수정</h2>
-        <form enctype="multipart/form-data" method="post" action="modifyok.jsp">
+        <form method="post" action="modifyok.jsp" enctype="multipart/form-data">
         	<input type="hidden" name="no" value="<%= no %>">
-        	
-            <label for="title">제목</label>
-            <input type="text" id="title" name="title" placeholder="제목을 입력하세요" value="<%= title %>">
-
+            <div class="title">
+	        	<select name="listType">
+	        		<option value="1" <%= listType.equals("1") ? "selected" : "" %>>인증</option>
+	        		<option value="2" <%= listType.equals("2") ? "selected" : "" %>>일상</option>
+	        		<option value="3" <%= listType.equals("3") ? "selected" : "" %>>자유</option>
+	        	</select>
+	            <input type="text" id="title" name="title" placeholder="제목을 입력하세요" value="<%= title %>">
+			</div>
+			
             <label for="content">내용</label>
             <textarea id="content" name="content" placeholder="내용을 입력하세요"><%= content %></textarea>
 
-            <label for="file">첨부파일</label>
-            <input type="file" id="file" name="file">
+			<div>
+	            <label for="file">첨부파일</label>
+	            <input type="file" id="file" name="file">
+            </div>
+            
+   			<div id="img-container">
+			</div>
 
             <div class="action">
                 <button type="submit">수정</button>

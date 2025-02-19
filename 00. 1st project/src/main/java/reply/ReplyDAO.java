@@ -11,16 +11,17 @@ public class ReplyDAO extends DBManager {
 //	댓글 작성
 	public int write(ReplyVO vo) {
 		String rauthor = vo.getRauthor();
+		String rnick = vo.getRnick();
 		String rcontent = vo.getRcontent();
 		String bno = vo.getBno();
-		
+		System.out.println(rnick);
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into reply(rauthor, rcontent, bno) ";
-		sql += "values('" + rauthor + "', '" + rcontent + "', " + bno + ");";
+		String sql = "insert into reply(rauthor, rnick, rcontent, bno) ";
+		sql += "values('" + rauthor + "', '" + rnick + "', '" + rcontent + "', " + bno + ");";
 		executeUpdate(sql);
-		
+		System.out.println(sql);
 		String lastNum = "select last_insert_id() as rno;";
 		executeQuery(lastNum);
 		
@@ -39,7 +40,7 @@ public class ReplyDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select* from reply left join user on "; 
+		String sql = "select * from reply left join user on "; 
 		sql += "reply.rauthor = user.id ";
 		sql += "where bno = " + bno + " order by rno desc;";
 		executeQuery(sql);
@@ -52,6 +53,7 @@ public class ReplyDAO extends DBManager {
 			String createDate = getString("create_date");
 			String updateDate = getString("update_date");
 			String userType = getString("user_type");
+			String rnick = getString("rnick");
 			
 			ReplyVO vo = new ReplyVO();
 			vo.setRno(rno);
@@ -60,6 +62,7 @@ public class ReplyDAO extends DBManager {
 			vo.setCreateDate(createDate);
 			vo.setUpdateDate(updateDate);
 			vo.setUserType(userType);
+			vo.setRnick(rnick);
 			
 			list.add(vo);
 		}
@@ -75,7 +78,7 @@ public class ReplyDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "update reply set rcontent = " + rcontent;
+		String sql = "update reply set rcontent = '" + rcontent + "'";
 		sql += ", update_date = now() where rno = " + rno;
 		executeUpdate(sql);
 		

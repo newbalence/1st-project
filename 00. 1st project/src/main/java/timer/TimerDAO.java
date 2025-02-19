@@ -88,7 +88,7 @@ public class TimerDAO extends DBManager {
 		sql += "update timer "; 
 		sql += "set end_time = now(), "; 
 		sql += "all_time = " + time;
-		sql += ", add_time = (select sun from (select sum(all_time) + " + time + " as sun from timer where id='" + uid + "') as t) "; 
+		sql += ", add_time = (select sun from (select IFNULL(sum(all_time), 0) + " + time + " as sun from timer where id='" + uid + "') as t) "; 
 		sql += "where timeno = " + num;
 		executeUpdate(sql);
 		

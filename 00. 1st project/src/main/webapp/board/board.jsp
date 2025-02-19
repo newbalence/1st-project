@@ -1,3 +1,4 @@
+<%@page import="favorit.favoritDAO"%>
 <%@page import="board.BoardVO"%>
 <%@page import="java.util.List"%>
 <%@page import="board.SearchVO"%>
@@ -8,6 +9,11 @@
 <%@ include file="../main/comMenu.jsp" %>
 <%
 	BoardDAO bdao = new BoardDAO();
+	String boardType = request.getParameter("boardType");
+	String listType = request.getParameter("listType");
+	if(boardType == null || boardType.isEmpty()){
+		boardType = "";
+	}
 	
 	String pageNum = request.getParameter("page");
 	if(pageNum == null || pageNum.equals("null")){
@@ -19,7 +25,6 @@
 	int startNum = (currentPage - 1) * limitSize;
 	String searchType = request.getParameter("searchType");
 	String keyword = request.getParameter("searchKeyword");
-	String listType = request.getParameter("type");
 	String listOrder = request.getParameter("order");
 
 	
@@ -29,7 +34,8 @@
 	svo.setStartNum(startNum);
 	svo.setLimitSize(limitSize);
 	svo.setSelectlist(listOrder);
-	svo.setBoardType(listType);
+	svo.setBoardType(boardType);
+	svo.setListType(listType);
 	List<BoardVO> list = bdao.selBoardAll(svo);
 	
 	int totalCount = bdao.getcount(svo);
@@ -39,6 +45,7 @@
 	int startPage = ((currentPage - 1) / pageGroupSize) * pageGroupSize + 1;
 	int totalPage = (int)Math.ceil(totalCount / (double)limitSize);
 	int endPage = Math.min(startPage + pageGroupSize - 1, totalPage);
+	
 	if(searchType == null){
 		searchType = "";
 	}
@@ -47,14 +54,33 @@
 		keyword = "";
 	}
 	
-	if(listType == null){
+	if(listType == null || listType.isEmpty()){
 		listType = "";
 	}
 	
 	if(listOrder == null){
 		listOrder = "";
 	}
-	
+	String topTitle = "";
+	if(boardType.equals("1")){
+		topTitle= "공부";
+	}else if(boardType.equals("2")){
+		topTitle= "독서";
+	}else if(boardType.equals("3")){
+		topTitle= "축구";
+	}else if(boardType.equals("4")){
+		topTitle= "런닝";
+	}else if(boardType.equals("5")){
+		topTitle= "헬스";
+	}else if(boardType.equals("6")){
+		topTitle= "여행";
+	}else if(boardType.equals("7")){
+		topTitle= "우표수집";
+	}else if(boardType.equals("8")){
+		topTitle= "야구";
+	}else{
+		topTitle= "전체";
+	}
 	
 %>
 <!DOCTYPE html>
@@ -65,54 +91,6 @@
     <title>자유 게시판</title>
     <style>
     	
-    	ul {
-		  list-style-type: none;
-		  padding-left: 0px;
-		}
-		.select {
-		  display: inline-block;
-		  width: 120px;
-		  border: 1px solid #999;
-		  text-align-last: center;
-		}
-		
-		.select .selected {
-		  display: flex;
-		  justify-content: center;
-		  padding: 8px 5px;
-		}
-		
-		.select .selected .selected-value {
-		  max-width: 90px;
-		}
-		
-		.select ul {
-		  width: 120px;
-		  border: 1px solid #999;
-		  position: absolute;
-		  background: #fff;
-		  border-top: none;
-		  margin: 1px 0 0 -1px;
-		  cursor: pointer;
-		  display : none;
-	      
-		}
-		.select.active ul {
-		  display: initial;
-		}
-		
-		.select ul li {
-		  padding: 8px 5px;
-		}
-		.select ul li,
-		.select .selected .selected-value {
-		  white-space: nowrap; /* 줄바꿈 안함 */
-		  overflow: hidden;
-		  text-overflow: ellipsis; /* 말줄임 적용 */
-		}
-		.select ul li:hover {
-		  background: rgba(168, 156, 235, 0.35)
-		}
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #e9f5ff, #ffffff);
@@ -146,7 +124,7 @@
             border: 1px solid #ddd;
             margin-top: 50px;
         }
-        .post-item-container a {
+        .post-item-container table {
             text-decoration: none;
             color: #2575fc;
             font-weight: bold;
@@ -163,16 +141,15 @@
         .post-item:hover {
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             transform: translateY(-3px);
+            text-decoration: underline;
+            text-decoration-color: #2575fc;
         }
-        .post-item a {
+        .post-item td {
             text-decoration: none;
             color: #2575fc;
             font-weight: bold;
-            font-size: 1.2rem;
         }
-        .post-item a:hover {
-            text-decoration: underline;
-        }
+
         .post-item .meta {
             font-size: 0.9rem;
             color: #777;
@@ -253,123 +230,107 @@
             display: flex;
     		justify-content: space-evenly;
         }
-<<<<<<< HEAD
-        
+
         .post-item {
-        	display: flex;
-        	justify-content: space-between;
-=======
+        	cursor:pointer;
+        	color: black;
+		}
         #typeForm{
         	float: right;
         }
         #content{
         	font-size: 23px;
->>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
+        }
+        .title{
+			max-width: 50px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap; 
+			text-align: left;
+        }
+        table{
+        	border-collapse: separate;
+    		border-spacing: 1px 20px;
+    		text-align: center;
+    		width: 100%;
+    		font-size: 23px;
+    		
+        }
+        #favorit, #unfavorit{
+        	cursor: pointer;
+        	font-size: 40px;
+        	margin-right: 15px;
+        }
+        #favorit:hover{
+        	cursor: pointer;
+       	    color: #C40000;
+        }
+        .bi-star-fill{
+        	color: #FFD966;
+        }
+        .titleLine{
+        	display: flex;
+       	    justify-self: center;
+       	    
+        }
+        h1{
+   	    	margin-right: 30px;
         }
     </style>
 </head>
 <body>
     <div class="board-container">
-    	<!-- <div id="sel">
-			<div class="select">
-				<div class="selected">
-			    	<div class="selected-value">전체</div>
-			  	</div>
-			  	<ul>
-			    	<li class="option">none</li>
-			    	<li class="option">option 1</li>
-			    	<li class="option">option 2</li>
-			    	<li class="option">option 3</li>
-			    	<li class="option">loooooooooooooooooong text option</li>
-			  	</ul>
-			</div>     
-			<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">실내취미</div>
-			    <div class="arrow"></div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-	     	<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">실외취미</div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-	     	<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">수집취미</div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-	    	<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">경쟁취미</div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-	    	<div class="select">
-			  <div class="selected">
-			    <div class="selected-value">관찰취미</div>
-			  </div>
-			  <ul>
-			    <li class="option">none</li>
-			    <li class="option">option 1</li>
-			    <li class="option">option 2</li>
-			    <li class="option">option 3</li>
-			    <li class="option">loooooooooooooooooong text option</li>
-			  </ul>
-			</div>
-		</div> -->
-		<h1>러닝</h1>
+    	<div class="titleLine">
+    	<%
+        	if(user != null && !boardType.equals("") && !boardType.equals("null") && boardType != null){
+        		favoritDAO fdao = new favoritDAO();
+        		int userFavorit = fdao.selFavoritOne(user.getId(), boardType);
+        		%>
+   		        <i id="favorit" class=<%= userFavorit == 1 ? "bi-star-fill" : "bi-star" %>></i>
+      			<%
+        	}else if(!boardType.equals("") && !boardType.equals("null") && boardType != null){
+        		%>
+        		<i id="unfavorit" class="bi-star" onclick="alert('로그인 후 사용가능합니다.')"></i>
+        		<%
+        	}
+        %>
+		<h1><%= topTitle %></h1>
+		</div>
 		<form action="board.jsp" method="get" id="typeForm" style="display:inline">
-			<select id="type" name="type">
+			<% 
+			if(!boardType.equals("")){
+				%>
+				<input type="hidden" name="boardType" value="<%= boardType %>">
+				<%
+			}
+			%>
+
+			
+			<select id="listType" name="listType">
 				<option value="" <%= listType.equals("") ? "selected" : ""  %>>전체</option>
 				<option value="1" <%= listType.equals("1") ? "selected" : ""  %>>인증</option>
 				<option value="2" <%= listType.equals("2") ? "selected" : ""  %>>일상</option>
-				<option value="3" <%= listType.equals("3") ? "selected" : ""  %>>기타</option>
+				<option value="3" <%= listType.equals("3") ? "selected" : ""  %>>자유</option>
 			</select>
-		<select id="order" name="order">
-			<option value="" <%= listOrder.equals("") ? "selected" : ""  %>>최신순</option>
-			<option value="push" <%= listOrder.equals("push") ? "selected" : ""  %>>추천순</option>
-			<option value="old" <%= listOrder.equals("old") ? "selected" : ""  %>>오래된순</option>
-		</select>
+			<select id="order" name="order">
+				<option value="" <%= listOrder.equals("") ? "selected" : ""  %>>최신순</option>
+				<option value="push" <%= listOrder.equals("push") ? "selected" : ""  %>>추천순</option>
+				<option value="old" <%= listOrder.equals("old") ? "selected" : ""  %>>오래된순</option>
+			</select>
 		</form>
 		
-        <ul class="post-list">
-        	<li class="post-item-container">
-				<a id="content">번호</a>
-				<a id="content">제목</a>
-				<a id="content">글쓴이</a>
-				<a id="content">등록일</a>
-				<a id="content">조회</a>
-				<a id="content">추천</a>
-				
-			</li>
+        <table class="post-list">
+        	<thead>
+        		<tr class="post-item-container">
+				<th style="width: 67px" id="content">타입</th>
+				<th id="content">제목</th>
+				<th style="width: 103px" id="content">글쓴이</th>
+				<th style="width: 140px" id="content">등록일</th>
+				<th style="width: 67px" id="content">조회</th>
+				<th style="width: 67px" id="content">추천</th>
+				</tr>
+			</thead>
+			<tbody>
         	<%
         		for(int i = 0; i < list.size(); i++){
         			BoardVO bvo = list.get(i);
@@ -380,31 +341,42 @@
         			String userType = bvo.getUserType();
         			String nick = bvo.getNick();
         			int hit = bvo.getHit();
-        			int push = bvo.getPush();;
+        			int push = bvo.getPush();
+        			String blistType = bvo.getListType();
+        			String blist = "기타";
+        			if(blistType.equals("1")){
+        				blist = "인증";
+        			}else if(blistType.equals("2")){
+        				blist = "일상";
+        			}else if(blistType.equals("3")){
+        				blist = "자유";
+        			}
+        			
         			createDate = createDate.substring(0, 10);
         			if(userType.equals("2") || bvo.getBoardType().equals("99")){
         				continue;
         			}
         			%>
-					<li class="post-item">
-						<a href="post.jsp?bno=<%= bno %><%= searchType != "" ? "&searchType=" + searchType : ""%><%= keyword != "" ? "&searchKeyword=" + keyword : ""%>&pageNum=<%= pageNum %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">
-						<span id="content"><%= bno %></span>
-						<span id="content"><%= title %></span>
-						<span id="content"><%= nick %></span>
-						<span id="content"><%= createDate %></span>
-						<span id="content"><%= hit %></span>
-						<span id="content"><%= push %></span>
-						</a>
-					</li>
+					
+					<tr class="post-item" onclick="location.href='post.jsp?bno=<%= bno %><%= searchType != "" ? "&searchType=" + searchType : ""%><%= keyword != "" ? "&searchKeyword=" + keyword : ""%>&pageNum=<%= pageNum %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>'">
+					<td><%= blist %></td>
+					<td class="title"><%= title %></td>
+					<td class="title"><%= nick %></td>
+					<td><%= createDate %></td>
+					<td><%= hit %></td>
+					<td><%= push %></td>
+					</tr>
+					
         			<%
         		}
         	%>
-        </ul>
+        	</tbody>
+        </table>
         <%
-        	if(user != null){
+        	if(user != null && !boardType.equals("") && !boardType.equals("null") && boardType != null){
         		%>
   			<div class="action">
-	            <button onclick="location.href='write.jsp'">글쓰기</button>
+	            <button onclick="location.href='write.jsp?boardType=<%= boardType %><%= listType != "" ? "&listType=" + listType : "" %>'">글쓰기</button>
 	        </div>
         		<%
         	}
@@ -413,7 +385,7 @@
         	<%
         		if(startPage > 1){
         			%>
-                	<a href="board.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&Type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">&lt;</a>
+                	<a href="board.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>">&lt;</a>
                 	<%
         		}
         	%>
@@ -421,12 +393,12 @@
         	for(int i = startPage; i <= endPage; i++){
         		if(i == currentPage){
             		%>
-            		<a class="active" href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>"><%= i %></a>
+            		<a class="active" href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>"><%= i %></a>
             		<%
         			continue;
         		}else{
             		%>
-            		<a href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>"><%= i %></a>
+            		<a href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>"><%= i %></a>
             		<%
         		}
         	}
@@ -434,7 +406,7 @@
         	<%
         		if(endPage < totalPage){
         			%>
-       				<a href="board.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&type=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%>">&gt;</a>
+       				<a href="board.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType=" + searchType : "" %><%= keyword != "" ? "&searchKeyword=" + keyword : "" %><%= listType != "" ? "&listType=" + listType : "" %><%= listOrder != "" ? "&order=" + listOrder : ""%><%= boardType != "" ? "&boardType=" + boardType : ""%>">&gt;</a>
         			<%
         		}
         	%>
@@ -456,53 +428,59 @@
 </body>
 <script>
 	$("#order").change(function(e){
+		console.log(e);
 		$("#typeForm").submit();
 	})
-	$("#type").change(function(e){
+	$("#listType").change(function(e){
 		$("#typeForm").submit();
 	})
 	
-	const selectBoxElements = document.querySelectorAll(".select");
 	
-	function toggleSelectBox(selectBox) {
-	  selectBox.classList.toggle("active");
-	}
-	
-	function selectOption(optionElement) {
-	  const selectBox = optionElement.closest(".select");
-	  const selectedElement = selectBox.querySelector(".selected-value");
-	  selectedElement.textContent = optionElement.textContent;
-	}
-	
-	selectBoxElements.forEach(selectBoxElement => {
-	  selectBoxElement.addEventListener("click", function (e) {
-	    const targetElement = e.target;
-	    const isOptionElement = targetElement.classList.contains("option");
-	
-	    if (isOptionElement) {
-	      selectOption(targetElement);
-	    }
-	
-	    toggleSelectBox(selectBoxElement);
-	  });
-	});
-	
-	document.addEventListener("click", function (e) {
-	  const targetElement = e.target;
-	  const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
-	
-	  if (isSelect) {
-	    return;
-	  }
-	
-	  const allSelectBoxElements = document.querySelectorAll(".select");
-	
-	  allSelectBoxElements.forEach(boxElement => {
-	    boxElement.classList.remove("active");
-	  });
-	});
-	
-	
+	function getTime(){
+			let date = new Date();
+			console.log(date);
+			
+			let year = date.getFullYear();
+			let month = (date.getMonth() + 1).toString().padStart(2,"0");
+			let day = date.getDate().toString().padStart(2,"0");
+			let hour = date.getHours().toString().padStart(2,"0");
+			let minute = date.getMinutes().toString().padStart(2,"0");
+			let second = date.getSeconds().toString().padStart(2,"0");
+			
+			let time = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second
+			return time;
+		}
+		
+		let id = "<%= user == null ? null : user.getId() %>";
+		let boardType = <%= boardType %>
+		$("#favorit").click(function(){
+			let favorit = $("#favorit");
+			let cName = favorit.attr("class");
+			$.ajax({
+				url : "favoritok.jsp",
+				type : "post",
+				data : {
+					id : id,
+					boardType : boardType
+				},
+				success : function (result){
+					if(result.trim() == "success"){
+						if(cName == "bi-star"){
+							favorit.attr("class", "bi-star-fill")
+						}else if(cName == "bi-star-fill"){
+							favorit.attr("class", "bi-star")
+						}
+					}else{
+						console.log("에러 발생");
+					}
+					
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
+
+		});
 	
 </script>
 </html>
