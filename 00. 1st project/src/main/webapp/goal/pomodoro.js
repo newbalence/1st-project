@@ -6,17 +6,17 @@ const control = document.querySelector('.button-container #control');
 const remainTime = document.querySelector('.time-container #remain-time');
 const totalTime = document.querySelector('.time-container #total-time');
 
-let endTime = 25
+let endTime = 0;
 
 let intervalID = null;
 let progressTimeSec = 0;
 
 let isPlay = true;
 function paintLines() {
-    for(let i=0; i<30; i++) {
+    for(let i=0; i<3; i++) {
         const line = document.createElement('div');
         line.classList.add('line');
-        line.style.transform = `rotate(${i*30}deg)`;
+        line.style.transform = `rotate(${i*60}deg)`;
 
 //        if (i%5 == 0) {
 //            line.classList.add('thick')

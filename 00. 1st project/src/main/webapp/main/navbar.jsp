@@ -443,7 +443,7 @@
 			          		<a class="nav-link" id="unlogin" onclick="alert('로그인 후 사용 가능합니다.')">목표</a>
 			          	<%}else{%>
 			          		<!-- <a class="nav-link" href="../goal/goalTimer.jsp">목표</a> -->
-			          		<a class="nav-link" href="../board/goal.jsp">목표</a>
+			          		<a class="nav-link" href="../goal/goal.jsp">목표</a>
 						        <div class="goal-dropdown">
 						        	<a href="../goal/goal.jsp">나의 목표</a>
 						        	<a href="../goal/pomodoro.jsp">뽀모도로</a>
