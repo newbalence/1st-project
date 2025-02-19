@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/navbar.jsp" %>
+<%@ include file="../main/comMenu.jsp" %>
 <%
 	BoardDAO bdao = new BoardDAO();
 	String boardType = request.getParameter("boardType");
@@ -92,7 +93,6 @@
     	
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #e9f5ff, #ffffff);
             margin: 0;
             padding: 0;
             color: #333;
