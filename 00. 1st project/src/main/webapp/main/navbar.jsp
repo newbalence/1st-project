@@ -405,26 +405,6 @@
 			line-height:40px;
 			color:black;
 		}
-		.menu > li:hover .depth_1 {display:block;}
-		.depth_1 > li > a:hover{
-			display:block;
-			color:red;
-		}
-		.menu .depth_1{
-			display:none; 
-			position:absolute; 
-			left:-156px;
-			right:0;
-			text-align:center;
-		}
-		.menu .depth_1 a{
-			display:block; 
-			padding:5px; 
-			background:white; 
-			color:black; 
-			width: 60px;
-    		font-size: 20px;
-    	}
     	#unlogin{
     		cursor: pointer;
     	}
@@ -476,21 +456,7 @@
 			        </li>
 			        
 			        <li class="nav-item">
-<<<<<<< HEAD
 			        	<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
-=======
-						<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
-						<ul class="depth_1">
-					      <li><a href="../board/board.jsp?boardType=1">공부</a></li>
-					      <li><a href="../board/board.jsp?boardType=2">독서</a></li>
-					      <li><a href="../board/board.jsp?boardType=3">축구</a></li>
-					      <li><a href="../board/board.jsp?boardType=4">런닝</a></li>
-					      <li><a href="../board/board.jsp?boardType=5">헬스</a></li>
-					      <li><a href="../board/board.jsp?boardType=6">여행</a></li>
-					      <li><a href="../board/board.jsp?boardType=7">우표</a></li>
-					      <li><a href="../board/board.jsp?boardType=8">야구</a></li>
-						</ul>
->>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 			        </li>
 			        
 			        <li class="nav-item">
