@@ -78,7 +78,7 @@ function tickSec() {
 }
 
 function play() {
-    intervalID = setInterval(tickSec,100)
+    intervalID = setInterval(tickSec,1000)
     isPlay = true;
     control.innerHTML = `<i class="fas fa-pause"></i>`;
 }
