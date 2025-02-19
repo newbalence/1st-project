@@ -32,7 +32,6 @@
     <style>
          body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #e9f5ff, #ffffff);
             margin: 0;
             padding: 0;
             color: #333;

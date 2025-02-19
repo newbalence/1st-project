@@ -618,13 +618,6 @@
 					console.log("에러 발생");
 				}
 			});
-			if(cName == "bi-hand-thumbs-up"){
-				push.attr("class", "bi-hand-thumbs-up-fill");
-			}else if(cName == "bi-hand-thumbs-up-fill"){
-				push.attr("class", "bi-hand-thumbs-up");
-			}else{
-				return;
-			}
 		});
 		
 		

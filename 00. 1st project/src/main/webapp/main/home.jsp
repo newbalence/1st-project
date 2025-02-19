@@ -19,13 +19,12 @@
 	
 	favoritDAO fdao = new favoritDAO();
 	List<favoritVO> flist = fdao.selFavorit(id);
-	String topTitle = "";
-	String boardType = "";
+	
 	
 	BoardDAO bdao = new BoardDAO();
 	List<BoardVO> blist = bdao.homePushBoard();
 	
-	
+	String boardType = "";
 	
 	
 	
@@ -166,8 +165,19 @@
 				border: 1px solid;
 			    border-radius: 15px;
 			}
+			.doneList{
+				margin-bottom: 150px;
+				display: none;
+			}
+			
 			.list_category{
 			    font-size: 25px;
+		    }
+		    #link_tab, {
+		    	cursor: pointer;
+		    }
+		    .int_headText{
+		    	cursor: pointer;
 		    }
 		</style>
 	</head>
@@ -221,6 +231,7 @@
 												for(int i = 0; i < flist.size(); i++){
 													favoritVO fvo = flist.get(i);
 													boardType = fvo.getBoard_type();
+													String topTitle = "";
 													
 													if(boardType.equals("1")){
 														topTitle= "공부";
@@ -243,78 +254,25 @@
 													}
 													
 													%>
-													<a class="link_tab" >
-														<span class="int_headText"><%= topTitle %></span>
+													<a class="link_tab" onclick="boardTypeClick(this)">
+														<span class="int_headText" data-boardtype="<%= boardType %>"><%= topTitle %></span>
 													</a>
 													<%
 												}
 											%>
 											</div>
 										</div>
-
 										<div class="intList">
-											<h2 class="screen_out">board_type =choice</h2>
+											<a class="link_cont" id="link"><h2 class="screen_out" id="board_choice"></h2></a>
 											<div class="int_top">
-												<%
-													for(int i = 0; i < 5; i++){
-														%>
-														<div class="item_group">
-															<a class="link_cont" href="#">
-																<div class="wrap_int">
-																	<strong class="tit_int">board_title</strong>
-																	
-																	<div class="wrap_btn">
-																		<span class="done_txt">board_create_date</span>
-																		<span class="int_btn">
-																			<span class="icon_like">hit</span>
-																			<span class="int_txt">hit_count</span> <!-- 추천 수 가져오기 -->
-																		</span>
-																		<span class="int_btn">
-																			<span class="icon_comment">reply</span>
-																			<span class="int_txt">reply_count</span> <!-- 댓글 수 가져오기 -->
-																		</span>
-																	</div>
-																	<div class="wrap_desc">
-																		<p class="desc_int">board_content</p>
-																	</div>
-																</div>
-															</a>
-														</div>
-														<%
-													}
-												%>
+												
 											</div>
 										</div>
 									</div>
 									<div class="doneList">
-										<h2 class="screen_out">list_type = 인증</h2> <!-- 여긴 최신글로 -->
+										<a class="link_cont" id="listLink"><h2 class="screen_out">인증</h2></a> <!-- 여긴 최신글로 -->
 										<div class="done_top">
-										<%
-											for(int i = 0; i< 3; i++){
-												%>
-												<div class="item_group">
-													<a class="link_cont" href="#">
-														<div class="wrap_done">
-															<strong class="tit_done">board_title</strong>
-															<div class="wrap_btn">
-																<span class="done_btn">
-																	<span class="icon_like">hit</span>
-																	<span class="done_txt">hit_count</span> <!-- 추천 수 가져오기 -->
-																</span>
-																<span class="done_btn">
-																	<span class="icon_comment">reply</span>
-																	<span class="done_txt">reply_count</span> <!-- 댓글 수 가져오기 -->
-																</span>
-															</div>
-															<div class="wrap_desc">
-																<p class="desc_done">board_contene</p>
-															</div>
-														</div>
-													</a>
-												</div>
-												<%
-											}
-										%>
+										
 										</div>
 									</div>
 								</div>
@@ -331,6 +289,16 @@
 								%>
 								
 								<button type="button" class="btn btn-dark login-btn" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">시작하기</button>
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+								<button type="button" class="btn btn-dark login-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+=======
+								<button type="button" class="btn btn-dark login-btn" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+>>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
+>>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
+>>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								  	<div class="modal-dialog">
 								    	<div class="modal-content">
@@ -420,8 +388,111 @@
 			</div>
 		</div>
 	</body>
-	<script>
-	
+	<script> 
+		//onclick="location.href='../board/board.jsp?boardType='"	
+		
+
+		function boardTypeClick(obj){
+			let choice = $(obj).children();
+			let boardType = choice.data("boardtype");
+			let text = choice.text();
+			$("#link").attr("href", "../board/board.jsp?boardType=" + boardType);
+			$("#board_choice").text(text);
+			$("#listLink").attr("href", "../board/board.jsp?boardType=" + boardType + "&listType=1");
+			$.ajax({
+				url : "../main/homeBoard.jsp",
+				type : "post",
+				data : {
+					boardType : boardType
+				},
+				success : function(result){
+					let data = JSON.parse(result.trim());
+					let html = "";
+					for(let i = 0; i < data.length; i++){
+						html += `<div class="item_group">
+							<a class="link_cont" href="../board/post.jsp?bno=`+data[i].bno+`&boardType=` + data[i].boardType + `">
+							<div class="wrap_int">
+								<strong class="tit_int">`+data[i].title+`</strong>
+								
+								<div class="wrap_btn">
+									<span class="done_txt">`+data[i].createDate.split(" ")[0]+`</span>
+									<span class="int_btn">
+										<span class="icon_like">추천수</span>
+										<span class="int_txt">`+data[i].hit+`</span> <!-- 추천 수 가져오기 -->
+									</span>
+									<span class="int_btn">
+										<span class="icon_comment">댓글수</span>
+										<span class="int_txt">`+data[i].reply+`</span> <!-- 댓글 수 가져오기 -->
+									</span>
+								</div>
+								<div class="wrap_desc">
+									<p class="desc_int">`+data[i].content+`</p>
+								</div>
+							</div>
+						</a>
+					</div>`
+					}
+					
+					$(".int_top").html(html);
+				},
+				error : function(){
+					console.log("에러 발생")
+				}	
+			});
+			
+			$.ajax({
+				url : "../main/secondboard.jsp",
+				type : "post",
+				data : {
+					boardType : boardType
+				},
+				success : function(result){
+					console.log(result);
+					let data = JSON.parse(result.trim());
+					let html = "";
+					$(".doneList").css("display", "block");
+					
+					for(let i = 0; i < data.length; i++){
+						html += `<div class="item_group">
+							<a class="link_cont" href="../board/post.jsp?bno=` + data[i].bno + `&boardType=` + data[i].boardType + `">
+							<div class="wrap_done">
+								<strong class="tit_done">` + data[i].title + `</strong>
+								<div class="wrap_btn">
+									<span class="done_btn">
+										<span class="icon_like">추천수</span>
+										<span class="done_txt">` + data[i].hit + `</span> <!-- 추천 수 가져오기 -->
+									</span>
+									<span class="done_btn">
+										<span class="icon_comment">댓글수</span>
+										<span class="done_txt">` + data[i].replt + `</span> <!-- 댓글 수 가져오기 -->
+									</span>
+								</div>
+								<div class="wrap_desc">
+									<p class="desc_done">` + data[i].content + `</p>
+								</div>
+							</div>
+						</a>
+					</div>`
+					}
+					
+					console.log(data);
+					$(".done_top").html(html);
+				},
+				error : function(){
+					console.log("에러 발생")
+				}	
+			});
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		
 		if ("geolocation" in navigator) {
 		  console.log("가능");
 		} else {
