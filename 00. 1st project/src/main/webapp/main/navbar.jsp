@@ -251,7 +251,6 @@
             z-index: 999;
         }
         .login-container {
-<<<<<<< HEAD
 	            background: white;
 	            padding: 30px 40px;
 	        }
@@ -333,7 +332,6 @@
 	        .nav-goal:hover .goal-dropdown {
 	        	display: block;
 	        }
-=======
             background: white;
             padding: 30px 40px;
         }
@@ -428,7 +426,6 @@
     	#unlogin{
     		cursor: pointer;
     	}
->>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 	</style>
 	<script>
 		function toggleMenu() {
@@ -476,9 +473,6 @@
 			        </li>
 			        
 			        <li class="nav-item">
-<<<<<<< HEAD
-			        	<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
-=======
 						<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
 						<ul class="depth_1">
 					      <li><a href="../board/board.jsp?boardType=1">공부</a></li>
@@ -490,7 +484,6 @@
 					      <li><a href="../board/board.jsp?boardType=7">우표</a></li>
 					      <li><a href="../board/board.jsp?boardType=8">야구</a></li>
 						</ul>
->>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 			        </li>
 			        
 			        <li class="nav-item">
