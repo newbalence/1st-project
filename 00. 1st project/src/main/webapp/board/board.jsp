@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/navbar.jsp" %>
+<%@ include file="../main/comMenu.jsp" %>
 <%
 	BoardDAO bdao = new BoardDAO();
 	
