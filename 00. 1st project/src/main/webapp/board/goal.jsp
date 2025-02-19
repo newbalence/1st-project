@@ -129,6 +129,8 @@
       	width: 20px;
       	text-align: -webkit-center;
       	margin-right: 10px;
+      	z-index: 1;
+      	cursor: pointer;
       }
       
       .editCom {
@@ -185,6 +187,7 @@
       	position: absolute;
       	z-index: 1;
       	left: calc(50% + 185px);
+      	cursor: pointer;
       }
       
       .editBtn a {
@@ -243,10 +246,10 @@
 						int cnt = vo.getCnt();
 						%>
 							<div class="each-goal" onclick="location.href='../goal/goalTimer.jsp?no=<%= goalNo %>'">
-								<i class="goal-edit fa-solid fa-ellipsis-vertical" onclick="editMenu(this)"></i>
+								<i class="goal-edit fa-solid fa-ellipsis-vertical" onclick="event.stopPropagation(); editMenu(this)"></i>
 								<div class="editBtn" >
-									<a onclick="modifyGoal(<%= goalNo %>, this)">수정</a>
-									<a onclick="removeGoal(<%= goalNo %>, this)">삭제</a>
+									<a onclick="event.stopPropagation(); modifyGoal(<%= goalNo %>, this)">수정</a>
+									<a onclick="event.stopPropagation(); removeGoal(<%= goalNo %>, this)">삭제</a>
 								</div>
 								<button class="editCom">완료</button>
 								<div class="contents">
@@ -374,8 +377,6 @@
 		
 		
 		
-		
-		
 		/* 항목 자체를 input 타입으로 만들어서 값을 입력 받는 방식 */
 		/* input 타입에서 다시 h3, div로 변경도 해 줘야 함...... */
 		/* const title = $(obj).parent().parent().children(".contents").children(".goal-title");
@@ -412,10 +413,10 @@
 			success : function(result){
 				console.log(result.trim());
 				let html = '<div class="each-goal" onclick="location.href=`../goal/goalTimer.jsp?no='+result.trim()+'`">';
-				html +=			'<i class="goal-edit fa-solid fa-ellipsis-vertical" onclick="editMenu(this)"></i>';
+				html +=			'<i class="goal-edit fa-solid fa-ellipsis-vertical" onclick="event.stopPropagation(); editMenu(this)"></i>';
 				html += 			'<div class="editBtn">';
-				html +=					'<a onclick="modifyGoal('+result.trim()+', this)">수정</a>';
-				html +=					'<a onclick="removeGoal(' + result.trim() + ', this)">삭제</a>';
+				html +=					'<a onclick="event.stopPropagation(); modifyGoal('+result.trim()+', this)">수정</a>';
+				html +=					'<a onclick="event.stopPropagation(); removeGoal(' + result.trim() + ', this)">삭제</a>';
 				html +=				'</div>';
 				html += 			'<button class="editCom">완료</button>';
 				html +=			'<div class="contents">';
