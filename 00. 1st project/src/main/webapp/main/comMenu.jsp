@@ -21,6 +21,7 @@
 		margin: 0 auto;
 		justify-content: center;
   		flex-wrap: nowrap;
+    	background: white;
 	}
 	
 	.menu-search {
@@ -51,9 +52,17 @@
 	    height: 60px;
 	}
 	
-    .lnb>ul {display: flex;
-      justify-content: center;
-      text-align: center;
+    .lnb>ul {
+    	display: flex;
+	      justify-content: center;
+	      text-align: center;
+	      padding-left: 0px;
+      	background: transparent;
+      	margin-bottom : 0px;
+    }
+    
+    .lnb > ul > li{
+    	background: transparent;
     }
     
     .lnb a {
@@ -61,7 +70,7 @@
         width: 150px;
         height: 60px; 
         text-align: center; 
-        background-color: white;
+        background-color: transparent;
         color: black;
     }
     
@@ -73,8 +82,13 @@
     	display: none; position: absolute;
     }
     
+    .subMenu > li {
+    	display : block;
+    }
+    
     .lnb>ul>li:hover .subMenu {
     	display: block;
+    	padding-left : 0px;
     }
     
     .lnb>ul>li:hover>a { 
