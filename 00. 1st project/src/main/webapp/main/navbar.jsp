@@ -445,29 +445,15 @@
 			          		<!-- <a class="nav-link" href="../goal/goalTimer.jsp">목표</a> -->
 			          		<a class="nav-link" href="../board/goal.jsp">목표</a>
 						        <div class="goal-dropdown">
-						        	<a href="../board/goal.jsp">나의 목표</a>
-						        	<a href="../board/pomodoro.jsp">뽀모도로</a>
-						        	<a href="../board/report.jsp">보고서</a>
+						        	<a href="../goal/goal.jsp">나의 목표</a>
+						        	<a href="../goal/pomodoro.jsp">뽀모도로</a>
+						        	<a href="../goal/report.jsp">보고서</a>
 						        </div>
 			          	<%} %>
 			        </li>
 			        
 			        <li class="nav-item">
-<<<<<<< HEAD
 			        	<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
-=======
-						<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
-						<ul class="depth_1">
-					      <li><a href="../board/board.jsp?boardType=1">공부</a></li>
-					      <li><a href="../board/board.jsp?boardType=2">독서</a></li>
-					      <li><a href="../board/board.jsp?boardType=3">축구</a></li>
-					      <li><a href="../board/board.jsp?boardType=4">런닝</a></li>
-					      <li><a href="../board/board.jsp?boardType=5">헬스</a></li>
-					      <li><a href="../board/board.jsp?boardType=6">여행</a></li>
-					      <li><a href="../board/board.jsp?boardType=7">우표</a></li>
-					      <li><a href="../board/board.jsp?boardType=8">야구</a></li>
-						</ul>
->>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 			        </li>
 			        
 			        <li class="nav-item">
