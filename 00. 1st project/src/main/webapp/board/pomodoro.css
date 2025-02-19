@@ -72,7 +72,7 @@ body {
     height: calc(50% - .3em);
     top: .3em;
 
-    background: rgb(255, 57, 50);
+    background: #c40000;
     z-index: 2;
     transform-origin: bottom;
 }
@@ -117,7 +117,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 17px;
-    color: rgb(255, 57, 50);
+    color: #c40000;
 }
 .control:active {
     transform: scale(.96);
