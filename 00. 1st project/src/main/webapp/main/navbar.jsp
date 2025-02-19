@@ -73,6 +73,7 @@
 			line-height: 40px;
 		}
 		.nav-item {
+			line-height: 2.5;
 			color:var(--bs-black);
 			position: relative;
 			margin: 0 5px 0 10px;

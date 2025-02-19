@@ -28,6 +28,7 @@
 		outline: none;
 		margin: 0;
 		padding-left: 20px;
+		width: auto;
 	}
 	
 	.menu-search:focus {
@@ -47,7 +48,7 @@
 	
 	li {
 	    list-style-type: none;
-	    height: 50px;
+	    height: 60px;
 	}
 	
     .lnb>ul {display: flex;
@@ -58,11 +59,14 @@
     .lnb a {
     	display: block;
         width: 150px;
-        height: 50px; 
+        height: 60px; 
         text-align: center; 
-        line-height: 50px;
         background-color: white;
         color: black;
+    }
+    
+    .com-menu {
+	    line-height: 60px;
     }
     
     .subMenu { 
@@ -85,13 +89,13 @@
     
     .search-box {
     	display: flex;
-    	height: 50px;
+    	height: 60px;
     	justify-content: flex-end;
     }
     
     .search-icon {
-    	height: 50px;
-    	line-height: 50px;
+    	height: 60px;
+    	line-height: 60px;
     	font-size: 18px;
     	background-color: white;
     	padding-right: 10px;
@@ -99,14 +103,19 @@
     
     input {
     	border-radius: 0;
-    	height: 50px;
+    	height: 60px;
     }
 	
+	.box {
+	    background-color: white;
+	    width: 100%;
+	    height: 60px;
+	}
 </style>
 </head>
 <body>
 	<div class="lnb">
-		
+		<div class="box"></div>
 		<div class="search-box">
 			<input type="text" id="search" class="menu-search" autocomplete="off">
 			<i onclick="searchMenu()" class="fa fa-search search-icon"></i>
@@ -114,71 +123,78 @@
 		
 		<ul>
 						
-			<li><a href="#">전체</a>
+			<li><a href="#" class="com-menu" class="com-menu">전체</a>
 				<ul class="subMenu">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
+
 				</ul>
 			</li>
 			
-			<li><a href="#">실내취미</a>
+			<li><a href="#" class="com-menu" class="com-menu">실내취미</a>
 				<ul class="subMenu">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
+					<li><a href="#" class="com-menu" class="com-menu">보드 게임</a></li>
+					<li><a href="#" class="com-menu">캘리그래피</a></li>
+					<li><a href="#" class="com-menu">요리</a></li>
+					<li><a href="#" class="com-menu">코스프레</a></li>
+					<li><a href="#" class="com-menu">영화/드라마</a></li>
+					<li><a href="#" class="com-menu">뜨개질</a></li>
+					<li><a href="#" class="com-menu">음악 감상</a></li>
+					<li><a href="#" class="com-menu">종이접기</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#">실외취미</a>
+			<li><a href="#" class="com-menu">실외취미</a>
 				<ul class="subMenu">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
+					<li><a href="#" class="com-menu">하이킹</a></li>
+					<li><a href="#" class="com-menu">승마</a></li>
+					<li><a href="#" class="com-menu">등산</a></li>
+					<li><a href="#" class="com-menu">암벽등반</a></li>
+					<li><a href="#" class="com-menu">러닝</a></li>
+					<li><a href="#" class="com-menu">스쿠버 다이빙</a></li>
+					<li><a href="#" class="com-menu">수영</a></li>
+					<li><a href="#" class="com-menu">스키</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#">수집취미</a>
+			<li><a href="#" class="com-menu">수집취미</a>
 				<ul class="subMenu">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
+					<li><a href="#" class="com-menu">피규어</a></li>
+					<li><a href="#" class="com-menu">트레이딩 카드</a></li>
+					<li><a href="#" class="com-menu">골동품 수집</a></li>
+					<li><a href="#" class="com-menu">우표 수집</a></li>
+					<li><a href="#" class="com-menu">주화 수집</a></li>
+					<li><a href="#" class="com-menu">금속 탐지</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#">경쟁취미</a>
+			<li><a href="#" class="com-menu">경쟁취미</a>
 				<ul class="subMenu">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
+					<li><a href="#" class="com-menu">축구</a></li>
+					<li><a href="#" class="com-menu">야구</a></li>
+					<li><a href="#" class="com-menu">체스</a></li>
+					<li><a href="#" class="com-menu">바둑</a></li>
+					<li><a href="#" class="com-menu">배드민턴</a></li>
+					<li><a href="#" class="com-menu">당구</a></li>
+					<li><a href="#" class="com-menu">포커</a></li>
+					<li><a href="#" class="com-menu">마작</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#">관찰취미</a>
+			<li><a href="#" class="com-menu">관찰취미</a>
 				<ul class="subMenu">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
+					<li><a href="#" class="com-menu">여행</a></li>
+					<li><a href="#" class="com-menu">타로</a></li>
+					<li><a href="#" class="com-menu">천문</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#">기타</a>
+			<li><a href="#" class="com-menu">기타</a>
 				<ul class="subMenu">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
+					<li><a href="#" class="com-menu">학습</a></li>
 				</ul>
 			</li>
 			
 		</ul>
-	
+		<div class="box"></div>
 	</div>
 </body>
 <script>
