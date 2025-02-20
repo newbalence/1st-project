@@ -1,6 +1,21 @@
+<%@page import="goal.reportDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/navbar.jsp" %>
+<%
+	reportDAO dao = new reportDAO();
+	int focusCount = dao.focusCount(user.getId());
+	int focusTime = dao.focusTime(user.getId());
+	int completeCount = dao.completeCount(user.getId());
+	int timeAvg = dao.timeAvg(user.getId());
+	
+	int countMonth = dao.countMonth(user.getId());
+	int timeMonth = dao.timeMonth(user.getId());
+	int dayMonth = dao.dayMonth(user.getId());
+	int avgMonth = dao.avgMonth(user.getId());
+
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,35 +91,39 @@
 					<div class="reportAll">
 						<div class="eachItem">
 							<div class="numAtt">집중횟수</div>
-							<div class="countNum">N 회</div>
+							<div class="countNum"><%= focusCount %> 회</div>
 						</div>
 						<div class="eachItem">
 							<div class="timeAtt">집중시간</div>
-							<div class="countTime">N 분</div>
+							<div class="countTime"><%= focusTime %> 분</div>
 						</div>
+						<div class="eachItem">
+							<div class="achiveNum">완료한 목표 개수</div>
+							<div class="countAchive"><%= completeCount %> 개</div>
+						</div>					
+						<div class="eachItem">
+							<div class="avgTime">평균 집중 시간</div>
+							<div class="countAvg"><%= timeAvg %> 분</div>
+						</div>					
 					</div>
 					
 					<div class="reportSub">
 						<div class="eachItem">
 							<div class="monthlyAtt">이번 달 집중 횟수</div>
-							<div class="countMonthly">N 회</div>
+							<div class="countMonthly"><%= countMonth %> 회</div>
 						</div>					
 						<div class="eachItem">
 							<div class="monthlyTime">이번 달 집중 시간</div>
-							<div class="count-MonTime">N 분</div>
+							<div class="count-MonTime"><%= timeMonth %> 분</div>
 						</div>					
+							<div class="eachItem">
+								<div class="monthlyDate">이번 달 집중한 날</div>
+								<div class="countDate"> <%= dayMonth %> 일</div>
+						</div>
 						<div class="eachItem">
-							<div class="monthlyDate">이번 달 집중한 날</div>
-							<div class="countDate">N / N 회</div>
-						</div>					
-						<div class="eachItem">
-							<div class="achiveNum">완료한 목표 개수</div>
-							<div class="countAchive">N 개</div>
-						</div>					
-						<div class="eachItem">
-							<div class="avgTime">평균 집중 시간</div>
-							<div class="countAvg">N 분</div>
-						</div>					
+								<div class="monthlyDate">이번 달 평균 집중 시간</div>
+								<div class="countDate"><%= avgMonth %> 분</div>
+						</div>
 					</div>
 				</div>
 				
