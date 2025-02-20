@@ -41,7 +41,7 @@
 	    </div>
 	
 	    <div class="button-container">
-	        <button id="control" class="control"><i class="fas fa-pause"></i></button>
+	        <button id="control" class="control"><i class="fas fa-play"></i></button>
 	    </div>
     </div>
 

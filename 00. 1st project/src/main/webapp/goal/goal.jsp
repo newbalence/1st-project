@@ -78,6 +78,7 @@
 	}
 	
 	.each-goal {
+		cursor: pointer;
 		position:relative;
 		display: block;
 		flex-direction: column;
@@ -168,6 +169,7 @@
       }
       
       .contents {
+      	
       	display: flex;
       }
       

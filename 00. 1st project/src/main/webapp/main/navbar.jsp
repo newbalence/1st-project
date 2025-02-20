@@ -404,26 +404,6 @@
 			line-height:40px;
 			color:black;
 		}
-		.menu > li:hover .depth_1 {display:block;}
-		.depth_1 > li > a:hover{
-			display:block;
-			color:red;
-		}
-		.menu .depth_1{
-			display:none; 
-			position:absolute; 
-			left:-156px;
-			right:0;
-			text-align:center;
-		}
-		.menu .depth_1 a{
-			display:block; 
-			padding:5px; 
-			background:white; 
-			color:black; 
-			width: 60px;
-    		font-size: 20px;
-    	}
     	#unlogin{
     		cursor: pointer;
     	}
@@ -464,16 +444,17 @@
 			          		<a class="nav-link" id="unlogin" onclick="alert('로그인 후 사용 가능합니다.')">목표</a>
 			          	<%}else{%>
 			          		<!-- <a class="nav-link" href="../goal/goalTimer.jsp">목표</a> -->
-			          		<a class="nav-link" href="../board/goal.jsp">목표</a>
+			          		<a class="nav-link" href="../goal/goal.jsp">목표</a>
 						        <div class="goal-dropdown">
-						        	<a href="../board/goal.jsp">나의 목표</a>
-						        	<a href="../board/pomodoro.jsp">뽀모도로</a>
-						        	<a href="../board/report.jsp">보고서</a>
+						        	<a href="../goal/goal.jsp">나의 목표</a>
+						        	<a href="../goal/pomodoro.jsp">뽀모도로</a>
+						        	<a href="../goal/report.jsp">보고서</a>
 						        </div>
 			          	<%} %>
 			        </li>
 			        
 			        <li class="nav-item">
+<<<<<<< HEAD
 						<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
 						<!-- <ul class="depth_1">
 					      <li><a href="../board/board.jsp?boardType=1">공부</a></li>
@@ -485,6 +466,9 @@
 					      <li><a href="../board/board.jsp?boardType=7">우표</a></li>
 					      <li><a href="../board/board.jsp?boardType=8">야구</a></li>
 						</ul> -->
+=======
+			        	<a class="nav-link" href="../board/board.jsp">커뮤니티</a>
+>>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 			        </li>
 			        
 			        <li class="nav-item">
