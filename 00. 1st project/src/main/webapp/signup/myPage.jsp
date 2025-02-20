@@ -1,3 +1,4 @@
+<%@page import="board.ConvertBoardType"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/navbar.jsp" %>
@@ -188,14 +189,45 @@
    	            		<li>
 	   	            	<label for="hobby">취미</label>
 			            <select id="hobby" name="hobby">
-			            	<option value="1" <%= user.getHobby().equals("1") ? "selected" : "" %>>공부</option> <!-- 기타 -->
-							<option value="2" <%= user.getHobby().equals("2") ? "selected" : "" %>>독서</option> <!-- 기타 -->
-							<option value="3" <%= user.getHobby().equals("3") ? "selected" : "" %>>축구</option> <!-- 경쟁 -->
-							<option value="4" <%= user.getHobby().equals("4") ? "selected" : "" %>>런닝</option> <!-- 개인 -->
-							<option value="5" <%= user.getHobby().equals("5") ? "selected" : "" %>>헬스</option> <!-- 개인 -->
-							<option value="6" <%= user.getHobby().equals("6") ? "selected" : "" %>>여행</option> <!-- 개인 -->
-							<option value="7" <%= user.getHobby().equals("7") ? "selected" : "" %>>우표</option> <!-- 수집 -->
-							<option value="8" <%= user.getHobby().equals("8") ? "selected" : "" %>>야구</option> <!-- 경쟁 -->
+							<option value="1"><%= ConvertBoardType.getBoardTye("1") %></option>
+							<option value="2"><%= ConvertBoardType.getBoardTye("2") %></option>
+							<option value="3"><%= ConvertBoardType.getBoardTye("3") %></option>
+							<option value="4"><%= ConvertBoardType.getBoardTye("4") %></option>
+							<option value="5"><%= ConvertBoardType.getBoardTye("5") %></option>
+							<option value="6"><%= ConvertBoardType.getBoardTye("6") %></option>
+							<option value="7"><%= ConvertBoardType.getBoardTye("7") %></option>
+							<option value="8"><%= ConvertBoardType.getBoardTye("8") %></option>
+							
+							<option value="10"><%= ConvertBoardType.getBoardTye("10") %></option>
+							<option value="11"><%= ConvertBoardType.getBoardTye("11") %></option>
+							<option value="12"><%= ConvertBoardType.getBoardTye("12") %></option>
+							<option value="13"><%= ConvertBoardType.getBoardTye("13") %></option>
+							<option value="14"><%= ConvertBoardType.getBoardTye("14") %></option>
+							<option value="15"><%= ConvertBoardType.getBoardTye("15") %></option>
+							<option value="16"><%= ConvertBoardType.getBoardTye("16") %></option>
+							<option value="17"><%= ConvertBoardType.getBoardTye("17") %></option>
+							
+							<option value="20"><%= ConvertBoardType.getBoardTye("20") %></option>
+							<option value="21"><%= ConvertBoardType.getBoardTye("21") %></option>
+							<option value="22"><%= ConvertBoardType.getBoardTye("22") %></option>
+							<option value="23"><%= ConvertBoardType.getBoardTye("23") %></option>
+							<option value="24"><%= ConvertBoardType.getBoardTye("24") %></option>
+							<option value="25"><%= ConvertBoardType.getBoardTye("25") %></option>
+							
+							<option value="30"><%= ConvertBoardType.getBoardTye("30") %></option>
+							<option value="31"><%= ConvertBoardType.getBoardTye("31") %></option>
+							<option value="32"><%= ConvertBoardType.getBoardTye("32") %></option>
+							<option value="33"><%= ConvertBoardType.getBoardTye("33") %></option>
+							<option value="34"><%= ConvertBoardType.getBoardTye("34") %></option>
+							<option value="35"><%= ConvertBoardType.getBoardTye("35") %></option>
+							<option value="36"><%= ConvertBoardType.getBoardTye("36") %></option>
+							<option value="37"><%= ConvertBoardType.getBoardTye("37") %></option>
+							
+							<option value="40"><%= ConvertBoardType.getBoardTye("40") %></option>
+							<option value="41"><%= ConvertBoardType.getBoardTye("41") %></option>
+							<option value="42"><%= ConvertBoardType.getBoardTye("42") %></option>
+							
+							<option value="50"><%= ConvertBoardType.getBoardTye("50") %></option>
 			            </select>
 			            </li>
 		            </ul>

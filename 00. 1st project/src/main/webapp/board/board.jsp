@@ -1,3 +1,4 @@
+<%@page import="board.ConvertBoardType"%>
 <%@page import="favorit.favoritDAO"%>
 <%@page import="board.BoardVO"%>
 <%@page import="java.util.List"%>
@@ -61,25 +62,11 @@
 	if(listOrder == null){
 		listOrder = "";
 	}
-	String topTitle = "";
-	if(boardType.equals("1")){
-		topTitle= "공부";
-	}else if(boardType.equals("2")){
-		topTitle= "독서";
-	}else if(boardType.equals("3")){
-		topTitle= "축구";
-	}else if(boardType.equals("4")){
-		topTitle= "런닝";
-	}else if(boardType.equals("5")){
-		topTitle= "헬스";
-	}else if(boardType.equals("6")){
-		topTitle= "여행";
-	}else if(boardType.equals("7")){
-		topTitle= "우표수집";
-	}else if(boardType.equals("8")){
-		topTitle= "야구";
-	}else{
-		topTitle= "전체";
+	
+	String topTitle = ConvertBoardType.getBoardTye(boardType);
+	
+	if(topTitle == null || topTitle == "null" || topTitle.isEmpty() || topTitle == ""){
+		topTitle = "전체";
 	}
 	
 %>
@@ -303,8 +290,6 @@
 				<%
 			}
 			%>
-
-			
 			<select id="listType" name="listType">
 				<option value="" <%= listType.equals("") ? "selected" : ""  %>>전체</option>
 				<option value="1" <%= listType.equals("1") ? "selected" : ""  %>>인증</option>
@@ -427,9 +412,9 @@
 </body>
 <script>
 	$("#order").change(function(e){
-		console.log(e);
 		$("#typeForm").submit();
 	})
+	
 	$("#listType").change(function(e){
 		$("#typeForm").submit();
 	})
@@ -463,14 +448,14 @@
 					boardType : boardType
 				},
 				success : function (result){
-					if(result.trim() == "success"){
+					if(result.trim() < 5){
 						if(cName == "bi-star"){
 							favorit.attr("class", "bi-star-fill")
 						}else if(cName == "bi-star-fill"){
 							favorit.attr("class", "bi-star")
 						}
 					}else{
-						console.log("에러 발생");
+						alert("즐겨찾기는 최대 5개 까지 가능합니다.")
 					}
 					
 				},

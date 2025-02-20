@@ -12,214 +12,221 @@
     <title>pomodoro</title>
     <style>
     	body {
-		  background-color: #1e213f;
-		  color: #d7e0ff;
+		  background: url("https://static.pexels.com/photos/6663/desk-white-black-header.jpg") no-repeat center center fixed;
+		  background-size: cover; 
 		}
-		.container {
+		.pomodoro {
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  width: 500px;  
+		  padding-top: 15px;
+		  padding-bottom: 25px;  
+		}
+		p {
 		  text-align: center;
-		  width: 100%;
-		  padding: 10px 0;
 		}
-		
-		.timer {
-		  display: inline-block;
-		  padding: 10px;
-		  width: 600px;
-		  box-sizing: border-box;
-		}
-		h1 {
-		  font-size: 2em;
-		  width: 8ch;
-		  margin: 20px auto;
-		}
-		.button-container {
-		  margin-top: 20px;
+		.flip-clock-wrapper{
+		  max-width: 460px;
+		  margin: 3em auto 2em;
 		  display: flex;
 		  justify-content: center;
 		}
-		.button {
-		  background-color: #2e325a;
-		  color: #fff;
-		  border: none;
-		  border-radius: 5px;
-		  padding: 10px 20px;
-		  margin: 5px;
-		  cursor: pointer;
+		.col-md-4{
+		  display: flex;
+		  justify-content: center;
 		}
-		.button:hover {
-		  background-color: #f87070;
+		.col-md-2{
+		  display: flex;
+		  justify-content: center;
+		  height: 34px;
+		  align-items: center;
 		}
-		.hidden {
-		  display: block;
+		.counter{
+		  display: flex;
+		  justify-content: center;
 		}
-		.timer-display {
-		  font-size: 5em;
-		  margin-top: 20px;
+		.clock{
+		  margin-top: 30px;
+		}
+		.container {
+		  width: 500px;
+		}
+		.middle{
+		    display:inline-block;
+		}
+		#btns{
+		  display: flex;
+		  justify-content: center;
+		}
+		#stop {
+		  margin-left: 10px;
+		  margin-right: 10px;
+		}
+		.btn {
+		  background-color: #333333;
+		  color: #CCCCCC;
+		}
+		#sessInc, #sessDec, #breakInc, #breakDec {  
 		  font-weight: bold;
 		}
-		#buttons {
-		  margin-top: 20px;
+		#stats {
+		  background-color: #333333;
+		  width: 220px;
+		  height: 70px;  
+		  border-radius: 10px;
+		  color: #CCCCCC;
+		  font-size: 45px;
+		  text-align: center;
 		}
-		#start,
-		#stop,
-		#reset {
-		  background-color: #2e325a;
-		  color: #fff;
-		  border: none;
-		  border-radius: 5px;
-		  padding: 10px 20px;
-		  margin: 10px;
-		  cursor: pointer;
+		#statRow {
+		  display: flex;
+		  justify-content: center;
+		  margin-bottom: 20px;
 		}
-		
-		#reset:hover {
-		  background-color: #808080;
-		}
-		
-		#stop:hover {
-		  background-color: tomato;
-		}
-		#start:hover {
-		  background-color: #219a52;
-		}
-		 #timer-message {
-		   color: white;
-		   background-color: tomato;
-		   display: none;
-		   padding: .5em;
-		   font-size: 1em;
-		   text-align: center;
-		   border-radius: 1em;
-		      }
     </style>
 </head>
 
 <body>
-    <div id="timer-message">Please select a timer before starting.</div>
-
-	<div class="container">
-	      <div class="timer">
-	        <h1>🍅 Pomodoro Timer</h1>
-	
-	        <div class="button-container">
-	          <button class="button" id="pomodoro-session">Pomodoro</button>
-	          <button class="button" id="short-break">Short Break</button>
-	          <button class="button" id="long-break">Long break</button>
+   <div class="pomodoro">
+	  <div class="row">
+	    <div class="col-md-6">
+	      <div class="row"><p>session length<p></div>
+	      <div class="row counter">
+	        <div class="col-md-4">
+	          <button class="btn btn-default" id="sessDec">-</button>        
 	        </div>
-	
-	        <div id="pomodoro-timer" class="timer-display" data-duration="25.00">
-	          25:00
+	        <div class="col-md-2">
+	          <div id="session"></div>
 	        </div>
-	
-	        <div id="short-timer" class="timer-display" data-duration="5.00">
-	          5:00
-	        </div>
-	
-	        <div id="long-timer" class="timer-display" data-duration="10.00">
-	          10:00
-	        </div>
-	
-	        <div id="buttons">
-	          <button id="start">START</button>
-	          <button id="stop">STOP</button>
-	          <button id="reset">RESET</button>
+	        <div class="col-md-4">
+	          <button class="btn btn-default" id="sessInc">+</button>
 	        </div>
 	      </div>
 	    </div>
+	
+	    <div class="col-md-6">
+	      <div class="row"><p>break length<p></div>
+	      <div class="row counter">
+	        <div class="col-md-4">
+	          <button class="btn btn-default" id="breakDec">-</button>
+	        </div>
+	        <div class="col-md-2">
+	          <div id="break"></div>
+	        </div>
+	        <div class="col-md-4">
+	          <button class="btn btn-default" id="breakInc">+</button>        
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	    
+	  <div id="clock" class="row">
+	    <div class="timer"><div class="middle"></div></div>
+	  </div>
+	  <div class="row" id="statRow">
+	    <div id="stats"></div>
+	  </div>
+	  <div class="container">
+	    <div class="row" id="btns">
+	      <button class="btn btn-default btn-lg" id="start">start</button>
+	      <button class="btn btn-default btn-lg" id="stop">stop</button>
+	      <button class="btn btn-default btn-lg" id="clear">clear</button>
+	    </div>
+	  </div>
+	     
+	</div>
 
 </body>
 <script>
-let pomodoro = document.getElementById("pomodoro-timer");
-let short = document.getElementById("short-timer");
-let long = document.getElementById("long-timer");
-let currentTimer = null;
-
-function showDefaultTimer() {
-  pomodoro.style.display = "block";
-  short.style.display = "none";
-  long.style.display = "none";
-}
-
-showDefaultTimer();
-
-function hideAll() {
-  let timers = document.querySelectorAll(".timer-display");
-  timers.forEach((timer) => (timer.style.display = "none"));
-}
-
-document
-  .getElementById("pomodoro-session")
-  .addEventListener("click", function () {
-    hideAll();
-
-    pomodoro.style.display = "block";
-    currentTimer = pomodoro;
-  });
-document
-  .getElementById("short-break")
-  .addEventListener("click", function () {
-    hideAll();
-
-    short.style.display = "block";
-    currentTimer = short;
-  });
-document
-  .getElementById("long-break")
-  .addEventListener("click", function () {
-    hideAll();
-
-    long.style.display = "block";
-    currentTimer = long;
-  });
-
-let myInterval = null;
-
-function startTimer(timerdisplay) {
-  if (myInterval) {
-    clearInterval(myInterval);
-  }
-
-  timerDuration = timerdisplay
-    .getAttribute("data-duration")
-    .split(":")[0];
-  console.log(timerDuration);
-
-  let durationinmiliseconds = timerDuration * 60 * 1000;
-  let endTimestamp = Date.now() + durationinmiliseconds;
-
-  myInterval = setInterval(function () {
-    const timeRemaining = new Date(endTimestamp - Date.now());
-
-    if (timeRemaining <= 0) {
-      clearInterval(myInterval);
-      timerdisplay.textContent = "00:00";
-      const alarm = new Audio(
-        "https://www.freespecialeffects.co.uk/soundfx/scifi/electronic.wav"
-      );
-      alarm.play();
-    } else {
-      const minutes = Math.floor(timeRemaining / 60000);
-      const seconds = ((timeRemaining % 60000) / 1000).toFixed(0);
-      const formattedTime = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-      console.log(formattedTime);
-      timerdisplay.textContent = formattedTime;
-    }
-  }, 1000);
-}
-
-document.getElementById("start").addEventListener("click", function () {
-  if (currentTimer) {
-      startTimer(currentTimer);
-      document.getElementById("timer-message").style.display = "none"; 
-  } else {
-      document.getElementById("timer-message").style.display = "block";
-  }
-});
-
-document.getElementById("stop").addEventListener("click", function () {
-  if (currentTimer) {
-    clearInterval(myInterval);
-  }
-});
+$(document).ready(function(){
+	  var countS = 25;
+	  $("#session").html(countS);
+	  var countB = 5;
+	  $("#break").html(countB);
+	  var pos = "pomodoro";
+	  var countLama;
+	  var posLama;
+	  var count;
+	  $("#stats").html(pos);
+	  var clock = $(".timer").FlipClock(0, {
+	    countdown: true,
+	    clockFace: 'MinuteCounter',
+	    autoStart: false,
+	    callbacks: {
+	      interval: function(){
+	        if (clock.getTime() == 0){
+	          if (pos == "session"){
+	            clock.setTime(countB*60);
+	            clock.start();
+	            pos = "break";
+	            $("#stats").html(pos);
+	          } else if (pos == "break"){
+	            clock.setTime(countS*60);
+	            clock.start();
+	            pos = "session";
+	            $("#stats").html(pos);
+	          }
+	        }        
+	      }
+	    }
+	  })  
+	  //SESSION
+	  $("#sessInc").on("click", function(){
+	    if ($("#session").html() > 0){
+	      countS = parseInt($("#session").html());
+	      countS+=1;
+	      $("#session").html(countS);
+	      //clock.setTime(countS*60);
+	    }
+	  });
+	  $("#sessDec").on("click", function(){
+	    if ($("#session").html() > 1){
+	      countS = parseInt($("#session").html());
+	      countS-=1;
+	      $("#session").html(countS);
+	      //clock.setTime(countS*60);
+	    }
+	  });
+	  //BREAK
+	  $("#breakInc").on("click", function(){
+	    if ($("#break").html() > 0){
+	      countB = parseInt($("#break").html());
+	      countB+=1;
+	      $("#break").html(countB);
+	    }    
+	  });
+	  $("#breakDec").on("click", function(){
+	    if ($("#break").html() > 1){
+	      countB = parseInt($("#break").html());
+	      countB-=1;
+	      $("#break").html(countB);
+	    }
+	  });  
+	  $("#start").on("click", function(){
+	    if (count != countS || clock.getTime()==0){
+	      clock.setTime(countS*60);
+	      pos="session";
+	      $("#stats").html(pos);
+	    } else {
+	      pos = posLama;
+	      $("#stats").html(pos);
+	    }
+	    count = countS;    
+	    clock.start();    
+	  });
+	  $("#stop").on("click", function(){
+	    clock.stop();
+	    countLama = clock.getTime();
+	    posLama = $("#stats").html();
+	  });
+	  $("#clear").on("click", function(){
+	    clock.stop();
+	    pos = "pomodoro";
+	    $("#stats").html(pos);
+	    clock.setTime(0);
+	  });
+	});
 </script>
 </html>

@@ -6,18 +6,18 @@
 	String boardType = request.getParameter("boardType");
 	
 	if(id == null || boardType == null){
-		out.print("fail");
+		out.print(5);
 		return;
 	}
 	
 	if(id.isEmpty() || boardType.isEmpty()){
-		out.print("fail");
+		out.print(5);
 		return;
 	}
 	
 	favoritDAO fdao = new favoritDAO();
-	fdao.clickFavorit(id, boardType);
-	out.print("success");
+	int count = fdao.clickFavorit(id, boardType);
+	out.print(count);
 	
 	
 %>

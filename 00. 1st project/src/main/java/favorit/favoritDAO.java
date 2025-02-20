@@ -14,6 +14,7 @@ public class favoritDAO extends DBManager {
 		DBConnect();
 		
 		String sql = "select * from favorit where id = '" + fid + "'";
+		sql += " limit 0, 5";
 		executeQuery(sql);
 		
 		List<favoritVO> list = new ArrayList<>();
@@ -48,24 +49,37 @@ public class favoritDAO extends DBManager {
 		return 0;
 	}
 	
-//	즐겨찾기 클릭시
-	public void clickFavorit(String id, String boardType) {
+//	즐겨찾기 클릭시 갯수 확인 후 DB 수정
+	public int clickFavorit(String id, String boardType) {
 		driverLoad();
 		DBConnect();
+		String sql = "select count(*) as count from favorit where id = '" + id + "';";
+		executeQuery(sql);
 		
-		String select = "select * from favorit where id = '" + id + "' and board_type = " + boardType;
-		executeQuery(select);
+		int count = 5;
 		
 		if(next()) {
-			String sql = "delete from favorit where id = '" + id + "' and board_type = " + boardType;
-			executeUpdate(sql);
-		}else {
-			String sql = "insert into favorit(id, board_type) ";
-			sql += "values('" + id + "', " + boardType + ");";
-			executeUpdate(sql);
+			count = getInt("count");
 		}
 		
+		if(count < 5) {
+			String select = "select * from favorit where id = '" + id + "' and board_type = " + boardType;
+			executeQuery(select);
+			
+			if(next()) {
+				String update = "delete from favorit where id = '" + id + "' and board_type = " + boardType;
+				executeUpdate(update);
+			}else {
+				String update = "insert into favorit(id, board_type) ";
+				update += "values('" + id + "', " + boardType + ");";
+				executeUpdate(update);
+			}
+			DBDisConnect();
+			return count;
+		}
 		DBDisConnect();
+		return 5;
+		
 	}
 	
 	

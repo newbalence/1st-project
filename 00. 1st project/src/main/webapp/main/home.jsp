@@ -1,3 +1,4 @@
+<%@page import="board.ConvertBoardType"%>
 <%@page import="board.BoardVO"%>
 <%@page import="board.BoardDAO"%>
 <%@page import="favorit.favoritVO"%>
@@ -179,6 +180,9 @@
 		    .int_headText{
 		    	cursor: pointer;
 		    }
+		    .favoritList{
+		    	font-size: 20px;
+		    }
 		</style>
 	</head>
 	<body>
@@ -231,28 +235,12 @@
 												for(int i = 0; i < flist.size(); i++){
 													favoritVO fvo = flist.get(i);
 													boardType = fvo.getBoard_type();
-													String topTitle = "";
 													
-													if(boardType.equals("1")){
-														topTitle= "공부";
-													}else if(boardType.equals("2")){
-														topTitle= "독서";
-													}else if(boardType.equals("3")){
-														topTitle= "축구";
-													}else if(boardType.equals("4")){
-														topTitle= "런닝";
-													}else if(boardType.equals("5")){
-														topTitle= "헬스";
-													}else if(boardType.equals("6")){
-														topTitle= "여행";
-													}else if(boardType.equals("7")){
-														topTitle= "우표수집";
-													}else if(boardType.equals("8")){
-														topTitle= "야구";
-													}else{
-														topTitle= "전체";
+													String topTitle = ConvertBoardType.getBoardTye(boardType);
+													
+													if(topTitle == null || topTitle == "null" || topTitle.isEmpty() || topTitle == ""){
+														topTitle = "전체";
 													}
-													
 													%>
 													<a class="link_tab" onclick="boardTypeClick(this)">
 														<span class="int_headText" data-boardtype="<%= boardType %>"><%= topTitle %></span>
@@ -260,6 +248,9 @@
 													<%
 												}
 											%>
+											<div>
+												<span class="favoritList">즐겨찾기는 최대 5개 까지 가능합니다.</span>
+											</div>
 											</div>
 										</div>
 										<div class="intList">
@@ -287,13 +278,8 @@
 						<%
 							if(user == null){
 								%>
-								<button type="button" class="btn btn-dark login-btn" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">시작하기</button>
-<<<<<<< HEAD
-								<button type="button" class="btn btn-dark login-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
-								<button type="button" class="btn btn-dark login-btn" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">로그인</button>
+								<button type="button" class="btn btn-dark login-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">시작하기</button>
 
-=======
->>>>>>> branch 'main' of https://github.com/newbalence/1st-project.git
 								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								  	<div class="modal-dialog">
 								    	<div class="modal-content">

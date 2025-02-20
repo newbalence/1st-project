@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +28,7 @@
 	}
 	
 	.menu-search {
+		
 		border: none;
 		outline: none;
 		margin: 0;
@@ -125,85 +129,88 @@
 	    width: 100%;
 	    height: 60px;
 	}
+	.search-icon{
+		cursor:pointer;
+	}
 </style>
 </head>
 <body>
 	<div class="lnb">
 		<div class="box"></div>
 		<div class="search-box">
-			<input type="text" id="search" class="menu-search" autocomplete="off">
+			<input type="text" id="comsearch" class="menu-search" autocomplete="off">
 			<i onclick="searchMenu()" class="fa fa-search search-icon"></i>
 		</div>
 		
 		<ul>
 						
-			<li><a href="#" class="com-menu" class="com-menu">전체</a>
+			<li><a href="../board/board.jsp" class="com-menu" class="com-menu">전체</a>
 				<ul class="subMenu">
 
 				</ul>
 			</li>
 			
-			<li><a href="#" class="com-menu" class="com-menu">실내취미</a>
+			<li><a href="../board/board.jsp?boardType=1" class="com-menu" class="com-menu">실내취미</a>
 				<ul class="subMenu">
-					<li><a href="#" class="com-menu" class="com-menu">보드 게임</a></li>
-					<li><a href="#" class="com-menu">캘리그래피</a></li>
-					<li><a href="#" class="com-menu">요리</a></li>
-					<li><a href="#" class="com-menu">코스프레</a></li>
-					<li><a href="#" class="com-menu">영화/드라마</a></li>
-					<li><a href="#" class="com-menu">뜨개질</a></li>
-					<li><a href="#" class="com-menu">음악 감상</a></li>
-					<li><a href="#" class="com-menu">종이접기</a></li>
+					<li><a href="../board/board.jsp?boardType=1" class="com-menu">보드 게임</a></li>
+					<li><a href="../board/board.jsp?boardType=2" class="com-menu">캘리그래피</a></li>
+					<li><a href="../board/board.jsp?boardType=3" class="com-menu">요리</a></li>
+					<li><a href="../board/board.jsp?boardType=4" class="com-menu">코스프레</a></li>
+					<li><a href="../board/board.jsp?boardType=5" class="com-menu">영화/드라마</a></li>
+					<li><a href="../board/board.jsp?boardType=6" class="com-menu">뜨개질</a></li>
+					<li><a href="../board/board.jsp?boardType=7" class="com-menu">음악 감상</a></li>
+					<li><a href="../board/board.jsp?boardType=8" class="com-menu">종이접기</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#" class="com-menu">실외취미</a>
+			<li><a href="../board/board.jsp?boardType=10" class="com-menu">실외취미</a>
 				<ul class="subMenu">
-					<li><a href="#" class="com-menu">하이킹</a></li>
-					<li><a href="#" class="com-menu">승마</a></li>
-					<li><a href="#" class="com-menu">등산</a></li>
-					<li><a href="#" class="com-menu">암벽등반</a></li>
-					<li><a href="#" class="com-menu">러닝</a></li>
-					<li><a href="#" class="com-menu">스쿠버 다이빙</a></li>
-					<li><a href="#" class="com-menu">수영</a></li>
-					<li><a href="#" class="com-menu">스키</a></li>
+					<li><a href="../board/board.jsp?boardType=10" class="com-menu">하이킹</a></li>
+					<li><a href="../board/board.jsp?boardType=11" class="com-menu">승마</a></li>
+					<li><a href="../board/board.jsp?boardType=12" class="com-menu">등산</a></li>
+					<li><a href="../board/board.jsp?boardType=13" class="com-menu">암벽등반</a></li>
+					<li><a href="../board/board.jsp?boardType=14" class="com-menu">러닝</a></li>
+					<li><a href="../board/board.jsp?boardType=15" class="com-menu">스쿠버 다이빙</a></li>
+					<li><a href="../board/board.jsp?boardType=16" class="com-menu">수영</a></li>
+					<li><a href="../board/board.jsp?boardType=17" class="com-menu">스키</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#" class="com-menu">수집취미</a>
+			<li><a href="../board/board.jsp?boardType=20" class="com-menu">수집취미</a>
 				<ul class="subMenu">
-					<li><a href="#" class="com-menu">피규어</a></li>
-					<li><a href="#" class="com-menu">트레이딩 카드</a></li>
-					<li><a href="#" class="com-menu">골동품 수집</a></li>
-					<li><a href="#" class="com-menu">우표 수집</a></li>
-					<li><a href="#" class="com-menu">주화 수집</a></li>
-					<li><a href="#" class="com-menu">금속 탐지</a></li>
+					<li><a href="../board/board.jsp?boardType=20" class="com-menu">피규어</a></li>
+					<li><a href="../board/board.jsp?boardType=21" class="com-menu">트레이딩 카드</a></li>
+					<li><a href="../board/board.jsp?boardType=22" class="com-menu">골동품 수집</a></li>
+					<li><a href="../board/board.jsp?boardType=23" class="com-menu">우표 수집</a></li>
+					<li><a href="../board/board.jsp?boardType=24" class="com-menu">주화 수집</a></li>
+					<li><a href="../board/board.jsp?boardType=25" class="com-menu">금속 탐지</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#" class="com-menu">경쟁취미</a>
+			<li><a href="../board/board.jsp?boardType=30" class="com-menu">경쟁취미</a>
 				<ul class="subMenu">
-					<li><a href="#" class="com-menu">축구</a></li>
-					<li><a href="#" class="com-menu">야구</a></li>
-					<li><a href="#" class="com-menu">체스</a></li>
-					<li><a href="#" class="com-menu">바둑</a></li>
-					<li><a href="#" class="com-menu">배드민턴</a></li>
-					<li><a href="#" class="com-menu">당구</a></li>
-					<li><a href="#" class="com-menu">포커</a></li>
-					<li><a href="#" class="com-menu">마작</a></li>
+					<li><a href="../board/board.jsp?boardType=30" class="com-menu">축구</a></li>
+					<li><a href="../board/board.jsp?boardType=31" class="com-menu">야구</a></li>
+					<li><a href="../board/board.jsp?boardType=32" class="com-menu">체스</a></li>
+					<li><a href="../board/board.jsp?boardType=33" class="com-menu">바둑</a></li>
+					<li><a href="../board/board.jsp?boardType=34" class="com-menu">배드민턴</a></li>
+					<li><a href="../board/board.jsp?boardType=35" class="com-menu">당구</a></li>
+					<li><a href="../board/board.jsp?boardType=36" class="com-menu">포커</a></li>
+					<li><a href="../board/board.jsp?boardType=37" class="com-menu">마작</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#" class="com-menu">관찰취미</a>
+			<li><a href="../board/board.jsp?boardType=40" class="com-menu">관찰취미</a>
 				<ul class="subMenu">
-					<li><a href="#" class="com-menu">여행</a></li>
-					<li><a href="#" class="com-menu">타로</a></li>
-					<li><a href="#" class="com-menu">천문</a></li>
+					<li><a href="../board/board.jsp?boardType=40" class="com-menu">여행</a></li>
+					<li><a href="../board/board.jsp?boardType=41" class="com-menu">타로</a></li>
+					<li><a href="../board/board.jsp?boardType=42" class="com-menu">천문</a></li>
 				</ul>
 			</li>
 			
-			<li><a href="#" class="com-menu">기타</a>
+			<li><a href="../board/board.jsp?boardType=50" class="com-menu">기타</a>
 				<ul class="subMenu">
-					<li><a href="#" class="com-menu">학습</a></li>
+					<li><a href="../board/board.jsp?boardType=50" class="com-menu">학습</a></li>
 				</ul>
 			</li>
 			
@@ -213,8 +220,9 @@
 </body>
 <script>
 	function searchMenu(){
-		let search = $("#search");
+		let search = $("#comsearch");
 		if(search.val().trim() == ""){
+			search.focus();
 			return;
 		}
 		location.href = "../board/board.jsp?searchType=title&searchKeyword="+search.val();
