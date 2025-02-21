@@ -183,6 +183,19 @@
 		    .favoritList{
 		    	font-size: 20px;
 		    }
+		    .login{
+			    padding: 0 23px;
+				box-sizing: border-box;
+				height: 40px;
+				min-width: 120px;
+				line-height: 38px;
+				border-radius: 30px;
+				background-color: #23272B;
+				color: white;
+			}
+			.alternate-option > p{
+			    display: inline-flex;
+			}
 		</style>
 	</head>
 	<body>
@@ -291,15 +304,19 @@
 								        		<form>
 									        		<div class="login-container">
 									       				<h1>로그인</h1>
-											            <label for="username">아이디</label>
-											            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" value="admin">
-											            <div id="username-feedback" class="feedback"></div>
-										
-											            <label for="password">비밀번호</label>
-											            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" value="1234">
-											            <div id="password-feedback" class="feedback"></div>
-										
-											            <button type="button" id="submit" class="login">로그인</button>
+										       			<div>
+												            <label for="username">아이디</label>
+												            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" autocomplete="off" value="admin">
+												            <div id="username-feedback" class="feedback"></div>
+														</div>
+														<div>
+												            <label for="password">비밀번호</label>
+												            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" autocomplete="off" value="1234">
+												            <div id="password-feedback" class="feedback"></div>
+														</div>
+														<div style="margin-left:80px">
+											            	<button type="button" id="submit" class="login">로그인</button>
+											            </div>
 												        <div class="alternate-option">
 											            	<p>계정이 없으신가요? <a href="../signup/signup.jsp">회원가입</a></p>
 											        	</div>
@@ -469,16 +486,6 @@
 			
 		}
 		
-		
-		
-		
-		
-		
-		if ("geolocation" in navigator) {
-		  console.log("가능");
-		} else {
-			console.log("불가능");
-		}
 		navigator.geolocation.getCurrentPosition(function(position) {
 			let x = position.coords.longitude;
 			let y = position.coords.latitude;

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 	//session.removeAttribute("user");
+	String referer = request.getHeader("referer");
+	
 	session.invalidate();
-	response.sendRedirect("../main/home.jsp");
+	response.sendRedirect(referer);
 %>

@@ -50,15 +50,15 @@
 		max-width: 60%;
 	}
 	#div{
-		position: fixed;
-	    bottom: 0;
+        position: fixed;
 	    width: 100%;
-	    height: 85.5vh;
+	    height: 80vh;
 	    overflow-y: scroll;
 	    font-size: 25px;
-	    padding: 10px 30% 80px 30%;
+	    padding: 20px 30% 30px 30%;
 	    margin-bottom: 75px;
 	    word-break: break-all;
+	    bottom: 3vh;
     }
     .you{
     	text-align: right;
@@ -92,6 +92,12 @@
     	max-width: max-content;
    		float: right;
 	}
+	.bi-arrow-down {
+		font-size: 25px;
+		text-align: right;
+		display: block;
+		cursor: pointer;
+	 }
 </style>
 </head>
 <body>
@@ -120,13 +126,19 @@
 		<div class="container">
 			<input class="text" type="text" id="chat"><br>
 			<input class="button" type="button" value="전송" id="send">
+			<i class="bi bi-arrow-down"></i>
 		</div>
 		<input type="button" id="exit" value="나가기" onClick="location.href='../chat/chatlist.jsp'">
 	</div>
 </body>
 <script>
+	$(document).ready(function(){
+		$("#div").scrollTop($("#div")[0].scrollHeight);
+	})
 	
-	
+	$(".bi-arrow-down").click(function(){
+		$("#div").scrollTop($("#div")[0].scrollHeight);
+	});
 	
 	let sender = "<%= nick %>";
 	let id = "<%= user.getId() %>";

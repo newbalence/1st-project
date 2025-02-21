@@ -28,12 +28,14 @@
 	}
 	
 	.menu-search {
-		
-		border: none;
+	    border: 1px solid black;
+    	border-radius: 50px;
+		/* border: none; */
 		outline: none;
 		margin: 0;
 		padding-left: 20px;
 		width: auto;
+		place-self: center;
 	}
 	
 	.menu-search:focus {
@@ -117,11 +119,13 @@
     	font-size: 18px;
     	background-color: white;
     	padding-right: 10px;
+    	margin-left: 10px;
+    	cursor:pointer;
     }
     
     input {
     	border-radius: 0;
-    	height: 60px;
+    	height: 40px;
     }
 	
 	.box {
@@ -129,9 +133,7 @@
 	    width: 100%;
 	    height: 60px;
 	}
-	.search-icon{
-		cursor:pointer;
-	}
+	
 </style>
 </head>
 <body>

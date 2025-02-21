@@ -111,15 +111,17 @@ public class UserDAO extends DBManager {
 	}
 	
 	//회원 등급수정
-	public void delete (String id, int no) {
+	public void delete (String id, String no) {
 		driverLoad();
 		DBConnect();
 		
 		String sql = "update user set user_type = " + no;
-		if(no == 2) {
+		if(no.equals("2") || no.equals("99")) {
 			sql += ", delete_date = now() ";
+		}else {
+			sql += ", delete_date = null";
 		}
-		sql +=  " where id = " + id;
+		sql +=  " where id = '" + id + "';";
 		executeUpdate(sql);
 		DBDisConnect();
 	}

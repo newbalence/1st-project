@@ -298,7 +298,7 @@
 	            margin-top: 20px;
 	        }
 	        .alternate-option a {
-	            color: #23272B;
+	            color: #c0c0c0;
 	            text-decoration: none;
 	            font-weight: bold;
 	        }
@@ -378,11 +378,7 @@
             text-align: center;
             margin-top: 20px;
         }
-        .alternate-option a {
-            color: #23272B;
-            text-decoration: none;
-            font-weight: bold;
-        }
+
         .alternate-option a:hover {
             text-decoration: underline;
             color: red;
@@ -457,7 +453,7 @@
 			        </li>
 			        
 			        <li class="nav-item">
-			          <a class="nav-link" href="#">마켓</a>
+			          <a class="nav-link" onclick="alert('추후에 제공예정')">마켓</a>
 			        </li>
 				</ul>
  				<div class="input-box">
@@ -469,8 +465,8 @@
 			      <%
 			      	if(user == null){
 			      		%>
-						<button type="button" class="btn btn-dark" href="../goal/goalTimer.jsp" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">시작하기</button>
-						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#loginnav" data-bs-whatever="@mdo">시작하기</button>
+						<div class="modal fade" id="loginnav" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -483,16 +479,16 @@
 						       			<h1>로그인</h1>
 						       			<div>
 								            <label for="username">아이디</label>
-								            <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" autocomplete="off" value="admin">
-								            <div id="username-feedback" class="feedback"></div>
+								            <input type="text" id="usernamenav" name="username" placeholder="아이디를 입력하세요" autocomplete="off" value="admin">
+								            <div id="username-feedbacknav" class="feedback"></div>
 										</div>
 										<div>
 								            <label for="password">비밀번호</label>
-								            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" autocomplete="off" value="1234">
-								            <div id="password-feedback" class="feedback"></div>
+								            <input type="password" id="passwordnav" name="password" placeholder="비밀번호를 입력하세요" autocomplete="off" value="1234">
+								            <div id="password-feedbacknav" class="feedback"></div>
 										</div>
-										<div style="margin-left: 80px;">
-							            	<button type="button" id="submit" class="login">로그인</button>
+										<div style="margin-left:80px">
+							            	<button type="button" id="submitnav" class="login">로그인</button>
 							            </div>
 								        <div class="alternate-option">
 							            	<p>계정이 없으신가요? <a href="../signup/signup.jsp">회원가입</a></p>
@@ -547,11 +543,11 @@
 			}
 			
 			
-			$("#submit").click(function(){
-				let id = $("#username");
-				let idFeedback = $("#username-feedback");
-				let pw = $("#password");
-				let pwFeedback = $("#password-feedback");
+			$("#submitnav").click(function(){
+				let id = $("#usernamenav");
+				let idFeedback = $("#username-feedbacknav");
+				let pw = $("#passwordnav");
+				let pwFeedback = $("#password-feedbacknav");
 				
 				$.ajax({
 					url : "../login/loginok.jsp",
@@ -561,10 +557,10 @@
 						pw : pw.val().trim()
 					},
 					success : function(result){
-						console.log(result)
+
 						
 						if(result.trim() != "0"){
-							location.href = "../main/home.jsp";
+							location.href = result.trim();
 						}else{
 							if(id.val().trim() == ""){
 								id.focus();

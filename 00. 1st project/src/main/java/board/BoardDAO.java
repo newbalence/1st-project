@@ -279,6 +279,7 @@ public class BoardDAO extends DBManager {
 		}
 		sql += " limit " + startNum + ", " + limitSize;
 		executeQuery(sql);
+		System.out.println(sql);
 		
 		List<BoardVO> list = new ArrayList<>();
 		while(next()) {

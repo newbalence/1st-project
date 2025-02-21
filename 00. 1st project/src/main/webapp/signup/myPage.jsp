@@ -88,7 +88,6 @@
     	
 	    body {
 	        font-family: 'Arial', sans-serif;
-	        background: linear-gradient(to bottom, #e9f5ff, #ffffff);
 	        margin: 0;
 	        padding: 0;
 	        color: #333;
@@ -261,6 +260,7 @@
 <script>
 	
 	let nickCheckFlag = true;
+	let id = "<%= user.getId() %>";
 	
 	$("#nickname").keyup(function(e){
 		let nickCheck = e.target.value;
@@ -334,14 +334,31 @@
 	function returnhome(){
 		let result = confirm("메인 화면으로 이동하시겠습니까?");
 		if(result == true){
-			location.href = "../main/main.jsp"
+			location.href = "../main/home.jsp"
 		}
 	}
 	
 	function deleteUser(){
-		let result = confirm("탈퇴하시겠습니까?");
-		if(result == true){
-			location.href = "joinout.jsp";
+		let resultCheck = confirm("탈퇴하시겠습니까?");
+		if(resultCheck == true){
+			$.ajax({
+				url : "../login/joinout.jsp",
+				type : "post",
+				data : {
+					id : id,
+					type : "2"
+				},
+				success : function(result){
+					if(result.trim() == "success"){
+						location.href = "../main/home.jsp"
+					}else{
+						alert("회원 탈퇴 실패");
+					}
+				},
+				error : function(){
+					console.log("에러 발생");
+				}
+			});
 		}
 	}
 </script>

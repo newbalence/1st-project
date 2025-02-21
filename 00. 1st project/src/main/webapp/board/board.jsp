@@ -15,7 +15,7 @@
 	if(boardType == null || boardType.isEmpty()){
 		boardType = "";
 	}
-	
+	System.out.println(boardType);
 	String pageNum = request.getParameter("page");
 	if(pageNum == null || pageNum.equals("null")){
 		pageNum = "1";
@@ -397,7 +397,8 @@
         </div>
         <div class="search-bar">
             <form action="board.jsp" method="get">
-            	<input type="hidden" name="type" value="<%= listType %>">
+            	<input type="hidden" name="boardType" value="<%= boardType %>">
+            	<input type="hidden" name="listType" value="<%= listType %>">
             	<input type="hidden" name="order"value="<%= listOrder %>">
                 <select name="searchType">
                     <option value="title" <%= searchType.equals("title") ? "selected" : "" %>>제목</option>

@@ -24,7 +24,6 @@
 	    <style>
 	        body {
 	            font-family: 'Arial', sans-serif;
-	            background: linear-gradient(135deg, #ffffff, #e8f0fe);
 	            margin: 0;
 	            padding: 0;
 	            color: #333;

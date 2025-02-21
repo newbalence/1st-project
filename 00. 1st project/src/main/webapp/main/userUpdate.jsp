@@ -23,6 +23,8 @@
 	uvo.setHobby(hobby);
 	uvo.setUserType(userType);
 	
+	
+	udao.delete(id, userType);
 	udao.modify(uvo);
 	out.print("success");
 	

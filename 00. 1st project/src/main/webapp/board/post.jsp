@@ -431,7 +431,7 @@
 		
 		let rauthor = "<%= user == null ? null : user.getId() %>";
 		let rnick = "<%= user == null ? null : user.getNick() %>";
-		console.log(rnick);
+		
 		function replyBtn(obj){
 			let el = $(".comment");
 			for(let i = 0; i < el.length; i++){
