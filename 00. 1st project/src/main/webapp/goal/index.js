@@ -11,13 +11,15 @@ const endTime = 30
 let intervalID = null;
 let progressTimeSec = 0;
 
-let isPlay = true;
+let isPlay = false;
+
+const imoji =["😀", "😁", "😂", "🤣", "😃", "😄", "😅", "😆", "😉", "😊", "😋", "😎", "😍", "😘", "🥰", "😗", "😙", "😚", "🙂", "🤗", "🤩", "🤔", "🤨", "😐", "😑", "😶", "🙄", "😏", "😣", "😥", "😮", "🤐", "😯", "😪", "😫", "🥱", "😴", "😌", "😛", "😜", "😝", "🤤", "😒", "😓", "😔", "😕", "🙃", "🤑", "🙁", "😖", "😞", "😟", "😤", "😢", "😭", "😦", "😧", "😨", "😩", "🤯", "😬", "😰", "😱", "🥵", "🥶", "😳", "🤪", "😵", "🥴", "😡", "🤬", "😷", "🤒", "🤕", "🤢", "🤮", "🤧", "😇", "🥺", "🤥", "🤫", "🤭", "🧐", "🤓", "👿"];
 
 function paintLines() {
-    for (let i = 0; i < 30; i++) { // 기존 60 → 30으로 변경
+    for (let i = 0; i < 60; i++) { // 기존 60 → 30으로 변경
         const line = document.createElement('div');
         line.classList.add('line');
-        line.style.transform = `rotate(${i * 12}deg)`; // 기존 6도 → 12도로 변경
+        line.style.transform = `rotate(${i * 6}deg)`; // 기존 6도 → 12도로 변경
 
         if (i % 5 === 0) {
             line.classList.add('thick');
@@ -29,8 +31,6 @@ function paintLines() {
 
 
 function paintNumber() {
-    let left = 15;
-    let right = 30;
 
     for (let i = 0; i < 6; i++) {
         const numBox = document.createElement('div');
@@ -39,10 +39,6 @@ function paintNumber() {
 
         const spanLeft = document.createElement('span');
         const spanRight = document.createElement('span');
-
-        const leftText = left - 5 * i;
-        spanLeft.textContent = leftText < 0 ? 30 + leftText : leftText;
-        spanRight.textContent = right - (5 * i);
 
         spanLeft.style.transform = `rotate(${-30 * i}deg)`;
         spanRight.style.transform = `rotate(${-30 * i}deg)`;
@@ -78,19 +74,40 @@ function tickSec() {
     }
 
     renderRemainTime();
+	
+	let index = Math.ceil((Math.random() * imoji.length));
+	$(".cover2").html(imoji[index]);
 }
 
 
 function play() {
-    intervalID = setInterval(tickSec,100)
+    intervalID = setInterval(tickSec,1000)
     isPlay = true;
     control.innerHTML = `<i class="fas fa-pause"></i>`;
 }
 
 function pause() {
-    clearInterval(intervalID);
-    isPlay = false;
-    control.innerHTML = `<i class="fas fa-play"></i>`;
+	$.ajax({
+		url : "pomedorook.jsp",
+		type : "post",
+		data : {
+			id : id
+		},
+		success : function(result){
+			console.log(result);
+				if(result.trim() == "success"){
+					clearInterval(intervalID);
+				    isPlay = false;
+				    control.innerHTML = `<i class="fas fa-play"></i>`;
+				}else{
+					alsert("에러 발생");
+				}
+		},
+		error : function(){
+			console.log("에러 발생");
+		}
+	});
+    
 }
 
 function onClickControl() {
@@ -104,7 +121,6 @@ function onClickControl() {
 
 function renderRemainTime() {
     const totalSec = endTime * 60 - progressTimeSec;
-    console.log(totalSec)
     const min = Math.floor(totalSec/60);
     const sec = totalSec % 60;
 
@@ -138,5 +154,3 @@ if(control) {
 if(remainTime && totalTime) {
     paintTime();
 }
-
-play();

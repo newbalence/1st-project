@@ -80,7 +80,7 @@ public class TimerDAO extends DBManager {
 	}
 	
 //	타이머 종료
-	public TimerVO endTime(String num, String time, String uid) {
+	public TimerVO endTime(String num, String time, String uid, String no) {
 		driverLoad();
 		DBConnect();
 		
@@ -88,7 +88,7 @@ public class TimerDAO extends DBManager {
 		sql += "update timer "; 
 		sql += "set end_time = now(), "; 
 		sql += "all_time = " + time;
-		sql += ", add_time = (select sun from (select IFNULL(sum(all_time), 0) + " + time + " as sun from timer where id='" + uid + "') as t) "; 
+		sql += ", add_time = (select sun from (select IFNULL(sum(all_time), 0) + " + time + " as sun from timer where id='" + uid + "' and goalno = " + no + ") as t) "; 
 		sql += "where timeno = " + num;
 		executeUpdate(sql);
 		

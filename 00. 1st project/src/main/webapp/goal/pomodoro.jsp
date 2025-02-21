@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/navbar.jsp" %>
+<%
+	if(user == null){
+		response.sendRedirect("../main/home.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="pomodoro.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
@@ -44,7 +49,12 @@
 	        <button id="control" class="control"><i class="fas fa-play"></i></button>
 	    </div>
     </div>
+    <script>
 
-    <script src="pomodoro.js"></script>
+    	let id = "<%= user.getId() %>"
+    </script>
+
+    <script src="index.js">
+    </script>
 </body>
 </html>

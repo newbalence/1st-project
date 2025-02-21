@@ -278,7 +278,8 @@
 		 data : {
 			 time : TIME - 1,
 			 timeNo : timeNo,
-			 id : id
+			 id : id,
+			 no : <%= no %>
 		 },
 		 success : function(result){
 			 if(result.trim() != "fail"){
