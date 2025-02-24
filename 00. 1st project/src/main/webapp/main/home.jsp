@@ -142,9 +142,6 @@
 		     flex-grow: 3;
 		   }
 		   
-		   .innerArticle > div:nth-child(2){
-		     flex-grow: 1;
-		   }
 		   .login-btn{
 		       margin-left: 0;
 			}
