@@ -110,6 +110,27 @@ public class goalDAO extends DBManager{
 		
 	}
 	
+	public double goalCal(String id) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "";
+		sql += "select round((select sum(all_time)from timer where id = '" + id + "') / (sum(goal_time) *60 * 60) * 100, 2) as cal from goal where id = '" + id + "';";
+		executeQuery(sql);
+		if(next()) {
+			double cal = getDouble("cal");
+			DBDisConnect();
+			return cal;
+			
+		}
+		DBDisConnect();
+		return 0;
+		
+	}
+	
+	
+	
+	
 }
 
 

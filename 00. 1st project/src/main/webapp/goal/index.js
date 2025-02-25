@@ -6,7 +6,7 @@ const control = document.querySelector('.button-container #control');
 const remainTime = document.querySelector('.time-container #remain-time');
 const totalTime = document.querySelector('.time-container #total-time');
 
-const endTime = 30
+let endTime = 25
 
 let intervalID = null;
 let progressTimeSec = 0;
@@ -66,8 +66,24 @@ function tickSec() {
     progressTimeSec++; 
     //console.log(progressTimeSec)
 
-    if (progressTimeSec >= endTime * 60) pause();
-
+    if (progressTimeSec >= endTime * 60){
+		if(endTime == 25){
+			progressTimeSec = 0;
+			endTime = 5
+			paintRemainTime()
+			paintTime()
+			renderRemainTime();
+			//play()
+			notifyMe("집중시간 종료", "25분 집중시간이 끝났습니다. 5분간 휴식을 취해주세요")
+		}else{
+			endTime = 25;
+			progressTimeSec = 0;
+			paintRemainTime()
+			paintTime()
+			renderRemainTime();
+			pause();
+		}	
+	 }
     const lastFin = fins.lastChild;
     if (lastFin) {
         lastFin.remove();
@@ -96,6 +112,7 @@ function pause() {
 		success : function(result){
 			console.log(result);
 				if(result.trim() == "success"){
+					notifyMe("휴식시간 종료", "5분 휴식시간이 끝났습니다. 다시 집중시간을 가지시리면 재생버튼을 눌러주세요")
 					clearInterval(intervalID);
 				    isPlay = false;
 				    control.innerHTML = `<i class="fas fa-play"></i>`;

@@ -389,6 +389,7 @@
 			clear:both;
 		}
 		.menu > li{
+			place-content: center;
 			position:relative;
 			float:left;
 			margin-right:5px;
@@ -590,6 +591,51 @@
 					}
 				});
 			});
+			
+			let notification;
+			
+			if (Notification.permission !== 'granted'){
+				Notification.requestPermission();
+			}
+			
+			function notifyMe(title, content) {
+				if (Notification.permission !== 'granted'){
+					Notification.requestPermission();
+			 	}else {
+					setTimeout(notification?.close.bind(notification), 500);
+					notification = new Notification(title, {
+						body: content,
+					});
+				}
+			}
+			
+			
+			let socket = new WebSocket("ws://" + location.host + "/1st_project/chat");
+			//웹소켓 서버 연결 시 동작
+			socket.onopen = function(obj){
+				console.log("웹소켓 연결");
+			}
+			
+			//웹소켓 서버 연결 종료 시 동작
+			socket.onclose = function(obj){
+				console.log("웹소켓 연결 해제");
+			}
+			
+			//웹소켓 서버 연결 오류 시 동작
+			socket.onerror = function(obj){
+				console.log("웹소켓 연결 에러");
+			}
+
+			//웹소켓 데이터 수신 시 동작
+			socket.onmessage = function(obj){
+				const data = JSON.parse(obj.data);
+				if($("#cr_" + data.chatroomno).length > 0){
+					$("#cr_" + data.chatroomno).next().css("display", "block")
+					
+				}
+				notifyMe(data.sender +"로 부터 채팅이 도착했습니다.", data.chatcontent);
+			}
+			
 		</script>
 </html>
 

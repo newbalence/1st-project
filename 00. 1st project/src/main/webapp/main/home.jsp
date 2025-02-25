@@ -193,6 +193,21 @@
 			.alternate-option > p{
 			    display: inline-flex;
 			}
+			.notify-badge{
+			        position: absolute;
+				    left: 59px;
+				    display : none;
+				    bottom: 17px;
+				    background: red;
+				    text-align: center;
+				    border-radius: 30px 30px 30px 30px;
+				    color: white;
+				    padding: 5px 10px;
+				    font-size: 12px;
+			}
+			.chat_list{
+				    position: relative;
+			}
 		</style>
 	</head>
 	<body>
@@ -370,7 +385,8 @@
 										String chatroomno = crvo.getChatroomno();
 										String chatname = crvo.getChatname();
 										%>
-											<a class="content" href="../chat/chatroom.jsp?no=<%= chatroomno %>"><%= chatname %></a><br>
+											<a class="content" id="cr_<%= chatroomno %>" href="../chat/chatroom.jsp?no=<%= chatroomno %>"><%= chatname %></a>
+											<span class="notify-badge">NEW</span>
 										<%
 									}
 								}

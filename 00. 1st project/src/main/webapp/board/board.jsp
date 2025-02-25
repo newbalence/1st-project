@@ -87,7 +87,7 @@
         .board-container {
             padding: 20px;
             max-width: 900px;
-            margin: 40px auto;
+            margin: 10px auto;
             background: white;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);

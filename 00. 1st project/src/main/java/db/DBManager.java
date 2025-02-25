@@ -95,6 +95,16 @@ public class DBManager {
 		}
 	}
 	
+	public double getDouble(String value) {
+		try {
+			double result = rs.getDouble(value);
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0.0;
+		}
+	}
+	
 	//int data = db.getInt("bno");
 	public int getInt(String value) {
 		try {

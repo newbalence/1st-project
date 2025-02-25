@@ -13,6 +13,7 @@
 
 	goalDAO dao = new goalDAO();
 	List<goalVO> list = dao.selectAll(user.getId());
+	double cal = dao.goalCal(user.getId());
 	
 %>
 <!DOCTYPE html>
@@ -226,8 +227,8 @@
 					<i class="profile-edit fa-solid fa-ellipsis-vertical"></i>
 					<div>
 						<i class="profile-pic fa-regular fa-user"></i>
-						<div class="percentage">전체 목표의 40%</div>
-						<progress id="progress" class="whole-per mypage-progress" value="40" min="0" max="100" style="position: relative; margin-top: 10px"></progress>
+						<div class="percentage">전체 목표의 <%= cal %>%</div>
+						<progress id="progress" class="whole-per mypage-progress" value="<%= cal %>" min="0" max="100" style="position: relative; margin-top: 10px"></progress>
 						<h2 class="user-name"><%= user.getName() %></h2>
 						<div class="user-intro">자기소개</div>
 					</div>

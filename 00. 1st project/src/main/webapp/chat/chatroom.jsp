@@ -115,7 +115,7 @@
 				<%
 			}else{
 				%>
-				<div class="id user"><%= sender %></div>
+				<div class="id user"><%= sender %> : </div>
 				<div class="user"><%= content %></div>
 				<%	
 			}
@@ -132,6 +132,7 @@
 	</div>
 </body>
 <script>
+	
 	$(document).ready(function(){
 		$("#div").scrollTop($("#div")[0].scrollHeight);
 	})
@@ -142,44 +143,32 @@
 	
 	let sender = "<%= nick %>";
 	let id = "<%= user.getId() %>";
-	let socket = new WebSocket("ws://" + location.host + "/1st_project/chat");
+	
 	let chat = document.getElementById("chat");
 	let btn = document.getElementById("send");
 	let div = document.getElementById("div");
-	//웹소켓 서버 연결 시 동작
-	socket.onopen = function(obj){
-		console.log("웹소켓 연결");
-	}
 	
-	//웹소켓 서버 연결 종료 시 동작
-	socket.onclose = function(obj){
-		console.log("웹소켓 연결 해제");
-	}
-	
-	//웹소켓 서버 연결 오류 시 동작
-	socket.onerror = function(obj){
-		console.log("웹소켓 연결 에러");
-	}
-
-	//웹소켓 데이터 수신 시 동작
 	socket.onmessage = function(obj){
 		//json 형태의 문자열을 진짜 json으로 재변환
 		const data = JSON.parse(obj.data);
 		if(data.chatroomno != <%= cno %>){
 			return;
 		}
+		
 		let log = document.getElementById("div")
 		
 		if(data.sender == sender){
 			log.innerHTML += "<div class='id you'> you : </div>";
 			log.innerHTML += "<div class='you'>" + data.chatcontent + "</div>";
 		}else{
+			
 			log.innerHTML += "<div class='id user'> " + data.sender + " : </div>";
 			log.innerHTML += "<div class='user'>" + data.chatcontent+ "</div>";
+			
+			//notifyMe(data.sender, data.chatcontent)
 		}
 		div.scrollTop = div.scrollHeight;
 		chat.focus();
-		
 	}
 	
 	function sendMessage(){
