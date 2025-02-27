@@ -81,6 +81,7 @@ function tickSec() {
 			paintRemainTime()
 			paintTime()
 			renderRemainTime();
+			//notifyMe("휴식시간 종료", "5분 휴식시간이 끝났습니다. 다시 집중시간을 가지시리면 재생버튼을 눌러주세요")
 			pause();
 		}	
 	 }
@@ -112,7 +113,6 @@ function pause() {
 		success : function(result){
 			console.log(result);
 				if(result.trim() == "success"){
-					notifyMe("휴식시간 종료", "5분 휴식시간이 끝났습니다. 다시 집중시간을 가지시리면 재생버튼을 눌러주세요")
 					clearInterval(intervalID);
 				    isPlay = false;
 				    control.innerHTML = `<i class="fas fa-play"></i>`;
